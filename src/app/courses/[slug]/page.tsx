@@ -6,9 +6,9 @@ import { courseCategories, difficultyLevels } from "@/lib/config";
 import type { Metadata } from "next";
 
 interface CoursePageProps {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 }
 
 // Generate static paths for all courses
@@ -21,7 +21,8 @@ export async function generateStaticParams() {
 
 // Generate metadata for SEO
 export async function generateMetadata({ params }: CoursePageProps): Promise<Metadata> {
-  const course = await getCourseBySlug(params.slug);
+  const { slug } = await params;
+  const course = await getCourseBySlug(slug);
 
   if (!course) {
     return {
@@ -37,7 +38,8 @@ export async function generateMetadata({ params }: CoursePageProps): Promise<Met
 }
 
 export default async function CoursePage({ params }: CoursePageProps) {
-  const course = await getCourseBySlug(params.slug);
+  const { slug } = await params;
+  const course = await getCourseBySlug(slug);
 
   if (!course) {
     notFound();

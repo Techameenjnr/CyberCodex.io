@@ -23,7 +23,7 @@ export default function Home() {
                 title: "Network Security",
                 description: "Learn network protocols, packet analysis, and network penetration testing",
                 icon: "🌐",
-                iconPath: "/icons/network.gif",
+                iconPath: "/icons/networkSecurity.gif",
               },
               {
                 title: "Cryptography",

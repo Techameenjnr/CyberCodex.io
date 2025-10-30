@@ -1,0 +1,735 @@
+---
+title: "AWS Security Best Practices"
+description: "Master AWS cloud security fundamentals including IAM, S3, EC2, and security monitoring with hands-on examples"
+category: "cloud-security"
+difficulty: "intermediate"
+duration: "3 hours"
+author: "CyberCodex Team"
+publishedAt: "2024-10-26"
+tags: ["AWS", "cloud security", "IAM", "S3", "EC2", "compliance"]
+prerequisites: ["Basic AWS knowledge", "Understanding of networking", "Linux command line"]
+learningObjectives:
+  - "Implement AWS IAM security best practices"
+  - "Secure S3 buckets and prevent data leaks"
+  - "Harden EC2 instances"
+  - "Monitor security with CloudTrail and GuardDuty"
+  - "Understand AWS shared responsibility model"
+---
+
+## Introduction
+
+Cloud security is paramount as organizations migrate to AWS. This course covers essential AWS security practices to protect your cloud infrastructure from common threats and misconfigurations.
+
+## AWS Shared Responsibility Model
+
+### AWS Responsibility: "Security OF the Cloud"
+- Physical infrastructure
+- Hypervisor and host OS
+- Network infrastructure
+- Managed service security
+
+### Your Responsibility: "Security IN the Cloud"
+- Guest OS patches
+- Application security
+- Identity and access management
+- Network configuration
+- Data encryption
+- Firewall configuration
+
+## Identity and Access Management (IAM)
+
+### IAM Best Practices
+
+#### 1. Root Account Security
+
+```bash
+# Root account should NEVER be used for daily operations
+
+✓ DO:
+- Enable MFA on root account
+- Remove root access keys
+- Use for account setup only
+- Set up billing alerts
+
+✗ DON'T:
+- Use for everyday tasks
+- Share root credentials
+- Create access keys for root
+```
+
+#### 2. Principle of Least Privilege
+
+**Bad Practice:**
+
+```json
+{
+  "Version": "2012-10-17",
+  "Statement": [{
+    "Effect": "Allow",
+    "Action": "*",
+    "Resource": "*"
+  }]
+}
+```
+
+**Good Practice:**
+
+```json
+{
+  "Version": "2012-10-17",
+  "Statement": [{
+    "Effect": "Allow",
+    "Action": [
+      "s3:GetObject",
+      "s3:PutObject"
+    ],
+    "Resource": "arn:aws:s3:::my-bucket/uploads/*"
+  }]
+}
+```
+
+#### 3. IAM Roles Over Users
+
+```python
+# Bad: Hardcoded credentials
+import boto3
+
+s3 = boto3.client('s3',
+    aws_access_key_id='AKIAIOSFODNN7EXAMPLE',
+    aws_secret_access_key='wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY'
+)
+
+# Good: Use IAM roles
+import boto3
+
+# Automatically uses instance role
+s3 = boto3.client('s3')
+response = s3.list_buckets()
+```
+
+#### 4. Enable MFA
+
+```bash
+# CLI: Enable MFA for IAM user
+aws iam enable-mfa-device \
+    --user-name alice \
+    --serial-number arn:aws:iam::123456789012:mfa/alice \
+    --authentication-code-1 123456 \
+    --authentication-code-2 654321
+
+# Policy: Require MFA for sensitive operations
+{
+  "Version": "2012-10-17",
+  "Statement": [{
+    "Effect": "Deny",
+    "Action": "*",
+    "Resource": "*",
+    "Condition": {
+      "BoolIfExists": {"aws:MultiFactorAuthPresent": "false"}
+    }
+  }]
+}
+```
+
+### IAM Policy Examples
+
+#### Deny All Except Specific Actions
+
+```json
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "ec2:DescribeInstances",
+        "ec2:DescribeSecurityGroups",
+        "s3:ListBucket",
+        "s3:GetObject"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Effect": "Deny",
+      "Action": [
+        "iam:*",
+        "organizations:*",
+        "account:*"
+      ],
+      "Resource": "*"
+    }
+  ]
+}
+```
+
+#### Time-Based Access
+
+```json
+{
+  "Version": "2012-10-17",
+  "Statement": [{
+    "Effect": "Allow",
+    "Action": "s3:*",
+    "Resource": "arn:aws:s3:::my-bucket/*",
+    "Condition": {
+      "DateGreaterThan": {"aws:CurrentTime": "2024-01-01T00:00:00Z"},
+      "DateLessThan": {"aws:CurrentTime": "2024-12-31T23:59:59Z"}
+    }
+  }]
+}
+```
+
+## S3 Security
+
+### Common S3 Vulnerabilities
+
+#### 1. Public Buckets
+
+```bash
+# Check for public buckets
+aws s3api list-buckets --query "Buckets[*].Name" | \
+  while read bucket; do
+    echo "Checking $bucket..."
+    aws s3api get-bucket-acl --bucket $bucket
+  done
+
+# Block public access (recommended)
+aws s3api put-public-access-block \
+    --bucket my-bucket \
+    --public-access-block-configuration \
+    BlockPublicAcls=true,IgnorePublicAcls=true,BlockPublicPolicy=true,RestrictPublicBuckets=true
+```
+
+#### 2. Bucket Policies
+
+**Insecure:**
+
+```json
+{
+  "Version": "2012-10-17",
+  "Statement": [{
+    "Effect": "Allow",
+    "Principal": "*",
+    "Action": "s3:GetObject",
+    "Resource": "arn:aws:s3:::my-bucket/*"
+  }]
+}
+```
+
+**Secure:**
+
+```json
+{
+  "Version": "2012-10-17",
+  "Statement": [{
+    "Effect": "Allow",
+    "Principal": {
+      "AWS": "arn:aws:iam::123456789012:role/MyAppRole"
+    },
+    "Action": ["s3:GetObject", "s3:PutObject"],
+    "Resource": "arn:aws:s3:::my-bucket/app-data/*",
+    "Condition": {
+      "IpAddress": {
+        "aws:SourceIp": "203.0.113.0/24"
+      }
+    }
+  }]
+}
+```
+
+### S3 Encryption
+
+#### Server-Side Encryption
+
+```bash
+# SSE-S3 (AWS managed keys)
+aws s3 cp file.txt s3://my-bucket/ --sse AES256
+
+# SSE-KMS (Customer managed keys)
+aws s3 cp file.txt s3://my-bucket/ --sse aws:kms --sse-kms-key-id alias/my-key
+
+# Enable default encryption
+aws s3api put-bucket-encryption \
+    --bucket my-bucket \
+    --server-side-encryption-configuration '{
+      "Rules": [{
+        "ApplyServerSideEncryptionByDefault": {
+          "SSEAlgorithm": "aws:kms",
+          "KMSMasterKeyID": "arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012"
+        },
+        "BucketKeyEnabled": true
+      }]
+    }'
+```
+
+#### Client-Side Encryption
+
+```python
+import boto3
+from botocore.client import Config
+
+# Initialize KMS client
+kms = boto3.client('kms')
+s3 = boto3.client('s3', config=Config(signature_version='s3v4'))
+
+# Encrypt data before upload
+plaintext = b"Sensitive data"
+response = kms.encrypt(
+    KeyId='alias/my-key',
+    Plaintext=plaintext
+)
+
+# Upload encrypted data
+s3.put_object(
+    Bucket='my-bucket',
+    Key='encrypted-file.bin',
+    Body=response['CiphertextBlob']
+)
+```
+
+### S3 Access Logging
+
+```bash
+# Enable access logging
+aws s3api put-bucket-logging \
+    --bucket my-bucket \
+    --bucket-logging-status '{
+      "LoggingEnabled": {
+        "TargetBucket": "my-log-bucket",
+        "TargetPrefix": "my-bucket-logs/"
+      }
+    }'
+
+# Query logs with Athena
+CREATE EXTERNAL TABLE s3_access_logs (
+  bucketowner string,
+  bucket string,
+  requestdatetime string,
+  remoteip string,
+  requester string,
+  requestid string,
+  operation string,
+  key string,
+  httpstatus string
+)
+ROW FORMAT SERDE 'org.apache.hadoop.hive.serde2.RegexSerDe'
+WITH SERDEPROPERTIES (
+  'serialization.format' = '1',
+  'input.regex' = '([^ ]*) ([^ ]*) \\[(.*?)\\] ([^ ]*) ([^ ]*) ([^ ]*) ([^ ]*) ([^ ]*) "([^ ]*) ([^ ]*) ([^ ]*)" ([^ ]*) ([^ ]*) ([^ ]*) ([^ ]*) ([^ ]*) ([^ ]*) "([^"]*)" "([^"]*)"'
+)
+LOCATION 's3://my-log-bucket/my-bucket-logs/';
+
+# Find suspicious access
+SELECT *
+FROM s3_access_logs
+WHERE httpstatus LIKE '4%'
+  OR requester = '-'
+ORDER BY requestdatetime DESC
+LIMIT 100;
+```
+
+## EC2 Security
+
+### Security Groups
+
+**Principle: Deny by default, allow explicitly**
+
+```bash
+# Create restrictive security group
+aws ec2 create-security-group \
+    --group-name web-server-sg \
+    --description "Web server security group" \
+    --vpc-id vpc-12345678
+
+# Allow only HTTPS from specific IP
+aws ec2 authorize-security-group-ingress \
+    --group-id sg-12345678 \
+    --protocol tcp \
+    --port 443 \
+    --cidr 203.0.113.0/24
+
+# Bad practice: Allow all
+aws ec2 authorize-security-group-ingress \
+    --group-id sg-12345678 \
+    --protocol all \
+    --cidr 0.0.0.0/0  # ❌ DON'T DO THIS
+```
+
+### EC2 Instance Hardening
+
+#### User Data Script
+
+```bash
+#!/bin/bash
+# Secure EC2 instance on launch
+
+# Update all packages
+yum update -y
+
+# Install security tools
+yum install -y fail2ban aide
+
+# Configure automatic security updates
+echo "unattended-upgrades unattended-upgrades/enable_auto_updates boolean true" | debconf-set-selections
+dpkg-reconfigure -f noninteractive unattended-upgrades
+
+# Disable root SSH login
+sed -i 's/PermitRootLogin yes/PermitRootLogin no/' /etc/ssh/sshd_config
+systemctl restart sshd
+
+# Enable firewall
+systemctl start firewalld
+systemctl enable firewalld
+firewall-cmd --permanent --add-service=https
+firewall-cmd --reload
+
+# Install CloudWatch agent
+wget https://s3.amazonaws.com/amazoncloudwatch-agent/amazon_linux/amd64/latest/amazon-cloudwatch-agent.rpm
+rpm -U ./amazon-cloudwatch-agent.rpm
+
+# Configure logging
+cat > /opt/aws/amazon-cloudwatch-agent/etc/config.json <<EOF
+{
+  "logs": {
+    "logs_collected": {
+      "files": {
+        "collect_list": [
+          {
+            "file_path": "/var/log/secure",
+            "log_group_name": "/aws/ec2/security",
+            "log_stream_name": "{instance_id}"
+          }
+        ]
+      }
+    }
+  }
+}
+EOF
+
+/opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl \
+    -a fetch-config \
+    -m ec2 \
+    -s \
+    -c file:/opt/aws/amazon-cloudwatch-agent/etc/config.json
+```
+
+### IMDSv2 (Instance Metadata Service v2)
+
+```bash
+# Require IMDSv2 (prevents SSRF attacks)
+aws ec2 modify-instance-metadata-options \
+    --instance-id i-1234567890abcdef0 \
+    --http-tokens required \
+    --http-put-response-hop-limit 1
+
+# Application code using IMDSv2
+#!/bin/bash
+TOKEN=`curl -X PUT "http://169.254.169.254/latest/api/token" -H "X-aws-ec2-metadata-token-ttl-seconds: 21600"`
+curl -H "X-aws-ec2-metadata-token: $TOKEN" http://169.254.169.254/latest/meta-data/
+```
+
+## Monitoring and Logging
+
+### CloudTrail
+
+```bash
+# Enable CloudTrail for all regions
+aws cloudtrail create-trail \
+    --name my-trail \
+    --s3-bucket-name my-cloudtrail-bucket \
+    --is-multi-region-trail
+
+aws cloudtrail start-logging --name my-trail
+
+# Query with Athena
+CREATE EXTERNAL TABLE cloudtrail_logs (
+    eventversion STRING,
+    useridentity STRUCT<
+        type:STRING,
+        principalid:STRING,
+        arn:STRING,
+        accountid:STRING,
+        username:STRING>,
+    eventtime STRING,
+    eventsource STRING,
+    eventname STRING,
+    awsregion STRING,
+    sourceipaddress STRING,
+    useragent STRING,
+    errorcode STRING,
+    errormessage STRING,
+    requestparameters STRING,
+    responseelements STRING
+)
+PARTITIONED BY (region string, year string, month string, day string)
+STORED AS INPUTFORMAT 'com.amazon.emr.cloudtrail.CloudTrailInputFormat'
+OUTPUTFORMAT 'org.apache.hadoop.hive.ql.io.HiveIgnoreKeyTextOutputFormat'
+LOCATION 's3://my-cloudtrail-bucket/AWSLogs/123456789012/CloudTrail/';
+
+# Find unauthorized access attempts
+SELECT
+    useridentity.username,
+    eventname,
+    sourceipaddress,
+    eventtime
+FROM cloudtrail_logs
+WHERE errorcode = 'AccessDenied'
+    AND year = '2024'
+    AND month = '10'
+ORDER BY eventtime DESC;
+
+# Find root account usage
+SELECT *
+FROM cloudtrail_logs
+WHERE useridentity.type = 'Root'
+    AND useridentity.invokedby IS NULL
+    AND eventtype != 'AwsServiceEvent';
+```
+
+### AWS GuardDuty
+
+```bash
+# Enable GuardDuty
+aws guardduty create-detector --enable
+
+# List findings
+aws guardduty list-findings --detector-id <detector-id>
+
+# Get finding details
+aws guardduty get-findings \
+    --detector-id <detector-id> \
+    --finding-ids <finding-id>
+
+# Common findings:
+# - UnauthorizedAccess:EC2/SSHBruteForce
+# - Recon:EC2/PortProbeUnprotectedPort
+# - CryptoCurrency:EC2/BitcoinTool.B!DNS
+# - Trojan:EC2/BlackholeTraffic
+```
+
+### AWS Security Hub
+
+```bash
+# Enable Security Hub
+aws securityhub enable-security-hub
+
+# Get security findings
+aws securityhub get-findings \
+    --filters '{"SeverityLabel":[{"Value":"CRITICAL","Comparison":"EQUALS"}]}'
+
+# Enable standards
+aws securityhub batch-enable-standards \
+    --standards-subscription-requests \
+    StandardsArn=arn:aws:securityhub:us-east-1::standards/aws-foundational-security-best-practices/v/1.0.0
+```
+
+## Common Misconfigurations
+
+### 1. Overly Permissive Security Groups
+
+```bash
+# Find security groups with 0.0.0.0/0
+aws ec2 describe-security-groups \
+    --filters Name=ip-permission.cidr,Values='0.0.0.0/0' \
+    --query 'SecurityGroups[*].[GroupId,GroupName]'
+```
+
+### 2. Unencrypted EBS Volumes
+
+```bash
+# Find unencrypted volumes
+aws ec2 describe-volumes \
+    --filters Name=encrypted,Values=false \
+    --query 'Volumes[*].[VolumeId,State]'
+
+# Enable encryption by default
+aws ec2 enable-ebs-encryption-by-default
+```
+
+### 3. Public Snapshots
+
+```bash
+# Find public snapshots
+aws ec2 describe-snapshots \
+    --owner-ids self \
+    --query 'Snapshots[?contains(CreateVolumePermissions[].Group, `all`)]'
+
+# Make snapshot private
+aws ec2 modify-snapshot-attribute \
+    --snapshot-id snap-1234567890abcdef0 \
+    --attribute createVolumePermission \
+    --operation-type remove \
+    --group-names all
+```
+
+### 4. Unused IAM Credentials
+
+```python
+import boto3
+from datetime import datetime, timedelta
+
+iam = boto3.client('iam')
+
+# Find unused credentials
+users = iam.list_users()['Users']
+for user in users:
+    username = user['UserName']
+
+    # Check access keys
+    keys = iam.list_access_keys(UserName=username)['AccessKeyMetadata']
+    for key in keys:
+        last_used = iam.get_access_key_last_used(AccessKeyId=key['AccessKeyId'])
+
+        if 'LastUsedDate' in last_used['AccessKeyLastUsed']:
+            last_used_date = last_used['AccessKeyLastUsed']['LastUsedDate'].replace(tzinfo=None)
+            if datetime.now() - last_used_date > timedelta(days=90):
+                print(f"Unused key: {key['AccessKeyId']} for user {username}")
+        else:
+            print(f"Never used key: {key['AccessKeyId']} for user {username}")
+```
+
+## Incident Response
+
+### 1. Compromised EC2 Instance
+
+```bash
+# Immediate actions:
+# 1. Isolate the instance
+aws ec2 modify-instance-attribute \
+    --instance-id i-1234567890abcdef0 \
+    --groups sg-quarantine
+
+# 2. Take snapshot for forensics
+aws ec2 create-snapshot \
+    --volume-id vol-1234567890abcdef0 \
+    --description "Forensic snapshot - incident $(date +%Y%m%d)"
+
+# 3. Capture memory (if possible)
+# Use tools like LiME or Volatility
+
+# 4. Collect logs
+aws logs filter-log-events \
+    --log-group-name /aws/ec2/security \
+    --start-time $(date -d '24 hours ago' +%s)000
+
+# 5. Terminate if necessary
+aws ec2 terminate-instances --instance-ids i-1234567890abcdef0
+```
+
+### 2. Compromised IAM Credentials
+
+```bash
+# 1. Disable access keys
+aws iam update-access-key \
+    --access-key-id AKIAIOSFODNN7EXAMPLE \
+    --status Inactive \
+    --user-name compromised-user
+
+# 2. Revoke sessions
+aws iam put-user-policy \
+    --user-name compromised-user \
+    --policy-name DenyAll \
+    --policy-document '{
+      "Version": "2012-10-17",
+      "Statement": [{
+        "Effect": "Deny",
+        "Action": "*",
+        "Resource": "*"
+      }]
+    }'
+
+# 3. Check CloudTrail for unauthorized actions
+aws cloudtrail lookup-events \
+    --lookup-attributes AttributeKey=Username,AttributeValue=compromised-user \
+    --start-time $(date -d '7 days ago' +%Y-%m-%dT%H:%M:%S) \
+    --max-results 50
+```
+
+## Compliance and Best Practices
+
+### AWS Well-Architected Framework (Security Pillar)
+
+1. **Identity and Access Management**
+2. **Detective Controls**
+3. **Infrastructure Protection**
+4. **Data Protection**
+5. **Incident Response**
+
+### CIS AWS Foundations Benchmark
+
+```bash
+# Example checks:
+# 1.1 - Avoid root account use
+# 1.3 - Ensure credentials unused for 90 days are disabled
+# 2.1 - Ensure CloudTrail is enabled in all regions
+# 2.3 - Ensure S3 bucket access logging is enabled
+# 4.1 - Ensure no security groups allow ingress from 0.0.0.0/0 to port 22
+```
+
+## Automation
+
+### Infrastructure as Code (Terraform)
+
+```hcl
+# Secure S3 bucket
+resource "aws_s3_bucket" "secure_bucket" {
+  bucket = "my-secure-bucket"
+
+  versioning {
+    enabled = true
+  }
+
+  server_side_encryption_configuration {
+    rule {
+      apply_server_side_encryption_by_default {
+        sse_algorithm = "aws:kms"
+        kms_master_key_id = aws_kms_key.my_key.arn
+      }
+    }
+  }
+
+  logging {
+    target_bucket = aws_s3_bucket.log_bucket.id
+    target_prefix = "access-logs/"
+  }
+
+  tags = {
+    Environment = "Production"
+    Compliance  = "Required"
+  }
+}
+
+resource "aws_s3_bucket_public_access_block" "secure_bucket" {
+  bucket = aws_s3_bucket.secure_bucket.id
+
+  block_public_acls       = true
+  block_public_policy     = true
+  ignore_public_acls      = true
+  restrict_public_buckets = true
+}
+```
+
+## Summary
+
+Key AWS security principles:
+- **Least privilege**: Grant minimum necessary permissions
+- **Defense in depth**: Multiple layers of security
+- **Encryption**: Encrypt data at rest and in transit
+- **Monitoring**: Enable CloudTrail, GuardDuty, Security Hub
+- **Automation**: Use IaC and security as code
+- **Incident response**: Have a plan and practice it
+
+## Next Steps
+
+- Complete AWS Certified Security - Specialty
+- Practice on AWS Security Labs
+- Implement security automation
+- Learn AWS Organizations for multi-account strategy
+- Study compliance frameworks (PCI-DSS, HIPAA, SOC 2)
+
+## Resources
+
+- [AWS Security Best Practices](https://aws.amazon.com/security/best-practices/)
+- [AWS Well-Architected Security Pillar](https://docs.aws.amazon.com/wellarchitected/latest/security-pillar/)
+- [CIS AWS Foundations Benchmark](https://www.cisecurity.org/benchmark/amazon_web_services)
+- [AWS Security Hub](https://aws.amazon.com/security-hub/)
