@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { Hero } from "@/components/features";
 
 export default function Home() {
@@ -17,50 +16,36 @@ export default function Home() {
                 title: "Web Security",
                 description: "Master OWASP Top 10, XSS, CSRF, SQL injection, and modern web vulnerabilities",
                 icon: "🕸",
-                iconPath: "/icons/webSecurity.gif",
               },
               {
                 title: "Network Security",
                 description: "Learn network protocols, packet analysis, and network penetration testing",
                 icon: "🌐",
-                iconPath: "/icons/networkSecurity.gif",
               },
               {
                 title: "Cryptography",
                 description: "Understand encryption, hashing, digital signatures, and cryptographic protocols",
-                iconPath: "/icons/cryptography.gif",
+                icon: "🔐",
               },
               {
                 title: "Penetration Testing",
                 description: "Hands-on practice with real-world scenarios and ethical hacking techniques",
-                iconPath: "/icons/penTesting.gif",
+                icon: "🎯",
               },
               {
                 title: "Malware Analysis",
                 description: "Analyze and reverse engineer malicious software safely",
                 icon: "🦠",
-                iconPath: "/icons/malware.gif",
               },
               {
                 title: "Cloud Security",
                 description: "Secure cloud infrastructure on AWS, Azure, and GCP",
                 icon: "☁️",
-                iconPath: "/icons/cloud.gif",
               },
             ].map((feature, index) => (
               <div key={index} className="card">
                 <div className="mb-4 flex items-center justify-start">
-                  {feature.iconPath ? (
-                    <Image
-                      src={feature.iconPath}
-                      alt={`${feature.title} icon`}
-                      width={32}
-                      height={32}
-                      className="object-contain"
-                    />
-                  ) : (
-                    <span className="text-4xl">{feature.icon}</span>
-                  )}
+                  <span className="text-4xl">{feature.icon}</span>
                 </div>
                 <h3 className="text-2xl font-bold mb-3 text-cyber-primary">{feature.title}</h3>
                 <p className="text-cyber-text-secondary">{feature.description}</p>

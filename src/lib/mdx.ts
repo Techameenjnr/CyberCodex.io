@@ -61,7 +61,7 @@ export function getAllCourses(): CourseSummary[] {
           slug,
           readingTime,
           ...(data as CourseFrontmatter),
-        };
+        } as CourseSummary;
       } catch (error) {
         return null;
       }
