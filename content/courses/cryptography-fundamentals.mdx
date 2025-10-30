@@ -1,0 +1,417 @@
+---
+title: "Cryptography Fundamentals"
+description: "Understand encryption, hashing, digital signatures, and modern cryptographic protocols used to secure data"
+category: "cryptography"
+difficulty: "intermediate"
+duration: "2.5 hours"
+author: "CyberCodex Team"
+publishedAt: "2024-10-25"
+tags: ["encryption", "hashing", "cryptography", "RSA", "AES", "security"]
+prerequisites: ["Basic programming knowledge", "Understanding of binary/hexadecimal"]
+learningObjectives:
+  - "Understand symmetric vs asymmetric encryption"
+  - "Implement basic cryptographic functions"
+  - "Recognize common cryptographic vulnerabilities"
+  - "Apply cryptography in real-world scenarios"
+---
+
+## Introduction
+
+Cryptography is the practice of securing information by transforming it into an unreadable format. It's the backbone of modern digital security, protecting everything from your bank account to your WhatsApp messages.
+
+## Core Concepts
+
+### The CIA Triad
+
+1. **Confidentiality**: Only authorized parties can access information
+2. **Integrity**: Data hasn't been tampered with
+3. **Authenticity**: Verify the source of information
+
+## Symmetric Encryption
+
+Both parties use the same key for encryption and decryption.
+
+### AES (Advanced Encryption Standard)
+
+The current gold standard for symmetric encryption.
+
+```python
+from Crypto.Cipher import AES
+from Crypto.Random import get_random_bytes
+from Crypto.Util.Padding import pad, unpad
+
+# Generate a random 256-bit key
+key = get_random_bytes(32)
+
+# Create cipher object
+cipher = AES.new(key, AES.MODE_CBC)
+
+# Encrypt
+plaintext = b"Secret message"
+ciphertext = cipher.encrypt(pad(plaintext, AES.block_size))
+
+print(f"Encrypted: {ciphertext.hex()}")
+
+# Decrypt
+decipher = AES.new(key, AES.MODE_CBC, cipher.iv)
+decrypted = unpad(decipher.decrypt(ciphertext), AES.block_size)
+
+print(f"Decrypted: {decrypted.decode()}")
+```
+
+### AES Modes of Operation
+
+#### ECB (Electronic Codebook) - DON'T USE!
+
+```python
+cipher = AES.new(key, AES.MODE_ECB)
+```
+
+**Problem**: Same plaintext = same ciphertext (patterns visible)
+
+#### CBC (Cipher Block Chaining) - Good
+
+```python
+cipher = AES.new(key, AES.MODE_CBC)
+```
+
+**Advantage**: Each block depends on previous blocks
+
+#### GCM (Galois/Counter Mode) - Best
+
+```python
+cipher = AES.new(key, AES.MODE_GCM)
+ciphertext, tag = cipher.encrypt_and_digest(plaintext)
+```
+
+**Advantage**: Provides both encryption AND authentication
+
+## Asymmetric Encryption
+
+Uses a pair of keys: public key (encryption) and private key (decryption).
+
+### RSA (Rivest-Shamir-Adleman)
+
+```python
+from Crypto.PublicKey import RSA
+from Crypto.Cipher import PKCS1_OAEP
+
+# Generate RSA key pair
+key = RSA.generate(2048)
+public_key = key.publickey()
+
+# Export keys
+private_pem = key.export_key()
+public_pem = public_key.export_key()
+
+# Encrypt with public key
+cipher = PKCS1_OAEP.new(public_key)
+ciphertext = cipher.encrypt(b"Secret message")
+
+# Decrypt with private key
+decipher = PKCS1_OAEP.new(key)
+plaintext = decipher.decrypt(ciphertext)
+```
+
+### How RSA Works
+
+1. Choose two large prime numbers: p and q
+2. Calculate n = p × q
+3. Calculate φ(n) = (p-1)(q-1)
+4. Choose e such that 1 < e < φ(n) and gcd(e, φ(n)) = 1
+5. Calculate d such that d × e ≡ 1 (mod φ(n))
+
+**Public Key**: (e, n)
+**Private Key**: (d, n)
+
+```
+Encryption: C = M^e mod n
+Decryption: M = C^d mod n
+```
+
+## Hashing
+
+One-way functions that produce fixed-size outputs.
+
+### Common Hash Functions
+
+```python
+import hashlib
+
+message = b"Hello, World!"
+
+# MD5 (BROKEN - Don't use!)
+md5 = hashlib.md5(message).hexdigest()
+print(f"MD5: {md5}")
+
+# SHA-1 (DEPRECATED)
+sha1 = hashlib.sha1(message).hexdigest()
+print(f"SHA-1: {sha1}")
+
+# SHA-256 (Good)
+sha256 = hashlib.sha256(message).hexdigest()
+print(f"SHA-256: {sha256}")
+
+# SHA-512 (Better)
+sha512 = hashlib.sha512(message).hexdigest()
+print(f"SHA-512: {sha512}")
+```
+
+### Properties of Cryptographic Hashes
+
+1. **Deterministic**: Same input = same output
+2. **Fast Computation**: Quick to calculate
+3. **Pre-image Resistant**: Can't reverse the hash
+4. **Collision Resistant**: Hard to find two inputs with same hash
+5. **Avalanche Effect**: Small change = completely different hash
+
+### Password Hashing (The Right Way)
+
+```python
+import bcrypt
+
+# Hash password
+password = b"super_secret_password"
+salt = bcrypt.gensalt(rounds=12)  # Cost factor
+hashed = bcrypt.hashpw(password, salt)
+
+print(f"Hashed: {hashed}")
+
+# Verify password
+if bcrypt.checkpw(password, hashed):
+    print("Password is correct!")
+```
+
+**Why bcrypt?**
+- Built-in salt
+- Adaptive (can increase rounds as computers get faster)
+- Deliberately slow (prevents brute force)
+
+## Digital Signatures
+
+Prove authenticity and integrity of messages.
+
+```python
+from Crypto.PublicKey import RSA
+from Crypto.Signature import pkcs1_15
+from Crypto.Hash import SHA256
+
+# Generate keys
+key = RSA.generate(2048)
+public_key = key.publickey()
+
+# Sign message
+message = b"This is an authentic message"
+hash_obj = SHA256.new(message)
+signature = pkcs1_15.new(key).sign(hash_obj)
+
+# Verify signature
+try:
+    pkcs1_15.new(public_key).verify(hash_obj, signature)
+    print("Signature is valid!")
+except (ValueError, TypeError):
+    print("Signature is invalid!")
+```
+
+## Key Exchange: Diffie-Hellman
+
+Securely exchange keys over an insecure channel.
+
+```python
+from Crypto.PublicKey import ECC
+from Crypto.Protocol.KDF import HKDF
+from Crypto.Hash import SHA256
+
+# Alice generates her key pair
+alice_key = ECC.generate(curve='P-256')
+alice_public = alice_key.public_key()
+
+# Bob generates his key pair
+bob_key = ECC.generate(curve='P-256')
+bob_public = bob_key.public_key()
+
+# Alice computes shared secret
+alice_shared = alice_key.d * bob_public.pointQ
+alice_secret = HKDF(
+    str(alice_shared.x).encode(),
+    32,
+    b'',
+    SHA256
+)
+
+# Bob computes shared secret
+bob_shared = bob_key.d * alice_public.pointQ
+bob_secret = HKDF(
+    str(bob_shared.x).encode(),
+    32,
+    b'',
+    SHA256
+)
+
+# Both secrets should match!
+assert alice_secret == bob_secret
+```
+
+## Common Vulnerabilities
+
+### 1. Weak Keys
+
+```python
+# BAD: Weak RSA key
+weak_key = RSA.generate(512)  # Too small!
+
+# GOOD: Strong RSA key
+strong_key = RSA.generate(2048)  # Or 4096
+```
+
+### 2. ECB Mode
+
+Never use ECB mode - patterns in plaintext appear in ciphertext!
+
+### 3. Hardcoded Keys
+
+```python
+# BAD: Hardcoded secret
+KEY = b"my_secret_key_123"
+
+# GOOD: Environment variable or key management system
+import os
+KEY = os.environ.get('ENCRYPTION_KEY').encode()
+```
+
+### 4. Weak Randomness
+
+```python
+import random  # BAD for crypto!
+import secrets  # GOOD for crypto!
+
+# Use secrets for crypto
+random_bytes = secrets.token_bytes(32)
+```
+
+## Real-world Applications
+
+### HTTPS (TLS/SSL)
+
+1. **Handshake**: Client and server agree on encryption method
+2. **Key Exchange**: Use Diffie-Hellman or RSA
+3. **Certificate Verification**: Check digital signature
+4. **Encrypted Communication**: Use symmetric encryption (AES)
+
+### Password Storage
+
+```python
+# Store passwords like this
+import bcrypt
+
+def store_password(password):
+    hashed = bcrypt.hashpw(password.encode(), bcrypt.gensalt())
+    # Save hashed to database
+    return hashed
+
+def verify_password(password, hashed):
+    return bcrypt.checkpw(password.encode(), hashed)
+```
+
+### JWT (JSON Web Tokens)
+
+```python
+import jwt
+
+# Create token
+payload = {'user_id': 123, 'role': 'admin'}
+secret = 'your-secret-key'
+token = jwt.encode(payload, secret, algorithm='HS256')
+
+# Verify token
+try:
+    decoded = jwt.decode(token, secret, algorithms=['HS256'])
+    print(f"Valid token: {decoded}")
+except jwt.InvalidTokenError:
+    print("Invalid token!")
+```
+
+## Practical Exercise
+
+### Challenge: Build a Secure Messaging System
+
+Requirements:
+1. Encrypt messages using AES-GCM
+2. Exchange keys using Diffie-Hellman
+3. Sign messages with RSA
+4. Verify signatures before decryption
+
+```python
+class SecureMessaging:
+    def __init__(self):
+        self.rsa_key = RSA.generate(2048)
+        self.dh_key = ECC.generate(curve='P-256')
+
+    def send_message(self, message, recipient_public_key):
+        # 1. Generate session key (AES)
+        session_key = get_random_bytes(32)
+
+        # 2. Encrypt message with AES-GCM
+        cipher = AES.new(session_key, AES.MODE_GCM)
+        ciphertext, tag = cipher.encrypt_and_digest(message.encode())
+
+        # 3. Encrypt session key with recipient's public key
+        rsa_cipher = PKCS1_OAEP.new(recipient_public_key)
+        encrypted_session_key = rsa_cipher.encrypt(session_key)
+
+        # 4. Sign the message
+        h = SHA256.new(ciphertext)
+        signature = pkcs1_15.new(self.rsa_key).sign(h)
+
+        return {
+            'ciphertext': ciphertext,
+            'tag': tag,
+            'nonce': cipher.nonce,
+            'encrypted_key': encrypted_session_key,
+            'signature': signature
+        }
+
+    # Implement receive_message yourself!
+```
+
+## Summary
+
+Key principles:
+- **Use established libraries** (don't roll your own crypto!)
+- **Keep keys secret** (never hardcode or commit to git)
+- **Use strong algorithms** (AES-256, RSA-2048+, SHA-256+)
+- **Update regularly** (crypto ages poorly)
+- **Defense in depth** (multiple layers of security)
+
+## Common Mistakes
+
+1. Using ECB mode
+2. Reusing IVs/nonces
+3. Using weak random number generators
+4. Storing passwords in plaintext
+5. Using deprecated algorithms (MD5, SHA-1, DES)
+6. Not validating certificates
+7. Hardcoding secrets
+
+## Challenge Questions
+
+1. What's the difference between encryption and hashing?
+2. Why shouldn't you use MD5 for passwords?
+3. How does HTTPS prevent man-in-the-middle attacks?
+4. What's the purpose of a salt in password hashing?
+5. Why is RSA slower than AES?
+
+## Next Steps
+
+- Study elliptic curve cryptography (ECC)
+- Learn about post-quantum cryptography
+- Explore blockchain and cryptocurrencies
+- Get familiar with cryptographic protocols (TLS, SSH, PGP)
+- Practice on CryptoHack challenges
+
+## Resources
+
+- [Cryptography I (Coursera)](https://www.coursera.org/learn/crypto)
+- [Crypto101](https://www.crypto101.io/)
+- [PyCryptodome Docs](https://pycryptodome.readthedocs.io/)
+- [OWASP Cryptographic Storage](https://cheatsheetseries.owasp.org/cheatsheets/Cryptographic_Storage_Cheat_Sheet.html)

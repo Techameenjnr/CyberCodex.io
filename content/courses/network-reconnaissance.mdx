@@ -1,0 +1,376 @@
+---
+title: "Network Reconnaissance Techniques"
+description: "Master the art of network reconnaissance using industry-standard tools like Nmap, Wireshark, and more"
+category: "network-security"
+difficulty: "intermediate"
+duration: "3 hours"
+author: "CyberCodex Team"
+publishedAt: "2024-10-20"
+tags: ["nmap", "reconnaissance", "network", "scanning", "enumeration"]
+prerequisites: ["Basic networking knowledge", "Linux command line familiarity"]
+learningObjectives:
+  - "Perform comprehensive network scans"
+  - "Enumerate services and versions"
+  - "Identify potential security weaknesses"
+  - "Avoid detection by security systems"
+---
+
+## Introduction
+
+Network reconnaissance is the first phase of any penetration test. It involves gathering information about target systems, services, and potential vulnerabilities before launching an attack.
+
+## Reconnaissance Phases
+
+### 1. Passive Reconnaissance
+Gathering information without directly interacting with the target.
+
+### 2. Active Reconnaissance
+Directly probing the target system (what we'll focus on today).
+
+## Nmap: The Network Mapper
+
+Nmap is the industry standard for network discovery and security auditing.
+
+### Basic Scans
+
+#### Ping Scan (Host Discovery)
+
+```bash
+# Scan entire subnet for live hosts
+nmap -sn 192.168.1.0/24
+
+# Ping specific hosts
+nmap -sn 192.168.1.1-50
+```
+
+#### TCP SYN Scan (Stealth Scan)
+
+```bash
+# Default scan - most common ports
+nmap 192.168.1.100
+
+# Scan specific ports
+nmap -p 80,443,8080 192.168.1.100
+
+# Scan all ports
+nmap -p- 192.168.1.100
+```
+
+### Service and Version Detection
+
+```bash
+# Detect service versions
+nmap -sV 192.168.1.100
+
+# Aggressive detection
+nmap -A 192.168.1.100
+
+# OS detection
+nmap -O 192.168.1.100
+```
+
+### Advanced Techniques
+
+#### Script Scanning (NSE)
+
+```bash
+# Run default scripts
+nmap -sC 192.168.1.100
+
+# Run specific scripts
+nmap --script=http-enum 192.168.1.100
+
+# Run vulnerability scripts
+nmap --script=vuln 192.168.1.100
+```
+
+#### Timing and Performance
+
+```bash
+# T0 (Paranoid) - Very slow, evades IDS
+nmap -T0 192.168.1.100
+
+# T3 (Normal) - Default
+nmap -T3 192.168.1.100
+
+# T4 (Aggressive) - Fast scan
+nmap -T4 192.168.1.100
+
+# T5 (Insane) - Fastest, may miss hosts
+nmap -T5 192.168.1.100
+```
+
+## Port Scanning Techniques
+
+### TCP Connect Scan
+
+```bash
+nmap -sT 192.168.1.100
+```
+
+Completes the full TCP three-way handshake:
+1. SYN →
+2. ← SYN/ACK
+3. ACK →
+
+**Pros**: Works without root privileges
+**Cons**: Easily detected
+
+### SYN Scan (Half-open)
+
+```bash
+sudo nmap -sS 192.168.1.100
+```
+
+Doesn't complete the handshake:
+1. SYN →
+2. ← SYN/ACK
+3. RST → (instead of ACK)
+
+**Pros**: Stealthy, faster
+**Cons**: Requires root
+
+### UDP Scan
+
+```bash
+sudo nmap -sU 192.168.1.100
+```
+
+Often overlooked but important for:
+- DNS (port 53)
+- SNMP (port 161)
+- DHCP (port 67/68)
+
+### FIN, NULL, and Xmas Scans
+
+```bash
+# FIN scan
+nmap -sF 192.168.1.100
+
+# NULL scan (no flags set)
+nmap -sN 192.168.1.100
+
+# Xmas scan (FIN, PSH, URG flags)
+nmap -sX 192.168.1.100
+```
+
+These can bypass some firewalls!
+
+## Service Enumeration
+
+### HTTP/HTTPS Services
+
+```bash
+# Enumerate web directories
+nmap --script=http-enum -p 80,443 192.168.1.100
+
+# Check for common vulnerabilities
+nmap --script=http-vuln* -p 80 192.168.1.100
+```
+
+### SMB (Server Message Block)
+
+```bash
+# Enumerate SMB shares
+nmap --script=smb-enum-shares -p 445 192.168.1.100
+
+# Check for vulnerabilities
+nmap --script=smb-vuln* -p 445 192.168.1.100
+```
+
+### SSH
+
+```bash
+# Enumerate SSH algorithms
+nmap --script=ssh2-enum-algos -p 22 192.168.1.100
+
+# Check SSH auth methods
+nmap --script=ssh-auth-methods -p 22 192.168.1.100
+```
+
+## Firewall and IDS Evasion
+
+### Fragmentation
+
+```bash
+# Fragment packets
+nmap -f 192.168.1.100
+
+# Custom MTU
+nmap --mtu 24 192.168.1.100
+```
+
+### Decoy Scans
+
+```bash
+# Use decoy IPs
+nmap -D RND:10 192.168.1.100
+
+# Specific decoys
+nmap -D 192.168.1.5,192.168.1.6,ME 192.168.1.100
+```
+
+### Timing Delays
+
+```bash
+# Add delays between probes
+nmap --scan-delay 1s 192.168.1.100
+
+# Randomize timing
+nmap --randomize-hosts 192.168.1.0/24
+```
+
+## Practical Exercise
+
+### Scenario: Corporate Network Assessment
+
+You've been hired to assess a corporate network:
+
+**Target**: 10.0.0.0/24
+
+#### Step 1: Host Discovery
+
+```bash
+nmap -sn 10.0.0.0/24 -oG live-hosts.txt
+```
+
+#### Step 2: Port Scanning
+
+```bash
+nmap -sS -p- --open 10.0.0.0/24 -oA full-scan
+```
+
+#### Step 3: Service Detection
+
+```bash
+nmap -sV -sC -p $(cat open-ports.txt) 10.0.0.0/24 -oA service-scan
+```
+
+#### Step 4: Vulnerability Scanning
+
+```bash
+nmap --script=vuln -p $(cat open-ports.txt) 10.0.0.0/24 -oA vuln-scan
+```
+
+## Output Formats
+
+```bash
+# Normal output
+nmap -oN scan.txt 192.168.1.100
+
+# XML output (for tools)
+nmap -oX scan.xml 192.168.1.100
+
+# Grepable output
+nmap -oG scan.grep 192.168.1.100
+
+# All formats
+nmap -oA scan 192.168.1.100
+```
+
+## Other Reconnaissance Tools
+
+### Netcat (The Swiss Army Knife)
+
+```bash
+# Banner grabbing
+nc -v 192.168.1.100 80
+
+# Port scanning
+nc -zv 192.168.1.100 1-1000
+```
+
+### Masscan (Ultra-fast Port Scanner)
+
+```bash
+# Scan entire internet for port 80
+masscan 0.0.0.0/0 -p80 --rate 10000
+```
+
+### Angry IP Scanner
+
+GUI-based network scanner for quick host discovery.
+
+## Real-world Scenario
+
+**Target**: Identify all web servers in the network
+
+```bash
+#!/bin/bash
+# web-server-scanner.sh
+
+NETWORK="192.168.1.0/24"
+
+echo "[*] Discovering live hosts..."
+nmap -sn $NETWORK -oG - | awk '/Up$/{print $2}' > live-hosts.txt
+
+echo "[*] Scanning for web servers..."
+nmap -p 80,443,8080,8443 -iL live-hosts.txt -oG - | \
+  grep -E "80/open|443/open|8080/open|8443/open" > web-servers.txt
+
+echo "[*] Enumerating web services..."
+while read host; do
+  echo "Scanning $host..."
+  nmap -sV -p 80,443,8080,8443 --script=http-enum $host
+done < web-servers.txt
+```
+
+## Detection and Defense
+
+### How to Detect Scans
+
+Monitor for:
+- Multiple connection attempts from same source
+- Incomplete TCP handshakes (SYN scans)
+- Unusual packet patterns
+- High volume of ICMP requests
+
+### Defense Strategies
+
+1. **Firewall Rules**: Block unused ports
+2. **IDS/IPS**: Detect and prevent scanning
+3. **Port Knocking**: Hide services behind authentication
+4. **Fail2ban**: Auto-block repeated attempts
+5. **VPN**: Require VPN for internal access
+
+## Summary
+
+Key takeaways:
+- Nmap is the most versatile reconnaissance tool
+- Different scan types for different situations
+- Stealth techniques to avoid detection
+- Always get proper authorization before scanning!
+
+## Challenge
+
+Try to discover:
+1. All live hosts in a /24 network
+2. All open ports on each host
+3. Service versions running on open ports
+4. Potential vulnerabilities
+5. Do this while avoiding IDS detection
+
+**Time limit**: 2 hours
+
+## Legal Disclaimer
+
+⚠️ **WARNING**: Only scan networks you own or have explicit permission to test. Unauthorized scanning is illegal and can result in:
+- Criminal charges
+- Fines
+- Jail time
+- Civil lawsuits
+
+Always obtain written authorization before testing!
+
+## Next Steps
+
+- Learn packet analysis with Wireshark
+- Study Metasploit for exploitation
+- Practice on HackTheBox or TryHackMe
+- Get OSCP or CEH certification
+
+## Resources
+
+- [Nmap Official Docs](https://nmap.org/book/)
+- [Nmap NSE Scripts](https://nmap.org/nsedoc/)
+- [SANS Cheat Sheet](https://www.sans.org/posters/nmap-cheat-sheet/)

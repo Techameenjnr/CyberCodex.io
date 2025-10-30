@@ -333,3 +333,142 @@ pre {
     transition-duration: 0.01ms !important;
   }
 }
+
+/* MDX Prose Styles */
+.prose-cyber {
+  color: var(--color-cyber-text-secondary);
+  line-height: 1.75;
+}
+
+.prose-cyber h2 {
+  color: var(--color-cyber-primary);
+  font-size: 1.875rem;
+  font-weight: 700;
+  margin-top: 3rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--color-cyber-border);
+}
+
+.prose-cyber h3 {
+  color: var(--color-cyber-secondary);
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+.prose-cyber h4 {
+  color: var(--color-cyber-text-primary);
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-top: 1.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.prose-cyber p {
+  margin-bottom: 1.25rem;
+}
+
+.prose-cyber ul,
+.prose-cyber ol {
+  margin-bottom: 1.5rem;
+  padding-left: 1.5rem;
+}
+
+.prose-cyber li {
+  margin-bottom: 0.5rem;
+}
+
+.prose-cyber code {
+  background-color: var(--color-cyber-dark-tertiary);
+  color: var(--color-cyber-primary);
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  font-size: 0.875rem;
+  font-family: 'Courier New', monospace;
+}
+
+.prose-cyber pre {
+  background-color: var(--color-cyber-dark-tertiary);
+  border: 1px solid var(--color-cyber-border);
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  margin: 1.5rem 0;
+  overflow-x: auto;
+}
+
+.prose-cyber pre code {
+  background-color: transparent;
+  padding: 0;
+  border-radius: 0;
+  font-size: 0.875rem;
+  color: var(--color-cyber-text-primary);
+}
+
+.prose-cyber blockquote {
+  border-left: 4px solid var(--color-cyber-primary);
+  padding-left: 1rem;
+  margin: 1.5rem 0;
+  font-style: italic;
+  color: var(--color-cyber-text-muted);
+}
+
+.prose-cyber a {
+  color: var(--color-cyber-secondary);
+  text-decoration: underline;
+  transition: color 200ms ease;
+}
+
+.prose-cyber a:hover {
+  color: var(--color-cyber-primary);
+}
+
+.prose-cyber strong {
+  color: var(--color-cyber-text-primary);
+  font-weight: 600;
+}
+
+.prose-cyber table {
+  width: 100%;
+  margin: 1.5rem 0;
+  border-collapse: collapse;
+}
+
+.prose-cyber th {
+  background-color: var(--color-cyber-dark-secondary);
+  color: var(--color-cyber-primary);
+  padding: 0.75rem;
+  text-align: left;
+  border: 1px solid var(--color-cyber-border);
+}
+
+.prose-cyber td {
+  padding: 0.75rem;
+  border: 1px solid var(--color-cyber-border);
+}
+
+.prose-cyber hr {
+  border: none;
+  border-top: 1px solid var(--color-cyber-border);
+  margin: 2rem 0;
+}
+
+.prose-cyber details {
+  background-color: var(--color-cyber-dark-secondary);
+  border: 1px solid var(--color-cyber-border);
+  border-radius: 0.5rem;
+  padding: 1rem;
+  margin: 1.5rem 0;
+}
+
+.prose-cyber summary {
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--color-cyber-primary);
+  margin-bottom: 0.5rem;
+}
+
+.prose-cyber summary:hover {
+  color: var(--color-cyber-secondary);
+}
