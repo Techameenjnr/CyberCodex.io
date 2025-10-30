@@ -1,0 +1,243 @@
+{
+  "metadata": {
+    "courseId": "sql-injection-basics",
+    "slug": "sql-injection-basics",
+    "title": "SQL Injection Basics",
+    "description": "Learn how SQL injection attacks work, how to identify vulnerabilities, and how to exploit and prevent them in web applications."
+  },
+  "progress": {
+    "exercisesCompleted": 0,
+    "totalExercises": 28,
+    "projectsCompleted": 0,
+    "totalProjects": 2,
+    "xpEarned": 0,
+    "totalXp": 450,
+    "badgesEarned": 0,
+    "totalBadges": 6
+  },
+  "chapters": [
+    {
+      "id": "1",
+      "number": 1,
+      "title": "Introduction to SQL",
+      "description": "Understand SQL basics and database fundamentals",
+      "isLocked": false,
+      "isPremium": false,
+      "exercises": [
+        {
+          "id": "what-is-sql",
+          "title": "What is SQL?",
+          "type": "article",
+          "isLocked": false,
+          "isCompleted": false,
+          "xpReward": 10
+        },
+        {
+          "id": "database-basics",
+          "title": "Database Basics",
+          "type": "exercise",
+          "isLocked": false,
+          "isCompleted": false,
+          "xpReward": 15
+        },
+        {
+          "id": "sql-queries",
+          "title": "Basic SQL Queries",
+          "type": "exercise",
+          "isLocked": false,
+          "isCompleted": false,
+          "xpReward": 15
+        }
+      ]
+    },
+    {
+      "id": "2",
+      "number": 2,
+      "title": "Understanding SQL Injection",
+      "description": "Learn what SQL injection is and why it's dangerous",
+      "isLocked": false,
+      "isPremium": false,
+      "exercises": [
+        {
+          "id": "what-is-sqli",
+          "title": "What is SQL Injection?",
+          "type": "article",
+          "isLocked": false,
+          "isCompleted": false,
+          "xpReward": 15
+        },
+        {
+          "id": "vulnerable-code",
+          "title": "Identifying Vulnerable Code",
+          "type": "exercise",
+          "isLocked": false,
+          "isCompleted": false,
+          "xpReward": 20
+        },
+        {
+          "id": "attack-vectors",
+          "title": "Common Attack Vectors",
+          "type": "exercise",
+          "isLocked": false,
+          "isCompleted": false,
+          "xpReward": 20
+        }
+      ]
+    },
+    {
+      "id": "3",
+      "number": 3,
+      "title": "Basic SQL Injection Techniques",
+      "description": "Practice basic SQLi techniques in a safe environment",
+      "isLocked": false,
+      "isPremium": false,
+      "exercises": [
+        {
+          "id": "authentication-bypass",
+          "title": "Authentication Bypass",
+          "type": "exercise",
+          "isLocked": false,
+          "isCompleted": false,
+          "xpReward": 25
+        },
+        {
+          "id": "union-based-sqli",
+          "title": "UNION-based SQLi",
+          "type": "exercise",
+          "isLocked": false,
+          "isCompleted": false,
+          "xpReward": 30
+        },
+        {
+          "id": "error-based-sqli",
+          "title": "Error-based SQLi",
+          "type": "exercise",
+          "isLocked": false,
+          "isCompleted": false,
+          "xpReward": 30
+        }
+      ]
+    },
+    {
+      "id": "4",
+      "number": 4,
+      "title": "Advanced Techniques",
+      "description": "Explore blind SQLi and advanced exploitation",
+      "isLocked": false,
+      "isPremium": true,
+      "exercises": [
+        {
+          "id": "blind-sqli",
+          "title": "Blind SQL Injection",
+          "type": "exercise",
+          "isLocked": true,
+          "isCompleted": false,
+          "xpReward": 35
+        },
+        {
+          "id": "time-based-sqli",
+          "title": "Time-based SQLi",
+          "type": "exercise",
+          "isLocked": true,
+          "isCompleted": false,
+          "xpReward": 35
+        }
+      ]
+    },
+    {
+      "id": "5",
+      "number": 5,
+      "title": "Prevention & Defense",
+      "description": "Learn how to secure applications against SQLi",
+      "isLocked": false,
+      "isPremium": true,
+      "exercises": [
+        {
+          "id": "parameterized-queries",
+          "title": "Parameterized Queries",
+          "type": "exercise",
+          "isLocked": true,
+          "isCompleted": false,
+          "xpReward": 25
+        },
+        {
+          "id": "input-validation",
+          "title": "Input Validation",
+          "type": "exercise",
+          "isLocked": true,
+          "isCompleted": false,
+          "xpReward": 25
+        }
+      ]
+    },
+    {
+      "id": "6",
+      "number": 6,
+      "title": "Final Project",
+      "description": "Complete a real-world SQLi challenge",
+      "isLocked": false,
+      "isPremium": true,
+      "exercises": [
+        {
+          "id": "final-challenge",
+          "title": "Capture The Flag",
+          "type": "project",
+          "isLocked": true,
+          "isCompleted": false,
+          "xpReward": 100
+        }
+      ]
+    }
+  ],
+  "badges": [
+    {
+      "id": "sql-basics",
+      "name": "SQL Basics",
+      "description": "Complete Chapter 1",
+      "icon": "🗄️",
+      "isUnlocked": false,
+      "unlockCondition": "Complete all Chapter 1 exercises"
+    },
+    {
+      "id": "sqli-hunter",
+      "name": "SQLi Hunter",
+      "description": "Complete Chapter 2",
+      "icon": "🔍",
+      "isUnlocked": false,
+      "unlockCondition": "Complete all Chapter 2 exercises"
+    },
+    {
+      "id": "injection-master",
+      "name": "Injection Master",
+      "description": "Complete Chapter 3",
+      "icon": "💉",
+      "isUnlocked": false,
+      "unlockCondition": "Complete all Chapter 3 exercises"
+    },
+    {
+      "id": "blind-expert",
+      "name": "Blind Expert",
+      "description": "Complete Chapter 4",
+      "icon": "🕶️",
+      "isUnlocked": false,
+      "unlockCondition": "Complete all Chapter 4 exercises"
+    },
+    {
+      "id": "defender",
+      "name": "Defender",
+      "description": "Complete Chapter 5",
+      "icon": "🛡️",
+      "isUnlocked": false,
+      "unlockCondition": "Complete all Chapter 5 exercises"
+    },
+    {
+      "id": "sqli-champion",
+      "name": "SQLi Champion",
+      "description": "Complete Final Project",
+      "icon": "🏆",
+      "isUnlocked": false,
+      "unlockCondition": "Complete the final CTF challenge"
+    }
+  ],
+  "cheatSheets": []
+}

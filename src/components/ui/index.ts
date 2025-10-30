@@ -4,3 +4,4 @@ export { Badge, type BadgeProps } from "./Badge";
 export { Input, type InputProps } from "./Input";
 export { Modal, ModalFooter, type ModalProps, type ModalFooterProps } from "./Modal";
 export { Grid, GridItem, Container, type GridProps, type GridItemProps, type ContainerProps } from "./Grid";
+export { ProgressBar, type ProgressBarProps } from "./ProgressBar";

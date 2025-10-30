@@ -1,0 +1,367 @@
+{
+  "metadata": {
+    "courseId": "aws-security-basics",
+    "slug": "aws-security-basics",
+    "title": "AWS Security Basics",
+    "description": "Learn essential AWS security concepts, IAM best practices, and how to secure cloud infrastructure. Perfect for beginners entering cloud security."
+  },
+  "progress": {
+    "exercisesCompleted": 0,
+    "totalExercises": 36,
+    "projectsCompleted": 0,
+    "totalProjects": 2,
+    "xpEarned": 0,
+    "totalXp": 600,
+    "badgesEarned": 0,
+    "totalBadges": 8
+  },
+  "chapters": [
+    {
+      "id": "1",
+      "number": 1,
+      "title": "AWS Fundamentals",
+      "description": "Understand core AWS concepts and services",
+      "isLocked": false,
+      "isPremium": false,
+      "exercises": [
+        {
+          "id": "what-is-aws",
+          "title": "What is AWS?",
+          "type": "article",
+          "isLocked": false,
+          "isCompleted": false,
+          "xpReward": 10
+        },
+        {
+          "id": "aws-global-infrastructure",
+          "title": "AWS Global Infrastructure",
+          "type": "article",
+          "isLocked": false,
+          "isCompleted": false,
+          "xpReward": 10
+        },
+        {
+          "id": "aws-console",
+          "title": "AWS Management Console",
+          "type": "exercise",
+          "isLocked": false,
+          "isCompleted": false,
+          "xpReward": 15
+        }
+      ]
+    },
+    {
+      "id": "2",
+      "number": 2,
+      "title": "Identity & Access Management",
+      "description": "Master IAM policies and permissions",
+      "isLocked": false,
+      "isPremium": false,
+      "exercises": [
+        {
+          "id": "iam-basics",
+          "title": "IAM Fundamentals",
+          "type": "exercise",
+          "isLocked": false,
+          "isCompleted": false,
+          "xpReward": 20
+        },
+        {
+          "id": "iam-users-groups",
+          "title": "Users & Groups",
+          "type": "exercise",
+          "isLocked": false,
+          "isCompleted": false,
+          "xpReward": 20
+        },
+        {
+          "id": "iam-roles",
+          "title": "IAM Roles",
+          "type": "exercise",
+          "isLocked": false,
+          "isCompleted": false,
+          "xpReward": 25
+        },
+        {
+          "id": "iam-policies",
+          "title": "IAM Policies",
+          "type": "exercise",
+          "isLocked": false,
+          "isCompleted": false,
+          "xpReward": 30
+        }
+      ]
+    },
+    {
+      "id": "3",
+      "number": 3,
+      "title": "Network Security",
+      "description": "Secure your AWS network infrastructure",
+      "isLocked": false,
+      "isPremium": false,
+      "exercises": [
+        {
+          "id": "vpc-basics",
+          "title": "VPC Fundamentals",
+          "type": "exercise",
+          "isLocked": false,
+          "isCompleted": false,
+          "xpReward": 25
+        },
+        {
+          "id": "security-groups",
+          "title": "Security Groups",
+          "type": "exercise",
+          "isLocked": false,
+          "isCompleted": false,
+          "xpReward": 25
+        },
+        {
+          "id": "nacls",
+          "title": "Network ACLs",
+          "type": "exercise",
+          "isLocked": false,
+          "isCompleted": false,
+          "xpReward": 30
+        }
+      ]
+    },
+    {
+      "id": "4",
+      "number": 4,
+      "title": "Data Protection",
+      "description": "Encrypt and protect data in AWS",
+      "isLocked": false,
+      "isPremium": true,
+      "exercises": [
+        {
+          "id": "s3-security",
+          "title": "S3 Security Best Practices",
+          "type": "exercise",
+          "isLocked": true,
+          "isCompleted": false,
+          "xpReward": 30
+        },
+        {
+          "id": "encryption-at-rest",
+          "title": "Encryption at Rest",
+          "type": "exercise",
+          "isLocked": true,
+          "isCompleted": false,
+          "xpReward": 30
+        },
+        {
+          "id": "encryption-in-transit",
+          "title": "Encryption in Transit",
+          "type": "exercise",
+          "isLocked": true,
+          "isCompleted": false,
+          "xpReward": 30
+        },
+        {
+          "id": "kms",
+          "title": "AWS Key Management Service",
+          "type": "exercise",
+          "isLocked": true,
+          "isCompleted": false,
+          "xpReward": 35
+        }
+      ]
+    },
+    {
+      "id": "5",
+      "number": 5,
+      "title": "Monitoring & Logging",
+      "description": "Track and audit AWS activity",
+      "isLocked": false,
+      "isPremium": true,
+      "exercises": [
+        {
+          "id": "cloudtrail",
+          "title": "AWS CloudTrail",
+          "type": "exercise",
+          "isLocked": true,
+          "isCompleted": false,
+          "xpReward": 30
+        },
+        {
+          "id": "cloudwatch",
+          "title": "CloudWatch Monitoring",
+          "type": "exercise",
+          "isLocked": true,
+          "isCompleted": false,
+          "xpReward": 30
+        },
+        {
+          "id": "config",
+          "title": "AWS Config",
+          "type": "exercise",
+          "isLocked": true,
+          "isCompleted": false,
+          "xpReward": 30
+        }
+      ]
+    },
+    {
+      "id": "6",
+      "number": 6,
+      "title": "Compliance & Best Practices",
+      "description": "Follow AWS security standards",
+      "isLocked": false,
+      "isPremium": true,
+      "exercises": [
+        {
+          "id": "shared-responsibility",
+          "title": "Shared Responsibility Model",
+          "type": "article",
+          "isLocked": true,
+          "isCompleted": false,
+          "xpReward": 15
+        },
+        {
+          "id": "security-hub",
+          "title": "AWS Security Hub",
+          "type": "exercise",
+          "isLocked": true,
+          "isCompleted": false,
+          "xpReward": 30
+        },
+        {
+          "id": "well-architected",
+          "title": "Well-Architected Framework",
+          "type": "article",
+          "isLocked": true,
+          "isCompleted": false,
+          "xpReward": 20
+        }
+      ]
+    },
+    {
+      "id": "7",
+      "number": 7,
+      "title": "Incident Response",
+      "description": "Respond to security incidents in AWS",
+      "isLocked": false,
+      "isPremium": true,
+      "exercises": [
+        {
+          "id": "incident-detection",
+          "title": "Detecting Security Incidents",
+          "type": "exercise",
+          "isLocked": true,
+          "isCompleted": false,
+          "xpReward": 30
+        },
+        {
+          "id": "guardduty",
+          "title": "Amazon GuardDuty",
+          "type": "exercise",
+          "isLocked": true,
+          "isCompleted": false,
+          "xpReward": 35
+        },
+        {
+          "id": "incident-response",
+          "title": "Incident Response Procedures",
+          "type": "exercise",
+          "isLocked": true,
+          "isCompleted": false,
+          "xpReward": 35
+        }
+      ]
+    },
+    {
+      "id": "8",
+      "number": 8,
+      "title": "Security Projects",
+      "description": "Apply your AWS security knowledge",
+      "isLocked": false,
+      "isPremium": true,
+      "exercises": [
+        {
+          "id": "secure-architecture",
+          "title": "Design Secure Architecture",
+          "type": "project",
+          "isLocked": true,
+          "isCompleted": false,
+          "xpReward": 100
+        },
+        {
+          "id": "security-audit",
+          "title": "Perform Security Audit",
+          "type": "project",
+          "isLocked": true,
+          "isCompleted": false,
+          "xpReward": 100
+        }
+      ]
+    }
+  ],
+  "badges": [
+    {
+      "id": "aws-basics",
+      "name": "AWS Basics",
+      "description": "Complete Chapter 1",
+      "icon": "☁️",
+      "isUnlocked": false,
+      "unlockCondition": "Complete all Chapter 1 exercises"
+    },
+    {
+      "id": "iam-master",
+      "name": "IAM Master",
+      "description": "Complete Chapter 2",
+      "icon": "🔐",
+      "isUnlocked": false,
+      "unlockCondition": "Complete all Chapter 2 exercises"
+    },
+    {
+      "id": "network-architect",
+      "name": "Network Architect",
+      "description": "Complete Chapter 3",
+      "icon": "🌐",
+      "isUnlocked": false,
+      "unlockCondition": "Complete all Chapter 3 exercises"
+    },
+    {
+      "id": "data-protector",
+      "name": "Data Protector",
+      "description": "Complete Chapter 4",
+      "icon": "🛡️",
+      "isUnlocked": false,
+      "unlockCondition": "Complete all Chapter 4 exercises"
+    },
+    {
+      "id": "monitoring-expert",
+      "name": "Monitoring Expert",
+      "description": "Complete Chapter 5",
+      "icon": "📊",
+      "isUnlocked": false,
+      "unlockCondition": "Complete all Chapter 5 exercises"
+    },
+    {
+      "id": "compliance-pro",
+      "name": "Compliance Pro",
+      "description": "Complete Chapter 6",
+      "icon": "✅",
+      "isUnlocked": false,
+      "unlockCondition": "Complete all Chapter 6 exercises"
+    },
+    {
+      "id": "incident-responder",
+      "name": "Incident Responder",
+      "description": "Complete Chapter 7",
+      "icon": "🚨",
+      "isUnlocked": false,
+      "unlockCondition": "Complete all Chapter 7 exercises"
+    },
+    {
+      "id": "aws-security-expert",
+      "name": "AWS Security Expert",
+      "description": "Complete All Projects",
+      "icon": "🏆",
+      "isUnlocked": false,
+      "unlockCondition": "Complete all security projects"
+    }
+  ],
+  "cheatSheets": []
+}

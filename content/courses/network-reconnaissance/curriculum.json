@@ -1,0 +1,277 @@
+{
+  "metadata": {
+    "courseId": "network-reconnaissance",
+    "slug": "network-reconnaissance",
+    "title": "Network Reconnaissance",
+    "description": "Master the art of network scanning and reconnaissance. Learn to discover hosts, enumerate services, and map network infrastructure like a pro."
+  },
+  "progress": {
+    "exercisesCompleted": 0,
+    "totalExercises": 32,
+    "projectsCompleted": 0,
+    "totalProjects": 1,
+    "xpEarned": 0,
+    "totalXp": 520,
+    "badgesEarned": 0,
+    "totalBadges": 7
+  },
+  "chapters": [
+    {
+      "id": "1",
+      "number": 1,
+      "title": "Networking Fundamentals",
+      "description": "Learn essential networking concepts",
+      "isLocked": false,
+      "isPremium": false,
+      "exercises": [
+        {
+          "id": "tcp-ip-basics",
+          "title": "TCP/IP Basics",
+          "type": "article",
+          "isLocked": false,
+          "isCompleted": false,
+          "xpReward": 10
+        },
+        {
+          "id": "ports-protocols",
+          "title": "Ports & Protocols",
+          "type": "exercise",
+          "isLocked": false,
+          "isCompleted": false,
+          "xpReward": 15
+        },
+        {
+          "id": "network-layers",
+          "title": "OSI Model Layers",
+          "type": "exercise",
+          "isLocked": false,
+          "isCompleted": false,
+          "xpReward": 15
+        }
+      ]
+    },
+    {
+      "id": "2",
+      "number": 2,
+      "title": "Host Discovery",
+      "description": "Identify live hosts on a network",
+      "isLocked": false,
+      "isPremium": false,
+      "exercises": [
+        {
+          "id": "ping-sweeps",
+          "title": "Ping Sweeps",
+          "type": "exercise",
+          "isLocked": false,
+          "isCompleted": false,
+          "xpReward": 20
+        },
+        {
+          "id": "arp-scanning",
+          "title": "ARP Scanning",
+          "type": "exercise",
+          "isLocked": false,
+          "isCompleted": false,
+          "xpReward": 20
+        },
+        {
+          "id": "nmap-host-discovery",
+          "title": "Nmap Host Discovery",
+          "type": "exercise",
+          "isLocked": false,
+          "isCompleted": false,
+          "xpReward": 25
+        }
+      ]
+    },
+    {
+      "id": "3",
+      "number": 3,
+      "title": "Port Scanning",
+      "description": "Discover open ports and services",
+      "isLocked": false,
+      "isPremium": false,
+      "exercises": [
+        {
+          "id": "tcp-connect-scan",
+          "title": "TCP Connect Scan",
+          "type": "exercise",
+          "isLocked": false,
+          "isCompleted": false,
+          "xpReward": 25
+        },
+        {
+          "id": "syn-scan",
+          "title": "SYN Stealth Scan",
+          "type": "exercise",
+          "isLocked": false,
+          "isCompleted": false,
+          "xpReward": 30
+        },
+        {
+          "id": "udp-scan",
+          "title": "UDP Scanning",
+          "type": "exercise",
+          "isLocked": false,
+          "isCompleted": false,
+          "xpReward": 30
+        }
+      ]
+    },
+    {
+      "id": "4",
+      "number": 4,
+      "title": "Service Enumeration",
+      "description": "Identify and enumerate network services",
+      "isLocked": false,
+          "isPremium": true,
+      "exercises": [
+        {
+          "id": "banner-grabbing",
+          "title": "Banner Grabbing",
+          "type": "exercise",
+          "isLocked": true,
+          "isCompleted": false,
+          "xpReward": 25
+        },
+        {
+          "id": "version-detection",
+          "title": "Version Detection",
+          "type": "exercise",
+          "isLocked": true,
+          "isCompleted": false,
+          "xpReward": 30
+        }
+      ]
+    },
+    {
+      "id": "5",
+      "number": 5,
+      "title": "OS Fingerprinting",
+      "description": "Identify operating systems remotely",
+      "isLocked": false,
+      "isPremium": true,
+      "exercises": [
+        {
+          "id": "passive-os-detection",
+          "title": "Passive OS Detection",
+          "type": "exercise",
+          "isLocked": true,
+          "isCompleted": false,
+          "xpReward": 30
+        },
+        {
+          "id": "active-os-detection",
+          "title": "Active OS Fingerprinting",
+          "type": "exercise",
+          "isLocked": true,
+          "isCompleted": false,
+          "xpReward": 35
+        }
+      ]
+    },
+    {
+      "id": "6",
+      "number": 6,
+      "title": "Vulnerability Scanning",
+      "description": "Discover vulnerabilities in services",
+      "isLocked": false,
+      "isPremium": true,
+      "exercises": [
+        {
+          "id": "nmap-scripts",
+          "title": "Nmap Scripting Engine",
+          "type": "exercise",
+          "isLocked": true,
+          "isCompleted": false,
+          "xpReward": 35
+        },
+        {
+          "id": "vulnerability-scanners",
+          "title": "Automated Scanners",
+          "type": "exercise",
+          "isLocked": true,
+          "isCompleted": false,
+          "xpReward": 30
+        }
+      ]
+    },
+    {
+      "id": "7",
+      "number": 7,
+      "title": "Network Mapping Project",
+      "description": "Complete a full network reconnaissance challenge",
+      "isLocked": false,
+      "isPremium": true,
+      "exercises": [
+        {
+          "id": "recon-challenge",
+          "title": "Full Network Recon",
+          "type": "project",
+          "isLocked": true,
+          "isCompleted": false,
+          "xpReward": 100
+        }
+      ]
+    }
+  ],
+  "badges": [
+    {
+      "id": "network-basics",
+      "name": "Network Basics",
+      "description": "Complete Chapter 1",
+      "icon": "🌐",
+      "isUnlocked": false,
+      "unlockCondition": "Complete all Chapter 1 exercises"
+    },
+    {
+      "id": "host-hunter",
+      "name": "Host Hunter",
+      "description": "Complete Chapter 2",
+      "icon": "🎯",
+      "isUnlocked": false,
+      "unlockCondition": "Complete all Chapter 2 exercises"
+    },
+    {
+      "id": "port-scanner",
+      "name": "Port Scanner",
+      "description": "Complete Chapter 3",
+      "icon": "🔌",
+      "isUnlocked": false,
+      "unlockCondition": "Complete all Chapter 3 exercises"
+    },
+    {
+      "id": "service-detective",
+      "name": "Service Detective",
+      "description": "Complete Chapter 4",
+      "icon": "🔍",
+      "isUnlocked": false,
+      "unlockCondition": "Complete all Chapter 4 exercises"
+    },
+    {
+      "id": "os-expert",
+      "name": "OS Expert",
+      "description": "Complete Chapter 5",
+      "icon": "💻",
+      "isUnlocked": false,
+      "unlockCondition": "Complete all Chapter 5 exercises"
+    },
+    {
+      "id": "vuln-finder",
+      "name": "Vulnerability Finder",
+      "description": "Complete Chapter 6",
+      "icon": "🐛",
+      "isUnlocked": false,
+      "unlockCondition": "Complete all Chapter 6 exercises"
+    },
+    {
+      "id": "recon-master",
+      "name": "Recon Master",
+      "description": "Complete Final Project",
+      "icon": "🏆",
+      "isUnlocked": false,
+      "unlockCondition": "Complete the network recon project"
+    }
+  ],
+  "cheatSheets": []
+}

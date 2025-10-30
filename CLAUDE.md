@@ -470,29 +470,134 @@ useEffect(() => {
    className="animate-[custom-animation]"
    ```
 
+## Course Curriculum System
+
+**Status**: ✅ Fully Implemented (Codedex-style UI, static data)
+
+### Architecture
+
+The course system uses a **multi-layered structure** inspired by Codedex:
+- **Course Listing** (`/courses`) - Browse all available courses
+- **Curriculum Page** (`/courses/[slug]`) - Chapter/exercise timeline with sidebar
+- **Exercise Page** (`/courses/[slug]/[exerciseId]`) - Individual exercise content (MDX)
+
+### Content Structure
+
+```
+content/courses/
+├── [course-slug]/
+│   ├── curriculum.json          # Course metadata, chapters, exercises, badges
+│   └── exercises/
+│       ├── [exercise-id].mdx   # Individual exercise content
+│       └── ...
+```
+
+### Curriculum JSON Schema
+
+```json
+{
+  "metadata": {
+    "courseId": "course-slug",
+    "slug": "course-slug",
+    "title": "Course Title",
+    "description": "Course description"
+  },
+  "progress": {
+    "exercisesCompleted": 0,
+    "totalExercises": 35,
+    "projectsCompleted": 0,
+    "totalProjects": 2,
+    "xpEarned": 0,
+    "totalXp": 500,
+    "badgesEarned": 0,
+    "totalBadges": 7
+  },
+  "chapters": [
+    {
+      "id": "1",
+      "number": 1,
+      "title": "Chapter Title",
+      "description": "Chapter description",
+      "isLocked": false,
+      "isPremium": false,
+      "exercises": [
+        {
+          "id": "exercise-slug",
+          "title": "Exercise Title",
+          "type": "exercise" | "article" | "project" | "quiz",
+          "isLocked": false,
+          "isCompleted": false,
+          "xpReward": 25
+        }
+      ]
+    }
+  ],
+  "badges": [...],
+  "cheatSheets": [...]
+}
+```
+
+### Course Components
+
+**Location**: `src/components/course/`
+
+- `CourseLayout.tsx` - Two-column layout (main content + sidebar)
+- `CourseSidebar.tsx` - User profile, progress bars, badge grid
+- `ChapterList.tsx` - Vertical timeline of chapters (calculates continuous exercise numbering)
+- `ChapterItem.tsx` - Collapsible chapter with expand/collapse animation
+- `ExerciseItem.tsx` - Individual exercise rows with Start/Lock buttons
+
+### Current Courses
+
+All 7 courses have full curriculum structures:
+
+1. **SQL Injection Basics** (28 exercises, 6 chapters, 6 badges)
+2. **Network Reconnaissance** (32 exercises, 7 chapters, 7 badges)
+3. **Cryptography Fundamentals** (30 exercises, 7 chapters, 7 badges)
+4. **Web App Penetration Testing** (35 exercises, 8 chapters, 8 badges)
+5. **Malware Analysis Fundamentals** (33 exercises, 7 chapters, 7 badges)
+6. **AWS Security Basics** (36 exercises, 8 chapters, 8 badges)
+7. **Python Fundamentals** (43 exercises, 8 chapters, 8 badges)
+
+### Key Features
+
+- ✅ Collapsible chapters with smooth Framer Motion animations
+- ✅ Continuous exercise numbering (1-35 across all chapters)
+- ✅ Premium/locked content indicators ("CLUB" badge, grayscale locked exercises)
+- ✅ Static progress tracking UI (progress bars, XP, badges)
+- ✅ Badge grid (8 badges per course, all locked initially)
+- ✅ Responsive layout (sidebar moves below on mobile)
+- ✅ MDX exercise content with syntax highlighting (rehype-prism-plus)
+
+### What's NOT Implemented (Future)
+
+- ❌ User authentication (NextAuth.js)
+- ❌ Progress persistence (database, localStorage)
+- ❌ Dynamic progress calculations
+- ❌ Real XP/badge unlocking logic
+- ❌ Exercise completion tracking
+- ❌ Cheat sheet downloads
+
 ## Feature Flags & Future Development
 
 **Implemented:**
-- ✅ Next.js 14 App Router with TypeScript
+- ✅ Next.js 16 App Router with TypeScript
 - ✅ Tailwind CSS v4 with @theme directive
-- ✅ Component library (Button, Card, Badge, Input, Modal, Grid)
+- ✅ Component library (Button, Card, Badge, Input, Modal, Grid, ProgressBar)
 - ✅ Navigation (mobile menu with Framer Motion)
 - ✅ Footer with social links
 - ✅ Hero with Three.js 3D network visualization
 - ✅ Responsive design, dark theme
+- ✅ Course curriculum system (Codedex-style UI)
+- ✅ MDX content structure with syntax highlighting
 
-**Planned (dependencies installed, not implemented):**
-- ⏳ MDX content structure (`next-mdx-remote`, `gray-matter` installed)
-- ⏳ Lenis smooth scroll (`lenis` installed)
-- ⏳ Zustand state management (`zustand` installed)
-- ⏳ Code syntax highlighting (`rehype-highlight`, `rehype-prism-plus` installed)
-
-**Future (commented in .env.example):**
-- ⏳ NextAuth.js authentication
-- ⏳ Prisma database
-- ⏳ Course/lab content system
-- ⏳ User progress tracking
-- ⏳ Community features
+**Planned:**
+- ⏳ Lenis smooth scroll (`lenis` installed but not integrated)
+- ⏳ Zustand state management (`zustand` installed but not used)
+- ⏳ User authentication (NextAuth.js)
+- ⏳ Progress tracking & persistence
+- ⏳ Interactive labs/challenges
+- ⏳ Community features (forums, comments)
 
 **Check feature flags** in `src/lib/config.ts`:
 ```typescript
@@ -536,6 +641,16 @@ features: {
 - `src/app/layout.tsx` - Root layout (Nav + Footer wrapper)
 - `src/components/ui/` - Reusable UI component library
 - `src/components/features/Hero3D.tsx` - Three.js 3D visualization
+
+**Course System Files:**
+- `src/lib/curriculum.ts` - Curriculum loading utilities
+- `src/types/curriculum.ts` - TypeScript types for courses
+- `src/components/course/` - Course UI components (CourseLayout, CourseSidebar, ChapterList, etc.)
+- `src/app/courses/page.tsx` - Course listing page
+- `src/app/courses/[slug]/page.tsx` - Curriculum page
+- `src/app/courses/[slug]/[exerciseId]/page.tsx` - Exercise content page
+- `content/courses/[slug]/curriculum.json` - Course metadata and structure
+- `content/courses/[slug]/exercises/*.mdx` - Exercise content files
 
 **Config Files:**
 - `postcss.config.js` - PostCSS with @tailwindcss/postcss plugin

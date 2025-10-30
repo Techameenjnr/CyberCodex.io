@@ -1,0 +1,314 @@
+{
+  "metadata": {
+    "courseId": "python-fundamentals",
+    "slug": "python-fundamentals",
+    "title": "Python",
+    "description": "Learn programming fundamentals such as variables, control flow, and loops with the world's most popular and versatile coding language — Python!",
+    "heroImage": "/images/courses/python-hero.png"
+  },
+  "progress": {
+    "exercisesCompleted": 0,
+    "totalExercises": 43,
+    "projectsCompleted": 0,
+    "totalProjects": 2,
+    "xpEarned": 0,
+    "totalXp": 685,
+    "badgesEarned": 0,
+    "totalBadges": 8
+  },
+  "chapters": [
+    {
+      "id": "1",
+      "number": 1,
+      "title": "Hello World",
+      "description": "Learn how to write your first line of Python by printing messages to the terminal.",
+      "isLocked": false,
+      "isPremium": false,
+      "exercises": [
+        {
+          "id": "setting-up",
+          "title": "Setting Up",
+          "description": "Get Python installed and ready to code",
+          "type": "exercise",
+          "isLocked": false,
+          "isCompleted": false,
+          "xpReward": 10
+        },
+        {
+          "id": "hello-world",
+          "title": "Hello World",
+          "description": "Print your first message",
+          "type": "exercise",
+          "isLocked": false,
+          "isCompleted": false,
+          "xpReward": 15
+        },
+        {
+          "id": "pattern",
+          "title": "Pattern",
+          "description": "Create ASCII art with print statements",
+          "type": "exercise",
+          "isLocked": false,
+          "isCompleted": false,
+          "xpReward": 15
+        },
+        {
+          "id": "initials",
+          "title": "Initials",
+          "description": "Print your initials in block letters",
+          "type": "exercise",
+          "isLocked": false,
+          "isCompleted": false,
+          "xpReward": 20
+        },
+        {
+          "id": "snail-mail",
+          "title": "Snail Mail",
+          "description": "Format and print an address",
+          "type": "exercise",
+          "isLocked": false,
+          "isCompleted": false,
+          "xpReward": 20
+        }
+      ]
+    },
+    {
+      "id": "2",
+      "number": 2,
+      "title": "Variables",
+      "description": "Store and manipulate data using variables",
+      "isLocked": false,
+      "isPremium": false,
+      "exercises": [
+        {
+          "id": "variables-intro",
+          "title": "Introduction to Variables",
+          "type": "exercise",
+          "isLocked": false,
+          "isCompleted": false,
+          "xpReward": 15
+        },
+        {
+          "id": "string-variables",
+          "title": "String Variables",
+          "type": "exercise",
+          "isLocked": false,
+          "isCompleted": false,
+          "xpReward": 15
+        },
+        {
+          "id": "number-variables",
+          "title": "Number Variables",
+          "type": "exercise",
+          "isLocked": false,
+          "isCompleted": false,
+          "xpReward": 15
+        }
+      ]
+    },
+    {
+      "id": "3",
+      "number": 3,
+      "title": "Control Flow",
+      "description": "Make decisions in your code with if/else statements",
+      "isLocked": false,
+      "isPremium": false,
+      "exercises": [
+        {
+          "id": "if-statements",
+          "title": "If Statements",
+          "type": "exercise",
+          "isLocked": false,
+          "isCompleted": false,
+          "xpReward": 20
+        },
+        {
+          "id": "else-statements",
+          "title": "Else Statements",
+          "type": "exercise",
+          "isLocked": false,
+          "isCompleted": false,
+          "xpReward": 20
+        }
+      ]
+    },
+    {
+      "id": "4",
+      "number": 4,
+      "title": "Loops",
+      "description": "Repeat code efficiently with loops",
+      "isLocked": false,
+      "isPremium": true,
+      "exercises": [
+        {
+          "id": "for-loops",
+          "title": "For Loops",
+          "type": "exercise",
+          "isLocked": true,
+          "isCompleted": false,
+          "xpReward": 25
+        },
+        {
+          "id": "while-loops",
+          "title": "While Loops",
+          "type": "exercise",
+          "isLocked": true,
+          "isCompleted": false,
+          "xpReward": 25
+        }
+      ]
+    },
+    {
+      "id": "5",
+      "number": 5,
+      "title": "Lists",
+      "description": "Store multiple items in a single variable",
+      "isLocked": false,
+      "isPremium": true,
+      "exercises": [
+        {
+          "id": "list-basics",
+          "title": "List Basics",
+          "type": "exercise",
+          "isLocked": true,
+          "isCompleted": false,
+          "xpReward": 25
+        }
+      ]
+    },
+    {
+      "id": "6",
+      "number": 6,
+      "title": "Functions",
+      "description": "Organize code into reusable blocks",
+      "isLocked": false,
+      "isPremium": true,
+      "exercises": [
+        {
+          "id": "function-basics",
+          "title": "Function Basics",
+          "type": "exercise",
+          "isLocked": true,
+          "isCompleted": false,
+          "xpReward": 30
+        }
+      ]
+    },
+    {
+      "id": "7",
+      "number": 7,
+      "title": "Classes & Objects",
+      "description": "Learn object-oriented programming",
+      "isLocked": false,
+      "isPremium": true,
+      "exercises": [
+        {
+          "id": "class-basics",
+          "title": "Class Basics",
+          "type": "exercise",
+          "isLocked": true,
+          "isCompleted": false,
+          "xpReward": 35
+        }
+      ]
+    },
+    {
+      "id": "8",
+      "number": 8,
+      "title": "Modules",
+      "description": "Import and use external code libraries",
+      "isLocked": false,
+      "isPremium": true,
+      "exercises": [
+        {
+          "id": "import-basics",
+          "title": "Import Basics",
+          "type": "exercise",
+          "isLocked": true,
+          "isCompleted": false,
+          "xpReward": 30
+        }
+      ]
+    }
+  ],
+  "badges": [
+    {
+      "id": "hello-world-badge",
+      "name": "Hello World",
+      "description": "Complete Chapter 1",
+      "icon": "🎓",
+      "isUnlocked": false,
+      "unlockCondition": "Complete all Chapter 1 exercises"
+    },
+    {
+      "id": "variables-badge",
+      "name": "Variable Master",
+      "description": "Complete Chapter 2",
+      "icon": "📦",
+      "isUnlocked": false,
+      "unlockCondition": "Complete all Chapter 2 exercises"
+    },
+    {
+      "id": "control-flow-badge",
+      "name": "Decision Maker",
+      "description": "Complete Chapter 3",
+      "icon": "🔀",
+      "isUnlocked": false,
+      "unlockCondition": "Complete all Chapter 3 exercises"
+    },
+    {
+      "id": "loops-badge",
+      "name": "Loop Master",
+      "description": "Complete Chapter 4",
+      "icon": "🔁",
+      "isUnlocked": false,
+      "unlockCondition": "Complete all Chapter 4 exercises"
+    },
+    {
+      "id": "lists-badge",
+      "name": "List Expert",
+      "description": "Complete Chapter 5",
+      "icon": "📝",
+      "isUnlocked": false,
+      "unlockCondition": "Complete all Chapter 5 exercises"
+    },
+    {
+      "id": "functions-badge",
+      "name": "Function Pro",
+      "description": "Complete Chapter 6",
+      "icon": "⚙️",
+      "isUnlocked": false,
+      "unlockCondition": "Complete all Chapter 6 exercises"
+    },
+    {
+      "id": "oop-badge",
+      "name": "OOP Guru",
+      "description": "Complete Chapter 7",
+      "icon": "🎯",
+      "isUnlocked": false,
+      "unlockCondition": "Complete all Chapter 7 exercises"
+    },
+    {
+      "id": "modules-badge",
+      "name": "Module Maven",
+      "description": "Complete Chapter 8",
+      "icon": "📚",
+      "isUnlocked": false,
+      "unlockCondition": "Complete all Chapter 8 exercises"
+    }
+  ],
+  "cheatSheets": [
+    {
+      "id": "basics-cheatsheet",
+      "title": "Python Basics Cheat Sheet",
+      "unlockAfterChapter": 4,
+      "isUnlocked": false
+    },
+    {
+      "id": "advanced-cheatsheet",
+      "title": "Advanced Python Cheat Sheet",
+      "unlockAfterChapter": 8,
+      "isUnlocked": false
+    }
+  ]
+}

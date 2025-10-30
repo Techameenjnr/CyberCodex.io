@@ -1,0 +1,309 @@
+{
+  "metadata": {
+    "courseId": "cryptography-fundamentals",
+    "slug": "cryptography-fundamentals",
+    "title": "Cryptography Fundamentals",
+    "description": "Explore the world of cryptography! Learn encryption, hashing, digital signatures, and how modern cryptographic systems protect our data."
+  },
+  "progress": {
+    "exercisesCompleted": 0,
+    "totalExercises": 30,
+    "projectsCompleted": 0,
+    "totalProjects": 2,
+    "xpEarned": 0,
+    "totalXp": 500,
+    "badgesEarned": 0,
+    "totalBadges": 7
+  },
+  "chapters": [
+    {
+      "id": "1",
+      "number": 1,
+      "title": "Introduction to Cryptography",
+      "description": "Understand the basics of cryptography and its importance",
+      "isLocked": false,
+      "isPremium": false,
+      "exercises": [
+        {
+          "id": "what-is-crypto",
+          "title": "What is Cryptography?",
+          "type": "article",
+          "isLocked": false,
+          "isCompleted": false,
+          "xpReward": 10
+        },
+        {
+          "id": "history-of-crypto",
+          "title": "History of Cryptography",
+          "type": "article",
+          "isLocked": false,
+          "isCompleted": false,
+          "xpReward": 10
+        },
+        {
+          "id": "crypto-basics",
+          "title": "Cryptographic Concepts",
+          "type": "exercise",
+          "isLocked": false,
+          "isCompleted": false,
+          "xpReward": 15
+        }
+      ]
+    },
+    {
+      "id": "2",
+      "number": 2,
+      "title": "Classical Ciphers",
+      "description": "Learn historical encryption methods",
+      "isLocked": false,
+      "isPremium": false,
+      "exercises": [
+        {
+          "id": "caesar-cipher",
+          "title": "Caesar Cipher",
+          "type": "exercise",
+          "isLocked": false,
+          "isCompleted": false,
+          "xpReward": 20
+        },
+        {
+          "id": "substitution-cipher",
+          "title": "Substitution Ciphers",
+          "type": "exercise",
+          "isLocked": false,
+          "isCompleted": false,
+          "xpReward": 20
+        },
+        {
+          "id": "vigenere-cipher",
+          "title": "Vigenère Cipher",
+          "type": "exercise",
+          "isLocked": false,
+          "isCompleted": false,
+          "xpReward": 25
+        }
+      ]
+    },
+    {
+      "id": "3",
+      "number": 3,
+      "title": "Symmetric Encryption",
+      "description": "Explore modern symmetric key algorithms",
+      "isLocked": false,
+      "isPremium": false,
+      "exercises": [
+        {
+          "id": "des-basics",
+          "title": "DES & 3DES",
+          "type": "exercise",
+          "isLocked": false,
+          "isCompleted": false,
+          "xpReward": 25
+        },
+        {
+          "id": "aes-intro",
+          "title": "AES Encryption",
+          "type": "exercise",
+          "isLocked": false,
+          "isCompleted": false,
+          "xpReward": 30
+        },
+        {
+          "id": "block-cipher-modes",
+          "title": "Block Cipher Modes",
+          "type": "exercise",
+          "isLocked": false,
+          "isCompleted": false,
+          "xpReward": 30
+        }
+      ]
+    },
+    {
+      "id": "4",
+      "number": 4,
+      "title": "Asymmetric Encryption",
+      "description": "Understand public-key cryptography",
+      "isLocked": false,
+      "isPremium": true,
+      "exercises": [
+        {
+          "id": "rsa-basics",
+          "title": "RSA Encryption",
+          "type": "exercise",
+          "isLocked": true,
+          "isCompleted": false,
+          "xpReward": 35
+        },
+        {
+          "id": "diffie-hellman",
+          "title": "Diffie-Hellman Key Exchange",
+          "type": "exercise",
+          "isLocked": true,
+          "isCompleted": false,
+          "xpReward": 35
+        },
+        {
+          "id": "ecc",
+          "title": "Elliptic Curve Cryptography",
+          "type": "exercise",
+          "isLocked": true,
+          "isCompleted": false,
+          "xpReward": 40
+        }
+      ]
+    },
+    {
+      "id": "5",
+      "number": 5,
+      "title": "Hashing & Integrity",
+      "description": "Learn about cryptographic hash functions",
+      "isLocked": false,
+      "isPremium": true,
+      "exercises": [
+        {
+          "id": "hash-basics",
+          "title": "Hash Functions",
+          "type": "article",
+          "isLocked": true,
+          "isCompleted": false,
+          "xpReward": 15
+        },
+        {
+          "id": "md5-sha",
+          "title": "MD5 & SHA Families",
+          "type": "exercise",
+          "isLocked": true,
+          "isCompleted": false,
+          "xpReward": 25
+        },
+        {
+          "id": "hmac",
+          "title": "HMAC & Message Authentication",
+          "type": "exercise",
+          "isLocked": true,
+          "isCompleted": false,
+          "xpReward": 30
+        }
+      ]
+    },
+    {
+      "id": "6",
+      "number": 6,
+      "title": "Digital Signatures",
+      "description": "Verify authenticity with digital signatures",
+      "isLocked": false,
+      "isPremium": true,
+      "exercises": [
+        {
+          "id": "signature-basics",
+          "title": "Digital Signature Basics",
+          "type": "article",
+          "isLocked": true,
+          "isCompleted": false,
+          "xpReward": 20
+        },
+        {
+          "id": "rsa-signatures",
+          "title": "RSA Signatures",
+          "type": "exercise",
+          "isLocked": true,
+          "isCompleted": false,
+          "xpReward": 30
+        }
+      ]
+    },
+    {
+      "id": "7",
+      "number": 7,
+      "title": "Cryptanalysis",
+      "description": "Learn to break cryptographic systems",
+      "isLocked": false,
+      "isPremium": true,
+      "exercises": [
+        {
+          "id": "frequency-analysis",
+          "title": "Frequency Analysis",
+          "type": "exercise",
+          "isLocked": true,
+          "isCompleted": false,
+          "xpReward": 30
+        },
+        {
+          "id": "padding-oracle",
+          "title": "Padding Oracle Attacks",
+          "type": "exercise",
+          "isLocked": true,
+          "isCompleted": false,
+          "xpReward": 40
+        },
+        {
+          "id": "crypto-ctf",
+          "title": "Crypto CTF Challenge",
+          "type": "project",
+          "isLocked": true,
+          "isCompleted": false,
+          "xpReward": 100
+        }
+      ]
+    }
+  ],
+  "badges": [
+    {
+      "id": "crypto-basics",
+      "name": "Crypto Basics",
+      "description": "Complete Chapter 1",
+      "icon": "🔐",
+      "isUnlocked": false,
+      "unlockCondition": "Complete all Chapter 1 exercises"
+    },
+    {
+      "id": "cipher-novice",
+      "name": "Cipher Novice",
+      "description": "Complete Chapter 2",
+      "icon": "📜",
+      "isUnlocked": false,
+      "unlockCondition": "Complete all Chapter 2 exercises"
+    },
+    {
+      "id": "symmetric-master",
+      "name": "Symmetric Master",
+      "description": "Complete Chapter 3",
+      "icon": "🔑",
+      "isUnlocked": false,
+      "unlockCondition": "Complete all Chapter 3 exercises"
+    },
+    {
+      "id": "asymmetric-expert",
+      "name": "Asymmetric Expert",
+      "description": "Complete Chapter 4",
+      "icon": "🔓",
+      "isUnlocked": false,
+      "unlockCondition": "Complete all Chapter 4 exercises"
+    },
+    {
+      "id": "hash-guru",
+      "name": "Hash Guru",
+      "description": "Complete Chapter 5",
+      "icon": "#️⃣",
+      "isUnlocked": false,
+      "unlockCondition": "Complete all Chapter 5 exercises"
+    },
+    {
+      "id": "signature-pro",
+      "name": "Signature Pro",
+      "description": "Complete Chapter 6",
+      "icon": "✍️",
+      "isUnlocked": false,
+      "unlockCondition": "Complete all Chapter 6 exercises"
+    },
+    {
+      "id": "cryptanalyst",
+      "name": "Cryptanalyst",
+      "description": "Complete Chapter 7",
+      "icon": "🏆",
+      "isUnlocked": false,
+      "unlockCondition": "Complete cryptanalysis challenges"
+    }
+  ],
+  "cheatSheets": []
+}

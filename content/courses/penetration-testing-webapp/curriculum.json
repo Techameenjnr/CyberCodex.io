@@ -1,0 +1,343 @@
+{
+  "metadata": {
+    "courseId": "penetration-testing-webapp",
+    "slug": "penetration-testing-webapp",
+    "title": "Web Application Penetration Testing",
+    "description": "Learn professional web application penetration testing methodologies, tools, and techniques to identify and exploit vulnerabilities."
+  },
+  "progress": {
+    "exercisesCompleted": 0,
+    "totalExercises": 35,
+    "projectsCompleted": 0,
+    "totalProjects": 3,
+    "xpEarned": 0,
+    "totalXp": 650,
+    "badgesEarned": 0,
+    "totalBadges": 8
+  },
+  "chapters": [
+    {
+      "id": "1",
+      "number": 1,
+      "title": "Web Application Basics",
+      "description": "Understand how web applications work",
+      "isLocked": false,
+      "isPremium": false,
+      "exercises": [
+        {
+          "id": "http-basics",
+          "title": "HTTP Protocol",
+          "type": "article",
+          "isLocked": false,
+          "isCompleted": false,
+          "xpReward": 10
+        },
+        {
+          "id": "web-technologies",
+          "title": "Web Technologies Stack",
+          "type": "article",
+          "isLocked": false,
+          "isCompleted": false,
+          "xpReward": 10
+        },
+        {
+          "id": "http-requests",
+          "title": "HTTP Requests & Responses",
+          "type": "exercise",
+          "isLocked": false,
+          "isCompleted": false,
+          "xpReward": 15
+        }
+      ]
+    },
+    {
+      "id": "2",
+      "number": 2,
+      "title": "Reconnaissance & Enumeration",
+      "description": "Discover and map web application structure",
+      "isLocked": false,
+      "isPremium": false,
+      "exercises": [
+        {
+          "id": "web-recon",
+          "title": "Web Reconnaissance",
+          "type": "exercise",
+          "isLocked": false,
+          "isCompleted": false,
+          "xpReward": 20
+        },
+        {
+          "id": "directory-enumeration",
+          "title": "Directory Enumeration",
+          "type": "exercise",
+          "isLocked": false,
+          "isCompleted": false,
+          "xpReward": 20
+        },
+        {
+          "id": "subdomain-discovery",
+          "title": "Subdomain Discovery",
+          "type": "exercise",
+          "isLocked": false,
+          "isCompleted": false,
+          "xpReward": 25
+        }
+      ]
+    },
+    {
+      "id": "3",
+      "number": 3,
+      "title": "Authentication Testing",
+      "description": "Test authentication mechanisms",
+      "isLocked": false,
+      "isPremium": false,
+      "exercises": [
+        {
+          "id": "auth-bypass",
+          "title": "Authentication Bypass",
+          "type": "exercise",
+          "isLocked": false,
+          "isCompleted": false,
+          "xpReward": 25
+        },
+        {
+          "id": "brute-force",
+          "title": "Brute Force Attacks",
+          "type": "exercise",
+          "isLocked": false,
+          "isCompleted": false,
+          "xpReward": 25
+        },
+        {
+          "id": "session-management",
+          "title": "Session Management Flaws",
+          "type": "exercise",
+          "isLocked": false,
+          "isCompleted": false,
+          "xpReward": 30
+        }
+      ]
+    },
+    {
+      "id": "4",
+      "number": 4,
+      "title": "Injection Attacks",
+      "description": "Master injection vulnerability testing",
+      "isLocked": false,
+      "isPremium": true,
+      "exercises": [
+        {
+          "id": "sql-injection-advanced",
+          "title": "Advanced SQL Injection",
+          "type": "exercise",
+          "isLocked": true,
+          "isCompleted": false,
+          "xpReward": 35
+        },
+        {
+          "id": "command-injection",
+          "title": "Command Injection",
+          "type": "exercise",
+          "isLocked": true,
+          "isCompleted": false,
+          "xpReward": 35
+        },
+        {
+          "id": "ldap-injection",
+          "title": "LDAP Injection",
+          "type": "exercise",
+          "isLocked": true,
+          "isCompleted": false,
+          "xpReward": 30
+        }
+      ]
+    },
+    {
+      "id": "5",
+      "number": 5,
+      "title": "XSS & Client-Side Attacks",
+      "description": "Exploit client-side vulnerabilities",
+      "isLocked": false,
+      "isPremium": true,
+      "exercises": [
+        {
+          "id": "reflected-xss",
+          "title": "Reflected XSS",
+          "type": "exercise",
+          "isLocked": true,
+          "isCompleted": false,
+          "xpReward": 30
+        },
+        {
+          "id": "stored-xss",
+          "title": "Stored XSS",
+          "type": "exercise",
+          "isLocked": true,
+          "isCompleted": false,
+          "xpReward": 35
+        },
+        {
+          "id": "dom-xss",
+          "title": "DOM-based XSS",
+          "type": "exercise",
+          "isLocked": true,
+          "isCompleted": false,
+          "xpReward": 40
+        }
+      ]
+    },
+    {
+      "id": "6",
+      "number": 6,
+      "title": "Business Logic Flaws",
+      "description": "Find flaws in application logic",
+      "isLocked": false,
+      "isPremium": true,
+      "exercises": [
+        {
+          "id": "logic-flaws",
+          "title": "Business Logic Testing",
+          "type": "exercise",
+          "isLocked": true,
+          "isCompleted": false,
+          "xpReward": 35
+        },
+        {
+          "id": "idor",
+          "title": "IDOR Vulnerabilities",
+          "type": "exercise",
+          "isLocked": true,
+          "isCompleted": false,
+          "xpReward": 35
+        }
+      ]
+    },
+    {
+      "id": "7",
+      "number": 7,
+      "title": "API Security Testing",
+      "description": "Test REST and GraphQL APIs",
+      "isLocked": false,
+      "isPremium": true,
+      "exercises": [
+        {
+          "id": "api-recon",
+          "title": "API Reconnaissance",
+          "type": "exercise",
+          "isLocked": true,
+          "isCompleted": false,
+          "xpReward": 30
+        },
+        {
+          "id": "api-vulns",
+          "title": "API Vulnerabilities",
+          "type": "exercise",
+          "isLocked": true,
+          "isCompleted": false,
+          "xpReward": 35
+        }
+      ]
+    },
+    {
+      "id": "8",
+      "number": 8,
+      "title": "Final Assessment",
+      "description": "Complete real-world pentest challenges",
+      "isLocked": false,
+      "isPremium": true,
+      "exercises": [
+        {
+          "id": "beginner-app",
+          "title": "Beginner Web App",
+          "type": "project",
+          "isLocked": true,
+          "isCompleted": false,
+          "xpReward": 75
+        },
+        {
+          "id": "intermediate-app",
+          "title": "Intermediate Web App",
+          "type": "project",
+          "isLocked": true,
+          "isCompleted": false,
+          "xpReward": 100
+        },
+        {
+          "id": "advanced-app",
+          "title": "Advanced Web App",
+          "type": "project",
+          "isLocked": true,
+          "isCompleted": false,
+          "xpReward": 150
+        }
+      ]
+    }
+  ],
+  "badges": [
+    {
+      "id": "web-basics",
+      "name": "Web Basics",
+      "description": "Complete Chapter 1",
+      "icon": "🌐",
+      "isUnlocked": false,
+      "unlockCondition": "Complete all Chapter 1 exercises"
+    },
+    {
+      "id": "recon-specialist",
+      "name": "Recon Specialist",
+      "description": "Complete Chapter 2",
+      "icon": "🔍",
+      "isUnlocked": false,
+      "unlockCondition": "Complete all Chapter 2 exercises"
+    },
+    {
+      "id": "auth-breaker",
+      "name": "Auth Breaker",
+      "description": "Complete Chapter 3",
+      "icon": "🔓",
+      "isUnlocked": false,
+      "unlockCondition": "Complete all Chapter 3 exercises"
+    },
+    {
+      "id": "injection-expert",
+      "name": "Injection Expert",
+      "description": "Complete Chapter 4",
+      "icon": "💉",
+      "isUnlocked": false,
+      "unlockCondition": "Complete all Chapter 4 exercises"
+    },
+    {
+      "id": "xss-master",
+      "name": "XSS Master",
+      "description": "Complete Chapter 5",
+      "icon": "⚡",
+      "isUnlocked": false,
+      "unlockCondition": "Complete all Chapter 5 exercises"
+    },
+    {
+      "id": "logic-breaker",
+      "name": "Logic Breaker",
+      "description": "Complete Chapter 6",
+      "icon": "🧩",
+      "isUnlocked": false,
+      "unlockCondition": "Complete all Chapter 6 exercises"
+    },
+    {
+      "id": "api-hacker",
+      "name": "API Hacker",
+      "description": "Complete Chapter 7",
+      "icon": "🔌",
+      "isUnlocked": false,
+      "unlockCondition": "Complete all Chapter 7 exercises"
+    },
+    {
+      "id": "pentest-pro",
+      "name": "Pentest Pro",
+      "description": "Complete Final Assessment",
+      "icon": "🏆",
+      "isUnlocked": false,
+      "unlockCondition": "Complete all final projects"
+    }
+  ],
+  "cheatSheets": []
+}

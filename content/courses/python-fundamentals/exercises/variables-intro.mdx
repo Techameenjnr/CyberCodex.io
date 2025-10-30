@@ -1,0 +1,162 @@
+---
+title: Introduction to Variables
+description: Learn how to store and use data
+nextExercise: string-variables
+---
+
+# Introduction to Variables
+
+Variables are containers for storing data values. They're one of the most fundamental concepts in programming!
+
+## What is a Variable?
+
+Think of a variable like a labeled box where you can store information. You give it a name, and you can put data inside it or take data out of it.
+
+## Creating Variables
+
+In Python, you create a variable by giving it a name and assigning it a value using the `=` operator:
+
+```python
+name = "Alex"
+age = 25
+is_student = True
+```
+
+## Variable Names
+
+Variable names in Python:
+
+- Can contain letters, numbers, and underscores
+- Must start with a letter or underscore
+- Are case-sensitive (`name` and `Name` are different)
+- Cannot be Python keywords (like `print`, `if`, `for`, etc.)
+
+### Good Variable Names
+
+```python
+user_name = "Alice"
+total_score = 100
+is_active = True
+```
+
+### Bad Variable Names
+
+```python
+1name = "Bob"        # Can't start with a number
+user-name = "Eve"    # Can't use hyphens
+class = "Math"       # 'class' is a Python keyword
+```
+
+## Using Variables
+
+Once you create a variable, you can use it anywhere in your code:
+
+```python
+name = "Sarah"
+print("Hello, " + name + "!")
+```
+
+Output:
+```
+Hello, Sarah!
+```
+
+## Updating Variables
+
+You can change the value of a variable at any time:
+
+```python
+score = 0
+print(score)  # Output: 0
+
+score = 10
+print(score)  # Output: 10
+
+score = 25
+print(score)  # Output: 25
+```
+
+## Multiple Variables
+
+You can create multiple variables at once:
+
+```python
+x, y, z = 1, 2, 3
+
+print(x)  # Output: 1
+print(y)  # Output: 2
+print(z)  # Output: 3
+```
+
+You can also assign the same value to multiple variables:
+
+```python
+a = b = c = 100
+
+print(a)  # Output: 100
+print(b)  # Output: 100
+print(c)  # Output: 100
+```
+
+## Exercise 1: Create Variables
+
+Create variables for the following and print them:
+
+- Your favorite color
+- Your favorite number
+- Whether you like pizza (True or False)
+
+<details>
+<summary>💡 Click here for the solution</summary>
+
+```python
+favorite_color = "blue"
+favorite_number = 7
+likes_pizza = True
+
+print(favorite_color)
+print(favorite_number)
+print(likes_pizza)
+```
+
+</details>
+
+## Exercise 2: Update a Variable
+
+Create a variable called `level` with an initial value of 1. Then update it to 2, then to 3, printing the value after each update.
+
+<details>
+<summary>💡 Click here for the solution</summary>
+
+```python
+level = 1
+print(level)  # Output: 1
+
+level = 2
+print(level)  # Output: 2
+
+level = 3
+print(level)  # Output: 3
+```
+
+</details>
+
+## Why Use Variables?
+
+Variables make your code:
+
+- **Reusable**: Use the same value multiple times without retyping it
+- **Maintainable**: Change a value in one place instead of many
+- **Readable**: Give meaningful names to values (`max_attempts` is clearer than just `3`)
+- **Dynamic**: Store values that change during program execution
+
+## Key Takeaways
+
+- Variables store data that can be used and changed
+- Use descriptive names for better code readability
+- Python is dynamically typed (you don't need to declare types)
+- Variables are case-sensitive
+
+## What's Next?
+
+In the next lessons, you'll learn about different types of variables: strings, numbers, and more!
