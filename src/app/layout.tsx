@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import { Navigation, Footer } from "@/components/layout";
+import { NavigationWrapper } from "@/components/layout/NavigationWrapper";
+import { Footer } from "@/components/layout";
 import { SmoothScrollProvider } from "@/components/providers";
 import "@/styles/globals.css";
 
@@ -52,7 +53,7 @@ export default function RootLayout({
     <html lang="en" className={inter.variable}>
       <body className="antialiased">
         <SmoothScrollProvider>
-          <Navigation />
+          <NavigationWrapper />
           {children}
           <Footer />
         </SmoothScrollProvider>

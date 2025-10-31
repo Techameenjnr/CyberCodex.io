@@ -5,3 +5,5 @@ export { Input, type InputProps } from "./Input";
 export { Modal, ModalFooter, type ModalProps, type ModalFooterProps } from "./Modal";
 export { Grid, GridItem, Container, type GridProps, type GridItemProps, type ContainerProps } from "./Grid";
 export { ProgressBar, type ProgressBarProps } from "./ProgressBar";
+export { Accordion, type AccordionProps, type AccordionItem } from "./Accordion";
+export { PricingCard, type PricingCardProps, type PricingFeature } from "./PricingCard";

@@ -3,12 +3,24 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { signOut } from "next-auth/react";
 import { motion, AnimatePresence } from "framer-motion";
 import { config } from "@/lib/config";
 import { Button } from "@/components/ui";
+import { UserMenu } from "./UserMenu";
 import { cn } from "@/lib/utils";
 
-export function Navigation() {
+interface NavigationProps {
+  user?: {
+    name?: string | null;
+    email?: string | null;
+    image?: string | null;
+    username?: string | null;
+    level?: number;
+  } | null;
+}
+
+export function Navigation({ user }: NavigationProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
@@ -85,14 +97,24 @@ export function Navigation() {
               ))}
             </div>
 
-            {/* CTA Buttons */}
+            {/* CTA Buttons or User Menu */}
             <div className="hidden md:flex items-center space-x-4">
-              <Button variant="ghost" size="sm">
-                Sign In
-              </Button>
-              <Button variant="primary" size="sm">
-                Get Started
-              </Button>
+              {user ? (
+                <UserMenu user={user} />
+              ) : (
+                <>
+                  <Link href="/login">
+                    <Button variant="ghost" size="sm">
+                      Sign In
+                    </Button>
+                  </Link>
+                  <Link href="/signup">
+                    <Button variant="primary" size="sm">
+                      Get Started
+                    </Button>
+                  </Link>
+                </>
+              )}
             </div>
 
             {/* Mobile Menu Button */}
@@ -206,12 +228,41 @@ export function Navigation() {
 
                 {/* Menu Footer */}
                 <div className="p-6 border-t border-cyber-border space-y-3">
-                  <Button variant="secondary" size="md" fullWidth>
-                    Sign In
-                  </Button>
-                  <Button variant="primary" size="md" fullWidth>
-                    Get Started
-                  </Button>
+                  {user ? (
+                    <>
+                      <Link href="/dashboard" onClick={() => setIsOpen(false)}>
+                        <Button variant="secondary" size="md" fullWidth>
+                          Dashboard
+                        </Button>
+                      </Link>
+                      <Link href="/profile" onClick={() => setIsOpen(false)}>
+                        <Button variant="secondary" size="md" fullWidth>
+                          Profile
+                        </Button>
+                      </Link>
+                      <Button
+                        variant="danger"
+                        size="md"
+                        fullWidth
+                        onClick={() => signOut({ callbackUrl: "/" })}
+                      >
+                        Sign Out
+                      </Button>
+                    </>
+                  ) : (
+                    <>
+                      <Link href="/login">
+                        <Button variant="secondary" size="md" fullWidth>
+                          Sign In
+                        </Button>
+                      </Link>
+                      <Link href="/signup">
+                        <Button variant="primary" size="md" fullWidth>
+                          Get Started
+                        </Button>
+                      </Link>
+                    </>
+                  )}
                 </div>
               </div>
             </motion.div>
