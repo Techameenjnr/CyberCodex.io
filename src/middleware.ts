@@ -1,5 +1,12 @@
-import { auth } from "@/lib/auth/auth";
+import NextAuth from "next-auth";
 import { NextResponse } from "next/server";
+import authConfig from "@/lib/auth/auth.config";
+
+/**
+ * Edge-compatible auth instance for middleware
+ * Uses only OAuth providers from auth.config (no Credentials provider)
+ */
+const { auth } = NextAuth(authConfig);
 
 export default auth((req) => {
   const { pathname } = req.nextUrl;

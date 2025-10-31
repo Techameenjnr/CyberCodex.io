@@ -1,18 +1,79 @@
 import NextAuth from "next-auth";
+import type { Adapter } from "next-auth/adapters";
 import { PrismaAdapter } from "@auth/prisma-adapter";
+import Credentials from "next-auth/providers/credentials";
 import prisma from "@/lib/db/prisma";
 import authConfig from "./auth.config";
+import { loginSchema } from "@/lib/validations/auth";
+import { verifyPassword } from "./password";
 
 /**
  * Main Auth.js configuration with Prisma adapter
+ * Includes Credentials provider (requires Node.js runtime for Argon2)
  */
 export const { auth, handlers, signIn, signOut } = NextAuth({
-  adapter: PrismaAdapter(prisma),
+  ...authConfig,
+  adapter: PrismaAdapter(prisma) as Adapter,
   session: {
     strategy: "database",
     maxAge: 7 * 24 * 60 * 60, // 7 days
     updateAge: 24 * 60 * 60,  // Update session every 24 hours
   },
+  providers: [
+    // Add Credentials provider here (requires Node.js runtime)
+    Credentials({
+      name: "credentials",
+      credentials: {
+        email: { label: "Email", type: "email" },
+        password: { label: "Password", type: "password" },
+      },
+      async authorize(credentials) {
+        // Validate input
+        const validatedFields = loginSchema.safeParse(credentials);
+
+        if (!validatedFields.success) {
+          return null;
+        }
+
+        const { email, password } = validatedFields.data;
+
+        // Find user
+        const user = await prisma.user.findUnique({
+          where: { email },
+        });
+
+        if (!user || !user.password) {
+          // Generic error to prevent user enumeration
+          return null;
+        }
+
+        // Verify password using Argon2 (Node.js only)
+        const isValid = await verifyPassword(user.password, password);
+
+        if (!isValid) {
+          return null;
+        }
+
+        // Return user object with all fields (will be available in session)
+        return {
+          id: user.id,
+          name: user.name,
+          email: user.email,
+          image: user.image,
+          username: user.username,
+          emailVerified: user.emailVerified,
+          level: user.level,
+          xp: user.xp,
+          totalXp: user.totalXp,
+          streak: user.streak,
+          rank: user.rank,
+          subscriptionTier: user.subscriptionTier,
+        };
+      },
+    }),
+    // OAuth providers from authConfig (edge-compatible)
+    ...authConfig.providers,
+  ],
   callbacks: {
     async session({ session, user }) {
       // Add custom user fields to session
@@ -84,5 +145,4 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
       }
     },
   },
-  ...authConfig,
 });

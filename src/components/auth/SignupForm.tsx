@@ -4,7 +4,7 @@ import { useState } from "react";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { Button, Input } from "@/components/ui";
-import { calculatePasswordStrength } from "@/lib/auth/password";
+import { calculatePasswordStrength } from "@/lib/utils/password-validation";
 
 export function SignupForm() {
   const router = useRouter();
