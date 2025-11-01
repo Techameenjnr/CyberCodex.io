@@ -40,7 +40,7 @@ export function PricingCard({
   return (
     <div
       className={cn(
-        "relative rounded-lg p-8 transition-all duration-300",
+        "relative rounded-lg p-8 transition-all duration-300 h-full flex flex-col",
         highlighted
           ? "bg-cyber-dark-secondary border-2 border-cyber-primary shadow-lg glow-primary"
           : "bg-cyber-dark-secondary border border-cyber-border hover:border-cyber-primary/50",
@@ -90,7 +90,7 @@ export function PricingCard({
       </Button>
 
       {/* Features List */}
-      <div className="space-y-3">
+      <div className="space-y-3 flex-grow">
         {features.map((feature, index) => (
           <div key={index} className="flex items-start space-x-3">
             {feature.included ? (

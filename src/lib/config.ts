@@ -153,7 +153,7 @@ export const pricingTiers = {
     id: "free",
     name: "Explorer",
     price: "Free",
-    period: "forever",
+    period: "/forever",
     description: "Explore cybersecurity with basic access to learning content",
     features: [
       { text: "Access to first few chapters in most courses", included: true },
@@ -172,9 +172,9 @@ export const pricingTiers = {
   pro: {
     id: "pro",
     name: "Elite Hacker",
-    price: "$9.99",
+    price: "$4.99",
     period: "/month",
-    priceYearly: "$79.99",
+    priceYearly: "$49.99",
     periodYearly: "/year",
     savingsPercentage: 33,
     description: "Unlock full access to all courses and premium features",
