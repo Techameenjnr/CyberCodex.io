@@ -1,8 +1,10 @@
 import { auth } from "@/lib/auth/auth";
 import { redirect } from "next/navigation";
 import prisma from "@/lib/db/prisma";
-import { Container } from "@/components/ui";
+import { Container, Button } from "@/components/ui";
 import Image from "next/image";
+import Link from "next/link";
+import { ProfilePageClient } from "@/components/profile/ProfilePageClient";
 
 export const metadata = {
   title: "Profile - CyberCodex.io",
@@ -20,10 +22,17 @@ export default async function ProfilePage() {
   const userData = await prisma.user.findUnique({
     where: { id: session.user.id },
     include: {
-      courseProgress: true,
+      courseProgress: {
+        orderBy: {
+          updatedAt: "desc",
+        },
+      },
       badges: {
         include: {
           badge: true,
+        },
+        orderBy: {
+          earnedAt: "desc",
         },
       },
     },
@@ -34,236 +43,147 @@ export default async function ProfilePage() {
   }
 
   const completedCourses = userData.courseProgress.filter((p) => p.isCompleted).length;
+  const totalExercises = userData.courseProgress.reduce(
+    (acc, cp) => acc + cp.exercisesCompleted,
+    0
+  );
+
+  // Prepare stats for ProfileStats component
+  const stats = [
+    {
+      label: "Exercises",
+      value: totalExercises,
+      color: "cyber-secondary",
+    },
+    {
+      label: "Total XP",
+      value: userData.totalXp.toLocaleString(),
+      color: "cyber-warning",
+    },
+    {
+      label: "Badges",
+      value: userData.badges.length,
+      color: "cyber-primary",
+    },
+    {
+      label: "Streak",
+      value: `${userData.streak} days`,
+      color: "cyber-danger",
+    },
+  ];
 
   return (
-    <main className="min-h-screen pt-32 pb-20">
+    <main className="min-h-screen pt-32 pb-20 bg-cyber-dark">
       <Container>
         {/* Profile Header with Banner */}
-        <div className="card overflow-hidden mb-8">
+        <div className="relative overflow-hidden rounded-2xl mb-8">
           {/* Banner */}
-          <div
-            className="h-48 bg-gradient-to-r from-cyber-primary/20 to-cyber-secondary/20"
-            style={{
-              backgroundImage: userData.banner || 'linear-gradient(to right, rgba(0,255,65,0.2), rgba(0,217,255,0.2))',
-            }}
-          />
+          <div className="h-64 bg-gradient-to-r from-cyber-primary/20 via-cyber-secondary/20 to-cyber-primary/20 relative overflow-hidden">
+            <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-10"></div>
+          </div>
 
           {/* Profile Info */}
-          <div className="p-8 -mt-16">
-            <div className="flex flex-col md:flex-row items-start md:items-end gap-6 mb-6">
-              {/* Avatar */}
-              <div className="relative">
-                {userData.image ? (
-                  <Image
-                    src={userData.image}
-                    alt={userData.name || "User"}
-                    width={120}
-                    height={120}
-                    className="rounded-full border-4 border-cyber-dark bg-cyber-dark"
-                  />
-                ) : (
-                  <div className="w-30 h-30 rounded-full border-4 border-cyber-dark bg-cyber-dark-secondary flex items-center justify-center">
-                    <span className="text-5xl">
-                      {userData.name?.charAt(0).toUpperCase() || "?"}
-                    </span>
+          <div className="relative bg-cyber-dark-secondary border border-cyber-border rounded-b-2xl">
+            <div className="px-8 py-6 -mt-20">
+              <div className="flex flex-col md:flex-row items-start md:items-end gap-6 mb-6">
+                {/* Avatar */}
+                <div className="relative">
+                  {userData.image ? (
+                    <Image
+                      src={userData.image}
+                      alt={userData.name || "User"}
+                      width={128}
+                      height={128}
+                      className="rounded-2xl border-4 border-cyber-dark-secondary bg-cyber-dark shadow-xl"
+                    />
+                  ) : (
+                    <div className="w-32 h-32 rounded-2xl border-4 border-cyber-dark-secondary bg-gradient-to-br from-cyber-primary/20 to-cyber-secondary/20 flex items-center justify-center shadow-xl">
+                      <span className="text-6xl font-bold gradient-text">
+                        {userData.name?.charAt(0).toUpperCase() || "?"}
+                      </span>
+                    </div>
+                  )}
+
+                  {/* Level Badge */}
+                  <div className="absolute -bottom-2 -right-2 bg-cyber-primary text-cyber-dark rounded-xl px-3 py-1.5 flex items-center justify-center font-bold text-sm shadow-lg">
+                    LVL {userData.level}
                   </div>
-                )}
-
-                {/* Level Badge */}
-                <div className="absolute -bottom-2 -right-2 bg-cyber-primary text-cyber-dark rounded-full w-12 h-12 flex items-center justify-center font-bold text-lg">
-                  {userData.level}
                 </div>
-              </div>
 
-              {/* User Info */}
-              <div className="flex-1">
-                <h1 className="text-3xl font-bold text-cyber-text-primary mb-2">
-                  {userData.name}
-                </h1>
-                <p className="text-cyber-text-secondary mb-3">
-                  @{userData.username || "user"}
-                </p>
-                {userData.bio && (
-                  <p className="text-cyber-text-secondary max-w-2xl">
-                    {userData.bio}
+                {/* User Info */}
+                <div className="flex-1">
+                  <h1 className="text-4xl font-bold text-cyber-text-primary mb-2">
+                    {userData.name}
+                  </h1>
+                  <p className="text-lg text-cyber-text-secondary mb-4">
+                    @{userData.username || "user"}
                   </p>
-                )}
-              </div>
-
-              {/* Edit Button */}
-              <a
-                href="/settings"
-                className="btn btn-secondary whitespace-nowrap"
-              >
-                Edit Profile
-              </a>
-            </div>
-
-            {/* Quick Stats */}
-            <div className="flex flex-wrap gap-6 text-sm">
-              <div>
-                <span className="text-cyber-text-muted">Joined</span>{" "}
-                <span className="text-cyber-text-primary font-medium">
-                  {new Date(userData.createdAt).toLocaleDateString('en-US', {
-                    month: 'short',
-                    day: 'numeric',
-                    year: 'numeric'
-                  })}
-                </span>
-              </div>
-              <div>
-                <span className="text-cyber-text-muted">Rank</span>{" "}
-                <span className="text-cyber-primary font-bold">{userData.rank}</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="grid lg:grid-cols-3 gap-8">
-          {/* Left Column - Stats */}
-          <div className="lg:col-span-1 space-y-6">
-            {/* Stats Card */}
-            <div className="card p-6">
-              <h2 className="text-xl font-bold mb-6">Stats</h2>
-
-              <div className="space-y-6">
-                {/* Exercises */}
-                <div>
-                  <div className="flex items-center justify-between mb-2">
-                    <span className="text-sm text-cyber-text-secondary">EXERCISES</span>
-                    <span className="text-2xl font-bold text-cyber-secondary">
-                      {userData.courseProgress.reduce((acc, cp) => acc + cp.exercisesCompleted, 0)}
-                    </span>
-                  </div>
-                </div>
-
-                {/* Total XP */}
-                <div>
-                  <div className="flex items-center justify-between mb-2">
-                    <span className="text-sm text-cyber-text-secondary">TOTAL XP</span>
-                    <span className="text-2xl font-bold text-cyber-warning">
-                      {userData.totalXp}
-                    </span>
-                  </div>
-                </div>
-
-                {/* Course Badges */}
-                <div>
-                  <div className="flex items-center justify-between mb-2">
-                    <span className="text-sm text-cyber-text-secondary">COURSE BADGES</span>
-                    <span className="text-2xl font-bold text-cyber-primary">
-                      {userData.badges.length}
-                    </span>
-                  </div>
-                </div>
-
-                {/* Daily Streak */}
-                <div>
-                  <div className="flex items-center justify-between mb-2">
-                    <span className="text-sm text-cyber-text-secondary">DAILY STREAK</span>
-                    <span className="text-2xl font-bold text-cyber-danger">
-                      {userData.streak}
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Skills Card */}
-            <div className="card p-6">
-              <h2 className="text-xl font-bold mb-4">Skills</h2>
-              <p className="text-cyber-text-secondary text-sm">
-                Complete courses to unlock skills
-              </p>
-            </div>
-          </div>
-
-          {/* Right Column - Activity */}
-          <div className="lg:col-span-2 space-y-6">
-            {/* Course Progress */}
-            <div className="card p-6">
-              <h2 className="text-xl font-bold mb-6">Course Progress</h2>
-
-              {userData.courseProgress.length > 0 ? (
-                <div className="space-y-4">
-                  {userData.courseProgress.map((progress) => (
-                    <div
-                      key={progress.id}
-                      className="p-4 rounded-lg border border-cyber-border bg-cyber-dark-secondary"
-                    >
-                      <div className="flex items-center justify-between mb-2">
-                        <h3 className="font-semibold text-cyber-text-primary">
-                          {progress.courseId.split('-').map(word =>
-                            word.charAt(0).toUpperCase() + word.slice(1)
-                          ).join(' ')}
-                        </h3>
-                        <span className="text-sm text-cyber-text-secondary">
-                          {progress.exercisesCompleted}/{progress.totalExercises} exercises
-                        </span>
-                      </div>
-
-                      {/* Progress Bar */}
-                      <div className="w-full h-2 bg-cyber-dark rounded-full overflow-hidden">
-                        <div
-                          className="h-full bg-cyber-primary transition-all duration-300"
-                          style={{
-                            width: `${(progress.exercisesCompleted / progress.totalExercises) * 100}%`
-                          }}
+                  {userData.bio && (
+                    <p className="text-cyber-text-secondary max-w-2xl mb-4">
+                      {userData.bio}
+                    </p>
+                  )}
+                  {/* Quick Stats */}
+                  <div className="flex flex-wrap gap-6 text-sm">
+                    <div className="flex items-center gap-2">
+                      <svg
+                        className="w-4 h-4 text-cyber-primary"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
                         />
-                      </div>
-
-                      <div className="mt-2 flex items-center justify-between text-xs">
-                        <span className="text-cyber-text-muted">
-                          {Math.round((progress.exercisesCompleted / progress.totalExercises) * 100)}% complete
-                        </span>
-                        <span className="text-cyber-warning">
-                          {progress.xpEarned} XP earned
-                        </span>
-                      </div>
+                      </svg>
+                      <span className="text-cyber-text-muted">Joined</span>
+                      <span className="text-cyber-text-primary font-medium">
+                        {new Date(userData.createdAt).toLocaleDateString("en-US", {
+                          month: "short",
+                          year: "numeric",
+                        })}
+                      </span>
                     </div>
-                  ))}
-                </div>
-              ) : (
-                <div className="text-center py-12">
-                  <p className="text-cyber-text-secondary mb-4">
-                    You haven't started any courses yet
-                  </p>
-                  <a href="/courses" className="btn btn-primary">
-                    Browse Courses
-                  </a>
-                </div>
-              )}
-            </div>
-
-            {/* Badges */}
-            <div className="card p-6">
-              <h2 className="text-xl font-bold mb-6">Achievements</h2>
-
-              {userData.badges.length > 0 ? (
-                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-                  {userData.badges.map((userBadge) => (
-                    <div
-                      key={userBadge.id}
-                      className="flex flex-col items-center p-4 rounded-lg border border-cyber-border bg-cyber-dark-secondary hover:border-cyber-primary transition-colors duration-200"
-                    >
-                      <span className="text-4xl mb-2">{userBadge.badge.icon}</span>
-                      <p className="text-xs text-center text-cyber-text-primary font-medium">
-                        {userBadge.badge.name}
-                      </p>
+                    <div className="flex items-center gap-2">
+                      <svg
+                        className="w-4 h-4 text-cyber-primary"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"
+                        />
+                      </svg>
+                      <span className="text-cyber-text-muted">Rank</span>
+                      <span className="text-cyber-primary font-bold">
+                        {userData.rank}
+                      </span>
                     </div>
-                  ))}
+                  </div>
                 </div>
-              ) : (
-                <div className="text-center py-8">
-                  <span className="text-6xl mb-4 block opacity-50">🏆</span>
-                  <p className="text-cyber-text-secondary">
-                    Complete courses to earn badges
-                  </p>
-                </div>
-              )}
+
+                {/* Edit Button */}
+                <Button variant="secondary" size="md" className="whitespace-nowrap" asChild>
+                  <Link href="/settings">Edit Profile</Link>
+                </Button>
+              </div>
             </div>
           </div>
         </div>
+
+        {/* Tabbed Content */}
+        <ProfilePageClient
+          courseProgress={userData.courseProgress}
+          badges={userData.badges}
+          stats={stats}
+        />
       </Container>
     </main>
   );

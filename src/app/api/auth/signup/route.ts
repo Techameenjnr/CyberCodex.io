@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from "next/server";
 import { signupSchema } from "@/lib/validations/auth";
 import { hashPassword, validatePasswordStrength } from "@/lib/auth/password";
 import prisma from "@/lib/db/prisma";
+import { sendVerificationEmail } from "@/lib/email/send";
+import { randomBytes } from "crypto";
 
 export async function POST(req: NextRequest) {
   try {
@@ -70,10 +72,29 @@ export async function POST(req: NextRequest) {
       },
     });
 
+    // Generate verification token
+    const token = randomBytes(32).toString("hex");
+    const expires = new Date();
+    expires.setHours(expires.getHours() + 24); // 24 hours from now
+
+    // Create verification token in database
+    await prisma.verificationToken.create({
+      data: {
+        identifier: email,
+        token,
+        expires,
+      },
+    });
+
+    // Send verification email (async, don't block response)
+    sendVerificationEmail(email, name, token).catch((error) => {
+      console.error("Failed to send verification email:", error);
+    });
+
     return NextResponse.json(
       {
         success: true,
-        message: "Account created successfully",
+        message: "Account created successfully. Please check your email to verify your account.",
         user,
       },
       { status: 201 }
