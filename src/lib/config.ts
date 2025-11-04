@@ -59,6 +59,7 @@ export const courseCategories = [
     name: "Web Security",
     description: "Master web application security and common vulnerabilities",
     icon: "🔐",
+    iconGif: "/images/categories/purpleSKy.gif",
     color: "cyber-primary",
   },
   {
@@ -66,6 +67,7 @@ export const courseCategories = [
     name: "Network Security",
     description: "Learn network protocols and penetration testing",
     icon: "🌐",
+    iconGif: "/images/categories/purpleSKy.gif",
     color: "cyber-secondary",
   },
   {
@@ -73,6 +75,7 @@ export const courseCategories = [
     name: "Cryptography",
     description: "Understand encryption and cryptographic protocols",
     icon: "🔑",
+    iconGif: "/images/categories/blue_banner.gif",
     color: "cyber-warning",
   },
   {
@@ -80,6 +83,7 @@ export const courseCategories = [
     name: "Penetration Testing",
     description: "Hands-on ethical hacking techniques",
     icon: "🎯",
+    iconGif: "/images/categories/purpleSKy.gif",
     color: "cyber-danger",
   },
   {
@@ -87,6 +91,7 @@ export const courseCategories = [
     name: "Malware Analysis",
     description: "Analyze and reverse engineer malicious software",
     icon: "🦠",
+    iconGif: "/images/categories/github-copilots.gif",
     color: "cyber-primary",
   },
   {
@@ -94,6 +99,7 @@ export const courseCategories = [
     name: "Cloud Security",
     description: "Secure cloud infrastructure and services",
     icon: "☁️",
+    iconGif: "/images/categories/python-animated.gif",
     color: "cyber-secondary",
   },
 ] as const;
