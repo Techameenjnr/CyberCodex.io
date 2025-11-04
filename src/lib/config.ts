@@ -54,12 +54,28 @@ export const config = {
  * Course Categories
  */
 export const courseCategories = [
+    {
+    id: "networking",
+    name: "Networking",
+    description: "Master network fundamentals, protocols, and infrastructure",
+    icon: "🔌",
+    iconGif: "/images/categories/clawMachine.gif",
+    color: "cyber-secondary",
+  },
+  {
+    id: "linux",
+    name: "Linux",
+    description: "Learn Linux system administration and command line",
+    icon: "🐧",
+    iconGif: "/images/categories/guyOnComputer.gif",
+    color: "cyber-primary",
+  },
   {
     id: "web-security",
     name: "Web Security",
     description: "Master web application security and common vulnerabilities",
     icon: "🔐",
-    iconGif: "/images/categories/purpleSKy.gif",
+    iconGif: "/images/categories/GameSpooky.gif",
     color: "cyber-primary",
   },
   {
@@ -67,7 +83,7 @@ export const courseCategories = [
     name: "Network Security",
     description: "Learn network protocols and penetration testing",
     icon: "🌐",
-    iconGif: "/images/categories/purpleSKy.gif",
+    iconGif: "/images/categories/hack.gif",
     color: "cyber-secondary",
   },
   {
@@ -75,7 +91,7 @@ export const courseCategories = [
     name: "Cryptography",
     description: "Understand encryption and cryptographic protocols",
     icon: "🔑",
-    iconGif: "/images/categories/blue_banner.gif",
+    iconGif: "/images/categories/CyberShop.webp",
     color: "cyber-warning",
   },
   {
@@ -83,7 +99,7 @@ export const courseCategories = [
     name: "Penetration Testing",
     description: "Hands-on ethical hacking techniques",
     icon: "🎯",
-    iconGif: "/images/categories/purpleSKy.gif",
+    iconGif: "/images/categories/GameSpooky3.gif",
     color: "cyber-danger",
   },
   {
@@ -91,7 +107,7 @@ export const courseCategories = [
     name: "Malware Analysis",
     description: "Analyze and reverse engineer malicious software",
     icon: "🦠",
-    iconGif: "/images/categories/github-copilots.gif",
+    iconGif: "/images/categories/lightChase.gif",
     color: "cyber-primary",
   },
   {
@@ -99,8 +115,16 @@ export const courseCategories = [
     name: "Cloud Security",
     description: "Secure cloud infrastructure and services",
     icon: "☁️",
-    iconGif: "/images/categories/python-animated.gif",
+    iconGif: "/images/categories/pink.gif",
     color: "cyber-secondary",
+  },
+  {
+    id: "programming",
+    name: "Programming",
+    description: "Learn programming fundamentals and coding skills",
+    icon: "💻",
+    iconGif: "/images/categories/python-animated.gif",
+    color: "cyber-primary",
   },
 ] as const;
 

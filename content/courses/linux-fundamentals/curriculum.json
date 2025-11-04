@@ -1,0 +1,367 @@
+{
+  "metadata": {
+    "courseId": "linux-fundamentals",
+    "slug": "linux-fundamentals",
+    "title": "Linux Fundamentals",
+    "description": "Learn Linux system administration and command line from scratch to advanced techniques"
+  },
+  "progress": {
+    "exercisesCompleted": 0,
+    "totalExercises": 36,
+    "projectsCompleted": 0,
+    "totalProjects": 2,
+    "xpEarned": 0,
+    "totalXp": 600,
+    "badgesEarned": 0,
+    "totalBadges": 8
+  },
+  "chapters": [
+    {
+      "id": "1",
+      "number": 1,
+      "title": "Introduction to Linux",
+      "description": "Get started with Linux and understand its importance",
+      "isLocked": false,
+      "isPremium": false,
+      "exercises": [
+        {
+          "id": "what-is-linux",
+          "title": "What is Linux?",
+          "type": "article",
+          "isLocked": false,
+          "isCompleted": false,
+          "xpReward": 10
+        },
+        {
+          "id": "linux-distributions",
+          "title": "Linux Distributions",
+          "type": "exercise",
+          "isLocked": false,
+          "isCompleted": false,
+          "xpReward": 15
+        },
+        {
+          "id": "installing-linux",
+          "title": "Installing Linux",
+          "type": "exercise",
+          "isLocked": false,
+          "isCompleted": false,
+          "xpReward": 15
+        }
+      ]
+    },
+    {
+      "id": "2",
+      "number": 2,
+      "title": "File System Navigation",
+      "description": "Master the Linux file system and navigation",
+      "isLocked": false,
+      "isPremium": false,
+      "exercises": [
+        {
+          "id": "file-system-structure",
+          "title": "File System Structure",
+          "type": "article",
+          "isLocked": false,
+          "isCompleted": false,
+          "xpReward": 15
+        },
+        {
+          "id": "cd-command",
+          "title": "Navigating with cd",
+          "type": "exercise",
+          "isLocked": false,
+          "isCompleted": false,
+          "xpReward": 15
+        },
+        {
+          "id": "ls-command",
+          "title": "Listing Files with ls",
+          "type": "exercise",
+          "isLocked": false,
+          "isCompleted": false,
+          "xpReward": 15
+        },
+        {
+          "id": "pwd-command",
+          "title": "Finding Your Location",
+          "type": "exercise",
+          "isLocked": false,
+          "isCompleted": false,
+          "xpReward": 10
+        }
+      ]
+    },
+    {
+      "id": "3",
+      "number": 3,
+      "title": "File Operations",
+      "description": "Learn to create, copy, move, and delete files",
+      "isLocked": false,
+      "isPremium": false,
+      "exercises": [
+        {
+          "id": "creating-files",
+          "title": "Creating Files",
+          "type": "exercise",
+          "isLocked": false,
+          "isCompleted": false,
+          "xpReward": 15
+        },
+        {
+          "id": "copying-files",
+          "title": "Copying Files and Folders",
+          "type": "exercise",
+          "isLocked": false,
+          "isCompleted": false,
+          "xpReward": 20
+        },
+        {
+          "id": "moving-files",
+          "title": "Moving and Renaming",
+          "type": "exercise",
+          "isLocked": false,
+          "isCompleted": false,
+          "xpReward": 20
+        },
+        {
+          "id": "deleting-files",
+          "title": "Deleting Files Safely",
+          "type": "exercise",
+          "isLocked": false,
+          "isCompleted": false,
+          "xpReward": 15
+        }
+      ]
+    },
+    {
+      "id": "4",
+      "number": 4,
+      "title": "Working with Text",
+      "description": "View, search, and manipulate text files",
+      "isLocked": false,
+      "isPremium": false,
+      "exercises": [
+        {
+          "id": "viewing-files",
+          "title": "Viewing Files (cat, less, more)",
+          "type": "exercise",
+          "isLocked": false,
+          "isCompleted": false,
+          "xpReward": 20
+        },
+        {
+          "id": "grep-command",
+          "title": "Searching with grep",
+          "type": "exercise",
+          "isLocked": false,
+          "isCompleted": false,
+          "xpReward": 25
+        },
+        {
+          "id": "text-editors",
+          "title": "Text Editors (nano, vim)",
+          "type": "exercise",
+          "isLocked": false,
+          "isCompleted": false,
+          "xpReward": 25
+        }
+      ]
+    },
+    {
+      "id": "5",
+      "number": 5,
+      "title": "Users and Permissions",
+      "description": "Manage users and file permissions",
+      "isLocked": false,
+      "isPremium": false,
+      "exercises": [
+        {
+          "id": "user-management",
+          "title": "User Management",
+          "type": "article",
+          "isLocked": false,
+          "isCompleted": false,
+          "xpReward": 20
+        },
+        {
+          "id": "file-permissions",
+          "title": "Understanding Permissions",
+          "type": "exercise",
+          "isLocked": false,
+          "isCompleted": false,
+          "xpReward": 25
+        },
+        {
+          "id": "chmod-command",
+          "title": "Changing Permissions (chmod)",
+          "type": "exercise",
+          "isLocked": false,
+          "isCompleted": false,
+          "xpReward": 25
+        },
+        {
+          "id": "chown-command",
+          "title": "Changing Ownership (chown)",
+          "type": "exercise",
+          "isLocked": false,
+          "isCompleted": false,
+          "xpReward": 20
+        }
+      ]
+    },
+    {
+      "id": "6",
+      "number": 6,
+      "title": "Process Management",
+      "description": "Monitor and control running processes",
+      "isLocked": false,
+      "isPremium": true,
+      "exercises": [
+        {
+          "id": "viewing-processes",
+          "title": "Viewing Processes (ps, top)",
+          "type": "exercise",
+          "isLocked": true,
+          "isCompleted": false,
+          "xpReward": 25
+        },
+        {
+          "id": "killing-processes",
+          "title": "Managing Processes (kill)",
+          "type": "exercise",
+          "isLocked": true,
+          "isCompleted": false,
+          "xpReward": 25
+        },
+        {
+          "id": "background-jobs",
+          "title": "Background Jobs",
+          "type": "exercise",
+          "isLocked": true,
+          "isCompleted": false,
+          "xpReward": 20
+        }
+      ]
+    },
+    {
+      "id": "7",
+      "number": 7,
+      "title": "Package Management & Scripting",
+      "description": "Install software and write bash scripts",
+      "isLocked": false,
+      "isPremium": true,
+      "exercises": [
+        {
+          "id": "package-management",
+          "title": "Package Management (apt, yum)",
+          "type": "exercise",
+          "isLocked": true,
+          "isCompleted": false,
+          "xpReward": 25
+        },
+        {
+          "id": "bash-basics",
+          "title": "Bash Scripting Basics",
+          "type": "exercise",
+          "isLocked": true,
+          "isCompleted": false,
+          "xpReward": 30
+        },
+        {
+          "id": "bash-variables",
+          "title": "Variables and Conditionals",
+          "type": "exercise",
+          "isLocked": true,
+          "isCompleted": false,
+          "xpReward": 30
+        }
+      ]
+    },
+    {
+      "id": "8",
+      "number": 8,
+      "title": "Final Project",
+      "description": "Build a complete system administration script",
+      "isLocked": false,
+      "isPremium": true,
+      "exercises": [
+        {
+          "id": "automation-project",
+          "title": "System Automation Project",
+          "type": "project",
+          "isLocked": true,
+          "isCompleted": false,
+          "xpReward": 100
+        }
+      ]
+    }
+  ],
+  "badges": [
+    {
+      "id": "linux-newcomer",
+      "name": "Linux Newcomer",
+      "description": "Complete Chapter 1",
+      "icon": "🐧",
+      "isUnlocked": false,
+      "unlockCondition": "Complete all Chapter 1 exercises"
+    },
+    {
+      "id": "file-navigator",
+      "name": "File Navigator",
+      "description": "Complete Chapter 2",
+      "icon": "📁",
+      "isUnlocked": false,
+      "unlockCondition": "Complete all Chapter 2 exercises"
+    },
+    {
+      "id": "file-master",
+      "name": "File Master",
+      "description": "Complete Chapter 3",
+      "icon": "📄",
+      "isUnlocked": false,
+      "unlockCondition": "Complete all Chapter 3 exercises"
+    },
+    {
+      "id": "text-wizard",
+      "name": "Text Wizard",
+      "description": "Complete Chapter 4",
+      "icon": "✍️",
+      "isUnlocked": false,
+      "unlockCondition": "Complete all Chapter 4 exercises"
+    },
+    {
+      "id": "permission-expert",
+      "name": "Permission Expert",
+      "description": "Complete Chapter 5",
+      "icon": "🔐",
+      "isUnlocked": false,
+      "unlockCondition": "Complete all Chapter 5 exercises"
+    },
+    {
+      "id": "process-guru",
+      "name": "Process Guru",
+      "description": "Complete Chapter 6",
+      "icon": "⚙️",
+      "isUnlocked": false,
+      "unlockCondition": "Complete all Chapter 6 exercises"
+    },
+    {
+      "id": "bash-scripter",
+      "name": "Bash Scripter",
+      "description": "Complete Chapter 7",
+      "icon": "💻",
+      "isUnlocked": false,
+      "unlockCondition": "Complete all Chapter 7 exercises"
+    },
+    {
+      "id": "linux-admin",
+      "name": "Linux Administrator",
+      "description": "Complete Final Project",
+      "icon": "🏆",
+      "isUnlocked": false,
+      "unlockCondition": "Complete the automation project"
+    }
+  ],
+  "cheatSheets": []
+}

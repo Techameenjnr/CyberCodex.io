@@ -72,14 +72,14 @@ export function CoursesClient({ courses }: CoursesClientProps) {
   return (
     <main className="min-h-screen pt-32 pb-20">
       {/* Hero Banner Section */}
-      <div className="relative mb-16 -mt-32 pt-32 pb-20 overflow-hidden min-h-[300px] sm:min-h-[400px] lg:min-h-[500px]">
+      <div className="relative mb-16 -mt-32 pt-32 pb-20 overflow-hidden min-h-[300px] sm:min-h-[350px] md:min-h-[400px]">
         {/* Background Image/GIF */}
         <div className="absolute inset-0 z-0">
           <Image
-            src="/images/banners/python-animated.gif"
+            src="/images/banners/CyberShop.webp"
             alt="Cybersecurity Courses Background"
             fill
-            className="object-cover object-center"
+            className="object-cover"
             priority
             unoptimized
             onError={(e) => {
@@ -87,10 +87,8 @@ export function CoursesClient({ courses }: CoursesClientProps) {
               e.currentTarget.style.display = 'none';
             }}
           />
-          {/* Gradient overlay for text readability and clean cutoff */}
-          <div className="absolute inset-0 bg-gradient-to-b from-cyber-dark/40 via-cyber-dark/50 via-60% to-cyber-dark" />
-          {/* Solid bottom border for clean cutoff */}
-          <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-cyber-dark via-cyber-dark to-transparent" />
+          {/* Subtle gradient overlay for text readability */}
+          <div className="absolute inset-0 bg-gradient-to-b from-cyber-dark/40 via-cyber-dark/30 to-cyber-dark" />
         </div>
 
         {/* Header Content */}
@@ -236,9 +234,11 @@ export function CoursesClient({ courses }: CoursesClientProps) {
 
                   {/* Card Content */}
                   <div className="relative z-10 p-6 pt-36">
-                    {/* Badge positioned at top-right */}
-                    <div className="absolute top-36 right-6">
-                      <Badge variant={difficulty.color as any}>{difficulty.label}</Badge>
+                    {/* Badge positioned at top-right corner of card */}
+                    <div className="absolute top-4 right-4 z-20">
+                      <div className="bg-cyber-dark/90 backdrop-blur-md rounded-full p-1 shadow-lg shadow-black/50 border border-cyber-border/50">
+                        <Badge variant={difficulty.color as any}>{difficulty.label}</Badge>
+                      </div>
                     </div>
 
                     {/* Title */}

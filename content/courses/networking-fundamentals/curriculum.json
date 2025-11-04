@@ -1,0 +1,333 @@
+{
+  "metadata": {
+    "courseId": "networking-fundamentals",
+    "slug": "networking-fundamentals",
+    "title": "Networking Fundamentals",
+    "description": "Master network fundamentals, protocols, and infrastructure from the ground up"
+  },
+  "progress": {
+    "exercisesCompleted": 0,
+    "totalExercises": 32,
+    "projectsCompleted": 0,
+    "totalProjects": 2,
+    "xpEarned": 0,
+    "totalXp": 520,
+    "badgesEarned": 0,
+    "totalBadges": 7
+  },
+  "chapters": [
+    {
+      "id": "1",
+      "number": 1,
+      "title": "Introduction to Networking",
+      "description": "Understand what networks are and why they matter",
+      "isLocked": false,
+      "isPremium": false,
+      "exercises": [
+        {
+          "id": "what-is-networking",
+          "title": "What is Networking?",
+          "type": "article",
+          "isLocked": false,
+          "isCompleted": false,
+          "xpReward": 10
+        },
+        {
+          "id": "network-types",
+          "title": "Types of Networks",
+          "type": "exercise",
+          "isLocked": false,
+          "isCompleted": false,
+          "xpReward": 15
+        },
+        {
+          "id": "network-topologies",
+          "title": "Network Topologies",
+          "type": "exercise",
+          "isLocked": false,
+          "isCompleted": false,
+          "xpReward": 15
+        }
+      ]
+    },
+    {
+      "id": "2",
+      "number": 2,
+      "title": "The OSI Model",
+      "description": "Learn the 7 layers of network communication",
+      "isLocked": false,
+      "isPremium": false,
+      "exercises": [
+        {
+          "id": "osi-overview",
+          "title": "OSI Model Overview",
+          "type": "article",
+          "isLocked": false,
+          "isCompleted": false,
+          "xpReward": 15
+        },
+        {
+          "id": "physical-layer",
+          "title": "Physical Layer",
+          "type": "exercise",
+          "isLocked": false,
+          "isCompleted": false,
+          "xpReward": 15
+        },
+        {
+          "id": "data-link-layer",
+          "title": "Data Link Layer",
+          "type": "exercise",
+          "isLocked": false,
+          "isCompleted": false,
+          "xpReward": 15
+        },
+        {
+          "id": "network-layer",
+          "title": "Network Layer",
+          "type": "exercise",
+          "isLocked": false,
+          "isCompleted": false,
+          "xpReward": 20
+        },
+        {
+          "id": "transport-layer",
+          "title": "Transport Layer",
+          "type": "exercise",
+          "isLocked": false,
+          "isCompleted": false,
+          "xpReward": 20
+        }
+      ]
+    },
+    {
+      "id": "3",
+      "number": 3,
+      "title": "IP Addressing",
+      "description": "Master IPv4 addressing and subnetting",
+      "isLocked": false,
+      "isPremium": false,
+      "exercises": [
+        {
+          "id": "ipv4-basics",
+          "title": "IPv4 Basics",
+          "type": "article",
+          "isLocked": false,
+          "isCompleted": false,
+          "xpReward": 15
+        },
+        {
+          "id": "subnet-masks",
+          "title": "Subnet Masks",
+          "type": "exercise",
+          "isLocked": false,
+          "isCompleted": false,
+          "xpReward": 20
+        },
+        {
+          "id": "subnetting",
+          "title": "Subnetting Practice",
+          "type": "exercise",
+          "isLocked": false,
+          "isCompleted": false,
+          "xpReward": 25
+        },
+        {
+          "id": "cidr-notation",
+          "title": "CIDR Notation",
+          "type": "exercise",
+          "isLocked": false,
+          "isCompleted": false,
+          "xpReward": 20
+        }
+      ]
+    },
+    {
+      "id": "4",
+      "number": 4,
+      "title": "Network Protocols",
+      "description": "Understand TCP, UDP, and application protocols",
+      "isLocked": false,
+      "isPremium": false,
+      "exercises": [
+        {
+          "id": "tcp-protocol",
+          "title": "TCP Protocol",
+          "type": "article",
+          "isLocked": false,
+          "isCompleted": false,
+          "xpReward": 20
+        },
+        {
+          "id": "udp-protocol",
+          "title": "UDP Protocol",
+          "type": "exercise",
+          "isLocked": false,
+          "isCompleted": false,
+          "xpReward": 20
+        },
+        {
+          "id": "http-https",
+          "title": "HTTP and HTTPS",
+          "type": "exercise",
+          "isLocked": false,
+          "isCompleted": false,
+          "xpReward": 20
+        },
+        {
+          "id": "dns",
+          "title": "DNS Protocol",
+          "type": "exercise",
+          "isLocked": false,
+          "isCompleted": false,
+          "xpReward": 20
+        }
+      ]
+    },
+    {
+      "id": "5",
+      "number": 5,
+      "title": "Network Devices",
+      "description": "Learn about routers, switches, and more",
+      "isLocked": false,
+      "isPremium": true,
+      "exercises": [
+        {
+          "id": "routers",
+          "title": "Routers",
+          "type": "article",
+          "isLocked": true,
+          "isCompleted": false,
+          "xpReward": 20
+        },
+        {
+          "id": "switches",
+          "title": "Switches",
+          "type": "exercise",
+          "isLocked": true,
+          "isCompleted": false,
+          "xpReward": 20
+        },
+        {
+          "id": "firewalls",
+          "title": "Firewalls",
+          "type": "exercise",
+          "isLocked": true,
+          "isCompleted": false,
+          "xpReward": 25
+        }
+      ]
+    },
+    {
+      "id": "6",
+      "number": 6,
+      "title": "Troubleshooting",
+      "description": "Learn to diagnose and fix network issues",
+      "isLocked": false,
+      "isPremium": true,
+      "exercises": [
+        {
+          "id": "ping-command",
+          "title": "Using Ping",
+          "type": "exercise",
+          "isLocked": true,
+          "isCompleted": false,
+          "xpReward": 15
+        },
+        {
+          "id": "traceroute",
+          "title": "Traceroute Analysis",
+          "type": "exercise",
+          "isLocked": true,
+          "isCompleted": false,
+          "xpReward": 20
+        },
+        {
+          "id": "network-troubleshooting",
+          "title": "Troubleshooting Scenarios",
+          "type": "exercise",
+          "isLocked": true,
+          "isCompleted": false,
+          "xpReward": 25
+        }
+      ]
+    },
+    {
+      "id": "7",
+      "number": 7,
+      "title": "Final Project",
+      "description": "Design and configure a complete network",
+      "isLocked": false,
+      "isPremium": true,
+      "exercises": [
+        {
+          "id": "network-design-project",
+          "title": "Network Design Challenge",
+          "type": "project",
+          "isLocked": true,
+          "isCompleted": false,
+          "xpReward": 100
+        }
+      ]
+    }
+  ],
+  "badges": [
+    {
+      "id": "networking-basics",
+      "name": "Network Newbie",
+      "description": "Complete Chapter 1",
+      "icon": "🌐",
+      "isUnlocked": false,
+      "unlockCondition": "Complete all Chapter 1 exercises"
+    },
+    {
+      "id": "osi-master",
+      "name": "OSI Master",
+      "description": "Complete Chapter 2",
+      "icon": "📊",
+      "isUnlocked": false,
+      "unlockCondition": "Complete all Chapter 2 exercises"
+    },
+    {
+      "id": "ip-expert",
+      "name": "IP Expert",
+      "description": "Complete Chapter 3",
+      "icon": "🔢",
+      "isUnlocked": false,
+      "unlockCondition": "Complete all Chapter 3 exercises"
+    },
+    {
+      "id": "protocol-pro",
+      "name": "Protocol Pro",
+      "description": "Complete Chapter 4",
+      "icon": "📡",
+      "isUnlocked": false,
+      "unlockCondition": "Complete all Chapter 4 exercises"
+    },
+    {
+      "id": "device-guru",
+      "name": "Device Guru",
+      "description": "Complete Chapter 5",
+      "icon": "🔌",
+      "isUnlocked": false,
+      "unlockCondition": "Complete all Chapter 5 exercises"
+    },
+    {
+      "id": "troubleshooter",
+      "name": "Troubleshooter",
+      "description": "Complete Chapter 6",
+      "icon": "🔧",
+      "isUnlocked": false,
+      "unlockCondition": "Complete all Chapter 6 exercises"
+    },
+    {
+      "id": "network-architect",
+      "name": "Network Architect",
+      "description": "Complete Final Project",
+      "icon": "🏆",
+      "isUnlocked": false,
+      "unlockCondition": "Complete the network design project"
+    }
+  ],
+  "cheatSheets": []
+}

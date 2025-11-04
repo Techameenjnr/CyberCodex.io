@@ -1,0 +1,154 @@
+---
+title: "Networking Fundamentals"
+description: "Master network fundamentals, protocols, and infrastructure from the ground up"
+category: "networking"
+difficulty: "beginner"
+duration: "4 hours"
+author: "CyberCodex Team"
+publishedAt: "2024-11-04"
+tags: ["networking", "protocols", "TCP/IP", "OSI model", "routing", "switching"]
+prerequisites: ["Basic computer knowledge"]
+learningObjectives:
+  - "Understand the OSI and TCP/IP models"
+  - "Learn network protocols and how they work"
+  - "Configure basic network devices"
+  - "Troubleshoot common network issues"
+  - "Understand IP addressing and subnetting"
+---
+
+## Introduction
+
+Networking is the foundation of modern computing and the internet. Whether you're pursuing a career in cybersecurity, system administration, or software development, understanding how networks function is essential.
+
+This course will take you from networking basics to practical skills you can apply immediately.
+
+## The OSI Model
+
+### Understanding the 7 Layers
+
+The OSI (Open Systems Interconnection) model is a conceptual framework that standardizes network communication:
+
+1. **Physical Layer** - Cables, signals, bits
+2. **Data Link Layer** - MAC addresses, switches
+3. **Network Layer** - IP addresses, routing
+4. **Transport Layer** - TCP/UDP, ports
+5. **Session Layer** - Connection management
+6. **Presentation Layer** - Data formatting, encryption
+7. **Application Layer** - HTTP, DNS, FTP
+
+### TCP/IP Model
+
+The practical implementation used on the internet:
+
+- **Network Access** (Physical + Data Link)
+- **Internet** (Network)
+- **Transport** (Transport)
+- **Application** (Session + Presentation + Application)
+
+## IP Addressing
+
+### IPv4 Basics
+
+IPv4 addresses are 32-bit numbers written in dotted decimal notation:
+
+```
+192.168.1.1
+```
+
+**Private IP Ranges:**
+- 10.0.0.0 to 10.255.255.255
+- 172.16.0.0 to 172.31.255.255
+- 192.168.0.0 to 192.168.255.255
+
+### Subnetting
+
+Subnetting divides networks into smaller segments:
+
+```
+Network: 192.168.1.0/24
+Subnet Mask: 255.255.255.0
+Usable Hosts: 254
+```
+
+## Network Protocols
+
+### TCP (Transmission Control Protocol)
+
+- Connection-oriented
+- Reliable delivery
+- Used for web browsing, email, file transfer
+
+### UDP (User Datagram Protocol)
+
+- Connectionless
+- Fast but unreliable
+- Used for streaming, gaming, DNS
+
+### Common Protocols
+
+- **HTTP/HTTPS** - Web traffic (ports 80/443)
+- **DNS** - Domain name resolution (port 53)
+- **FTP** - File transfer (ports 20/21)
+- **SSH** - Secure remote access (port 22)
+- **SMTP** - Email sending (port 25)
+
+## Network Devices
+
+### Router
+
+Routes traffic between different networks using IP addresses.
+
+### Switch
+
+Forwards traffic within a network using MAC addresses.
+
+### Firewall
+
+Filters traffic based on security rules.
+
+### Access Point
+
+Provides wireless network connectivity.
+
+## Network Troubleshooting
+
+### Essential Commands
+
+**Ping:**
+```bash
+ping google.com
+```
+
+**Traceroute:**
+```bash
+traceroute google.com
+```
+
+**NSLookup:**
+```bash
+nslookup google.com
+```
+
+**Netstat:**
+```bash
+netstat -an
+```
+
+## Practical Applications
+
+Throughout this course, you'll learn to:
+
+- Set up a home network
+- Configure routers and switches
+- Diagnose connectivity issues
+- Secure your network
+- Understand how data flows across the internet
+
+## Next Steps
+
+Ready to dive deeper into networking? Continue your journey by exploring:
+
+- Advanced routing and switching
+- Network security fundamentals
+- Cloud networking (AWS, Azure, GCP)
+- Software-defined networking (SDN)

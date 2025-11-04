@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { signOut } from "next-auth/react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -66,8 +67,18 @@ export function Navigation({ user }: NavigationProps) {
         <div className="container-custom">
           <div className="flex items-center justify-between h-20">
             {/* Logo */}
-            <Link href="/" className="flex items-center space-x-2">
-              <div className="text-2xl font-bold">
+            <Link href="/" className="flex items-center space-x-3 group">
+              <div className="relative w-10 h-10 md:w-12 md:h-12">
+                <Image
+                  src="/images/logo/possibleCharacter.gif"
+                  alt="CyberCodex Logo"
+                  fill
+                  className="object-contain transition-transform duration-300 group-hover:scale-110"
+                  unoptimized
+                  priority
+                />
+              </div>
+              <div className="text-xl md:text-2xl font-bold">
                 <span className="text-cyber-primary">Cyber</span>
                 <span className="text-cyber-text-primary">Codex</span>
               </div>
@@ -177,9 +188,20 @@ export function Navigation({ user }: NavigationProps) {
               <div className="flex flex-col h-full">
                 {/* Menu Header */}
                 <div className="flex items-center justify-between p-6 border-b border-cyber-border">
-                  <div className="text-xl font-bold">
-                    <span className="text-cyber-primary">Cyber</span>
-                    <span className="text-cyber-text-primary">Codex</span>
+                  <div className="flex items-center space-x-3">
+                    <div className="relative w-10 h-10">
+                      <Image
+                        src="/images/logo/logo.gif"
+                        alt="CyberCodex Logo"
+                        fill
+                        className="object-contain"
+                        unoptimized
+                      />
+                    </div>
+                    <div className="text-xl font-bold">
+                      <span className="text-cyber-primary">Cyber</span>
+                      <span className="text-cyber-text-primary">Codex</span>
+                    </div>
                   </div>
                   <button
                     onClick={() => setIsOpen(false)}
