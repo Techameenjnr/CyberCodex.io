@@ -76,7 +76,7 @@ export function CoursesClient({ courses }: CoursesClientProps) {
         {/* Background Image/GIF */}
         <div className="absolute inset-0 z-0">
           <Image
-            src="/images/banners/CyberShop.webp"
+            src="/images/banners/future.gif"
             alt="Cybersecurity Courses Background"
             fill
             className="object-cover"

@@ -2,8 +2,8 @@
   "metadata": {
     "courseId": "sql-injection-basics",
     "slug": "sql-injection-basics",
-    "title": "SQL Injection Basics",
-    "description": "Learn how SQL injection attacks work, how to identify vulnerabilities, and how to exploit and prevent them in web applications."
+    "title": "Advanced SQL Injection Techniques",
+    "description": "Master advanced SQL injection exploitation including blind SQLi, WAF bypass, and sophisticated data exfiltration methods."
   },
   "progress": {
     "exercisesCompleted": 0,
@@ -19,14 +19,14 @@
     {
       "id": "1",
       "number": 1,
-      "title": "Introduction to SQL",
-      "description": "Understand SQL basics and database fundamentals",
+      "title": "Advanced SQLi Fundamentals",
+      "description": "Deep dive into SQL injection attack vectors and methodology",
       "isLocked": false,
       "isPremium": false,
       "exercises": [
         {
           "id": "what-is-sql",
-          "title": "What is SQL?",
+          "title": "SQL Injection Attack Surface",
           "type": "article",
           "isLocked": false,
           "isCompleted": false,
@@ -34,7 +34,7 @@
         },
         {
           "id": "database-basics",
-          "title": "Database Basics",
+          "title": "Database Architecture & Exploitation",
           "type": "exercise",
           "isLocked": false,
           "isCompleted": false,
@@ -42,7 +42,7 @@
         },
         {
           "id": "sql-queries",
-          "title": "Basic SQL Queries",
+          "title": "Advanced Query Manipulation",
           "type": "exercise",
           "isLocked": false,
           "isCompleted": false,
@@ -87,14 +87,14 @@
     {
       "id": "3",
       "number": 3,
-      "title": "Basic SQL Injection Techniques",
-      "description": "Practice basic SQLi techniques in a safe environment",
+      "title": "WAF Bypass Techniques",
+      "description": "Master techniques to bypass web application firewalls",
       "isLocked": false,
       "isPremium": false,
       "exercises": [
         {
           "id": "authentication-bypass",
-          "title": "Authentication Bypass",
+          "title": "Obfuscation & Encoding",
           "type": "exercise",
           "isLocked": false,
           "isCompleted": false,
@@ -102,7 +102,7 @@
         },
         {
           "id": "union-based-sqli",
-          "title": "UNION-based SQLi",
+          "title": "Filter Evasion Techniques",
           "type": "exercise",
           "isLocked": false,
           "isCompleted": false,
@@ -110,7 +110,7 @@
         },
         {
           "id": "error-based-sqli",
-          "title": "Error-based SQLi",
+          "title": "Advanced Bypass Payloads",
           "type": "exercise",
           "isLocked": false,
           "isCompleted": false,
@@ -121,14 +121,14 @@
     {
       "id": "4",
       "number": 4,
-      "title": "Advanced Techniques",
-      "description": "Explore blind SQLi and advanced exploitation",
+      "title": "Out-of-Band SQL Injection",
+      "description": "Exploit using DNS and HTTP-based data exfiltration",
       "isLocked": false,
       "isPremium": true,
       "exercises": [
         {
           "id": "blind-sqli",
-          "title": "Blind SQL Injection",
+          "title": "DNS Exfiltration Techniques",
           "type": "exercise",
           "isLocked": true,
           "isCompleted": false,
@@ -136,7 +136,7 @@
         },
         {
           "id": "time-based-sqli",
-          "title": "Time-based SQLi",
+          "title": "HTTP-based Out-of-Band",
           "type": "exercise",
           "isLocked": true,
           "isCompleted": false,
@@ -147,14 +147,14 @@
     {
       "id": "5",
       "number": 5,
-      "title": "Prevention & Defense",
-      "description": "Learn how to secure applications against SQLi",
+      "title": "Automated Exploitation with SQLMap",
+      "description": "Master advanced SQLMap features and automation",
       "isLocked": false,
       "isPremium": true,
       "exercises": [
         {
           "id": "parameterized-queries",
-          "title": "Parameterized Queries",
+          "title": "SQLMap Advanced Options",
           "type": "exercise",
           "isLocked": true,
           "isCompleted": false,
@@ -162,7 +162,7 @@
         },
         {
           "id": "input-validation",
-          "title": "Input Validation",
+          "title": "Custom Tamper Scripts",
           "type": "exercise",
           "isLocked": true,
           "isCompleted": false,
@@ -173,14 +173,14 @@
     {
       "id": "6",
       "number": 6,
-      "title": "Final Project",
-      "description": "Complete a real-world SQLi challenge",
+      "title": "Advanced Exploitation Challenge",
+      "description": "Complete a complex real-world SQLi penetration test",
       "isLocked": false,
       "isPremium": true,
       "exercises": [
         {
           "id": "final-challenge",
-          "title": "Capture The Flag",
+          "title": "Enterprise App Pentest",
           "type": "project",
           "isLocked": true,
           "isCompleted": false,
@@ -192,15 +192,15 @@
   "badges": [
     {
       "id": "sql-basics",
-      "name": "SQL Basics",
+      "name": "Attack Vector Analyst",
       "description": "Complete Chapter 1",
-      "icon": "🗄️",
+      "icon": "🎯",
       "isUnlocked": false,
       "unlockCondition": "Complete all Chapter 1 exercises"
     },
     {
       "id": "sqli-hunter",
-      "name": "SQLi Hunter",
+      "name": "Vulnerability Hunter",
       "description": "Complete Chapter 2",
       "icon": "🔍",
       "isUnlocked": false,
@@ -208,35 +208,35 @@
     },
     {
       "id": "injection-master",
-      "name": "Injection Master",
+      "name": "WAF Breaker",
       "description": "Complete Chapter 3",
-      "icon": "💉",
+      "icon": "🔥",
       "isUnlocked": false,
       "unlockCondition": "Complete all Chapter 3 exercises"
     },
     {
       "id": "blind-expert",
-      "name": "Blind Expert",
+      "name": "Out-of-Band Expert",
       "description": "Complete Chapter 4",
-      "icon": "🕶️",
+      "icon": "📡",
       "isUnlocked": false,
       "unlockCondition": "Complete all Chapter 4 exercises"
     },
     {
       "id": "defender",
-      "name": "Defender",
+      "name": "Automation Master",
       "description": "Complete Chapter 5",
-      "icon": "🛡️",
+      "icon": "🤖",
       "isUnlocked": false,
       "unlockCondition": "Complete all Chapter 5 exercises"
     },
     {
       "id": "sqli-champion",
-      "name": "SQLi Champion",
+      "name": "Elite SQLi Specialist",
       "description": "Complete Final Project",
       "icon": "🏆",
       "isUnlocked": false,
-      "unlockCondition": "Complete the final CTF challenge"
+      "unlockCondition": "Complete the enterprise pentest challenge"
     }
   ],
   "cheatSheets": []
