@@ -349,7 +349,7 @@ export default function PricingPage() {
             >
               <div className="w-24 h-24 relative">
                 <Image
-                  src="/images/logo/darkrai.gif"
+                  src="/images/logo/possibleCharacter.gif"
                   alt="CyberCodex Elite"
                   width={96}
                   height={96}
