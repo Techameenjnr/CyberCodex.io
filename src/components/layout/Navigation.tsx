@@ -78,9 +78,9 @@ export function Navigation({ user }: NavigationProps) {
                   priority
                 />
               </div>
-              <div className="text-xl md:text-2xl font-bold">
+              <div className="font-pixel leading-tight" style={{ fontSize: 'var(--font-size-nav-logo)' }}>
                 <span className="text-cyber-primary">Cyber</span>
-                <span className="text-cyber-text-primary">Codex</span>
+                <span className="text-cyber-text-primary">Codex.io</span>
               </div>
             </Link>
 
@@ -191,16 +191,16 @@ export function Navigation({ user }: NavigationProps) {
                   <div className="flex items-center space-x-3">
                     <div className="relative w-10 h-10">
                       <Image
-                        src="/images/logo/logo.gif"
+                        src="/images/logo/possibleCharacter.gif"
                         alt="CyberCodex Logo"
                         fill
                         className="object-contain"
                         unoptimized
                       />
                     </div>
-                    <div className="text-xl font-bold">
+                    <div className="font-pixel leading-tight" style={{ fontSize: 'var(--font-size-nav-logo)' }}>
                       <span className="text-cyber-primary">Cyber</span>
-                      <span className="text-cyber-text-primary">Codex</span>
+                      <span className="text-cyber-text-primary">Codex.io</span>
                     </div>
                   </div>
                   <button

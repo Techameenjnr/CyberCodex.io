@@ -93,7 +93,10 @@ export function HomeClient({ courses }: HomeClientProps) {
                     </div>
 
                     {/* Title */}
-                    <h3 className="text-xl font-bold mb-3 text-cyber-primary group-hover:text-cyber-secondary transition-colors duration-200">
+                    <h3
+                      className="font-bold mb-3 text-cyber-primary group-hover:text-cyber-secondary transition-colors duration-200"
+                      style={{ fontSize: 'var(--font-size-card-title)' }}
+                    >
                       {course.title}
                     </h3>
 

@@ -78,19 +78,8 @@ export function PricingCard({
         <p className="text-cyber-text-secondary">{description}</p>
       </div>
 
-      {/* CTA Button */}
-      <Button
-        variant={ctaVariant}
-        size="lg"
-        fullWidth
-        className="mb-6"
-        onClick={onCtaClick}
-      >
-        {ctaText}
-      </Button>
-
       {/* Features List */}
-      <div className="space-y-3 flex-grow">
+      <div className="space-y-3 flex-grow mb-6">
         {features.map((feature, index) => (
           <div key={index} className="flex items-start space-x-3">
             {feature.included ? (
@@ -129,6 +118,16 @@ export function PricingCard({
           </div>
         ))}
       </div>
+
+      {/* CTA Button - Now at bottom */}
+      <Button
+        variant={ctaVariant}
+        size="lg"
+        fullWidth
+        onClick={onCtaClick}
+      >
+        {ctaText}
+      </Button>
     </div>
   );
 }

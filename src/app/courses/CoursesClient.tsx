@@ -76,7 +76,7 @@ export function CoursesClient({ courses }: CoursesClientProps) {
         {/* Background Image/GIF */}
         <div className="absolute inset-0 z-0">
           <Image
-            src="/images/banners/future.gif"
+            src="/images/banners/computerGuy.gif"
             alt="Cybersecurity Courses Background"
             fill
             className="object-cover"
@@ -87,17 +87,19 @@ export function CoursesClient({ courses }: CoursesClientProps) {
               e.currentTarget.style.display = 'none';
             }}
           />
-          {/* Subtle gradient overlay for text readability */}
-          <div className="absolute inset-0 bg-gradient-to-b from-cyber-dark/40 via-cyber-dark/30 to-cyber-dark" />
+          {/* Darker gradient overlay for better text readability */}
+          <div className="absolute inset-0 bg-gradient-to-b from-cyber-dark/70 via-cyber-dark/60 to-cyber-dark" />
+          {/* Additional dark overlay at top for title */}
+          <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-transparent to-transparent" />
         </div>
 
         {/* Header Content */}
         <Container>
           <div className="relative z-10">
-            <h1 className="text-display-2 font-bold mb-4 text-white drop-shadow-[0_2px_10px_rgba(0,0,0,0.8)]">
+            <h1 className="text-display-2 font-bold mb-4 text-white drop-shadow-[0_4px_20px_rgba(0,0,0,1)] [text-shadow:_0_0_30px_rgb(0_0_0_/_100%),_0_2px_10px_rgb(0_0_0_/_100%)]">
               Cybersecurity Courses
             </h1>
-            <p className="text-xl text-white/90 max-w-3xl drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">
+            <p className="text-xl text-white/95 max-w-3xl drop-shadow-[0_2px_12px_rgba(0,0,0,1)] [text-shadow:_0_2px_8px_rgb(0_0_0_/_80%)]">
               Master cybersecurity through hands-on tutorials and comprehensive learning paths
             </p>
           </div>
@@ -242,7 +244,10 @@ export function CoursesClient({ courses }: CoursesClientProps) {
                     </div>
 
                     {/* Title */}
-                    <h3 className="text-xl font-bold mb-3 text-cyber-primary group-hover:text-cyber-secondary transition-colors duration-200">
+                    <h3
+                      className="font-bold mb-3 text-cyber-primary group-hover:text-cyber-secondary transition-colors duration-200"
+                      style={{ fontSize: 'var(--font-size-card-title)' }}
+                    >
                       {course.title}
                     </h3>
 

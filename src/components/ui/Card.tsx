@@ -53,7 +53,8 @@ export const CardTitle = forwardRef<HTMLHeadingElement, HTMLAttributes<HTMLHeadi
   ({ className, children, ...props }, ref) => (
     <h3
       ref={ref}
-      className={cn("text-2xl font-bold text-cyber-text-primary", className)}
+      className={cn("font-bold text-cyber-text-primary", className)}
+      style={{ fontSize: 'var(--font-size-sidebar-title)' }}
       {...props}
     >
       {children}

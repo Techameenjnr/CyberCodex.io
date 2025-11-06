@@ -56,7 +56,10 @@ export function ChapterItem({
         {/* Chapter Info */}
         <div className="flex-1 text-left">
           <div className="flex items-center gap-3 mb-1">
-            <h3 className="text-lg font-semibold text-cyber-text-primary group-hover:text-cyber-primary transition-colors">
+            <h3
+              className="font-semibold text-cyber-text-primary group-hover:text-cyber-primary transition-colors"
+              style={{ fontSize: 'var(--font-size-chapter-title)' }}
+            >
               {chapter.title}
             </h3>
             {chapter.isPremium && (

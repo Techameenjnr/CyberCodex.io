@@ -40,7 +40,7 @@ export function CourseSidebar({
       {/* Course Progress */}
       <Card className="border-cyber-border">
         <CardHeader>
-          <CardTitle className="text-lg">Course Progress</CardTitle>
+          <CardTitle>Course Progress</CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
           <ProgressBar
@@ -65,7 +65,7 @@ export function CourseSidebar({
       {/* Course Badges */}
       <Card className="border-cyber-border">
         <CardHeader>
-          <CardTitle className="text-lg flex items-center justify-between">
+          <CardTitle className="flex items-center justify-between">
             Course Badges
             <span className="text-sm text-cyber-text-secondary font-normal">
               {progress.badgesEarned}/{progress.totalBadges}

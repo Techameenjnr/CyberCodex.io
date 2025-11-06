@@ -79,15 +79,17 @@ export default async function CoursePage({ params }: CoursePageProps) {
             // Fallback gradient background
             <div className="absolute inset-0 bg-gradient-to-br from-cyber-primary/20 via-cyber-secondary/20 to-cyber-dark" />
           )}
-          {/* Gradient overlay for text readability */}
-          <div className="absolute inset-0 bg-gradient-to-b from-cyber-dark/40 via-cyber-dark/30 to-cyber-dark" />
+          {/* Darker gradient overlay for better text readability */}
+          <div className="absolute inset-0 bg-gradient-to-b from-cyber-dark/70 via-cyber-dark/60 to-cyber-dark" />
+          {/* Additional dark overlay at top for title */}
+          <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-transparent to-transparent" />
         </div>
 
         {/* Header Content */}
         <Container>
           <div className="relative z-10">
             {/* Breadcrumb */}
-            <div className="flex items-center gap-2 text-sm text-white/80 mb-4">
+            <div className="flex items-center gap-2 text-sm text-white/80 mb-4 drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">
               <a href="/courses" className="hover:text-cyber-primary transition-colors">
                 Courses
               </a>
@@ -96,7 +98,7 @@ export default async function CoursePage({ params }: CoursePageProps) {
             </div>
 
             {/* Title & Description */}
-            <h1 className="text-display-1 font-bold mb-4 text-white drop-shadow-[0_2px_10px_rgba(0,0,0,0.8)]">
+            <h1 className="text-display-1 font-bold mb-4 text-white drop-shadow-[0_4px_20px_rgba(0,0,0,1)] [text-shadow:_0_0_30px_rgb(0_0_0_/_100%),_0_2px_10px_rgb(0_0_0_/_100%)]">
               {curriculum.metadata.title}
             </h1>
             <p className="text-xl text-white/90 max-w-3xl drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">

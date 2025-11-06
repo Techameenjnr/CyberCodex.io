@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import localFont from "next/font/local";
 import { NavigationWrapper } from "@/components/layout/NavigationWrapper";
 import { Footer } from "@/components/layout";
 import { SmoothScrollProvider } from "@/components/providers";
@@ -8,6 +9,12 @@ import "@/styles/globals.css";
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
+  display: "swap",
+});
+
+const pressStart2P = localFont({
+  src: "../../public/fonts/Press_Start_2P/PressStart2P-Regular.ttf",
+  variable: "--font-press-start",
   display: "swap",
 });
 
@@ -50,7 +57,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={inter.variable}>
+    <html lang="en" className={`${inter.variable} ${pressStart2P.variable}`}>
       <body className="antialiased">
         <SmoothScrollProvider>
           <NavigationWrapper />

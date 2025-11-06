@@ -80,12 +80,13 @@ export function Hero() {
 
           <motion.h1
             variants={itemVariants}
-            className="text-display-1 font-bold mb-6 leading-tight"
+            className="text-display-1 mb-6 flex flex-col items-center justify-center gap-2"
           >
-            Master{" "}
-            <span className="gradient-text">Cybersecurity</span>
-            <br />
-            Through Action
+            <span className="block text-center">
+              Master{" "}
+              <span className="gradient-text inline-block">Cybersecurity</span>
+            </span>
+            <span className="block text-center">Through Action</span>
           </motion.h1>
 
           <motion.p
