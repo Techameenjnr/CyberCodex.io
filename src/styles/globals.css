@@ -421,6 +421,37 @@ pre {
   }
 }
 
+@keyframes profile-pulse {
+  0%, 100% {
+    transform: scale(1);
+    filter: drop-shadow(0 0 10px rgba(0, 255, 65, 0.3));
+  }
+  50% {
+    transform: scale(1.05);
+    filter: drop-shadow(0 0 20px rgba(0, 255, 65, 0.6));
+  }
+}
+
+@keyframes border-glow {
+  0%, 100% {
+    border-color: var(--color-cyber-primary);
+    box-shadow: 0 0 15px rgba(0, 255, 65, 0.3);
+  }
+  50% {
+    border-color: var(--color-cyber-secondary);
+    box-shadow: 0 0 25px rgba(0, 217, 255, 0.4);
+  }
+}
+
+@keyframes skill-fill {
+  0% {
+    width: 0%;
+  }
+  100% {
+    width: var(--skill-width);
+  }
+}
+
 /* Reduced motion preferences */
 @media (prefers-reduced-motion: reduce) {
   *,

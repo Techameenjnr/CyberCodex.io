@@ -68,7 +68,13 @@ export function Navigation({ user }: NavigationProps) {
           <div className="flex items-center justify-between h-20">
             {/* Logo */}
             <Link href="/" className="flex items-center space-x-3 group">
-              <div className="relative w-10 h-10 md:w-12 md:h-12">
+              {/* Hide logo GIF on mobile when menu is open, always show on desktop */}
+              <div
+                className={cn(
+                  "relative w-10 h-10 md:w-12 md:h-12 transition-opacity duration-300",
+                  isOpen ? "md:block hidden" : "block"
+                )}
+              >
                 <Image
                   src="/images/logo/possibleCharacter.gif"
                   alt="CyberCodex Logo"
@@ -78,7 +84,14 @@ export function Navigation({ user }: NavigationProps) {
                   priority
                 />
               </div>
-              <div className="font-pixel leading-tight" style={{ fontSize: 'var(--font-size-nav-logo)' }}>
+              {/* Hide logo text on mobile when menu is open, always show on desktop */}
+              <div
+                className={cn(
+                  "font-pixel leading-tight transition-opacity duration-300",
+                  isOpen ? "md:block hidden" : "block"
+                )}
+                style={{ fontSize: 'var(--font-size-nav-logo)' }}
+              >
                 <span className="text-cyber-primary">Cyber</span>
                 <span className="text-cyber-text-primary">Codex.io</span>
               </div>
@@ -187,7 +200,7 @@ export function Navigation({ user }: NavigationProps) {
             >
               <div className="flex flex-col h-full">
                 {/* Menu Header */}
-                <div className="flex items-center justify-between p-6 border-b border-cyber-border">
+                <div className="flex items-center p-6 border-b border-cyber-border">
                   <div className="flex items-center space-x-3">
                     <div className="relative w-10 h-10">
                       <Image
@@ -203,23 +216,6 @@ export function Navigation({ user }: NavigationProps) {
                       <span className="text-cyber-text-primary">Codex.io</span>
                     </div>
                   </div>
-                  <button
-                    onClick={() => setIsOpen(false)}
-                    className="text-cyber-text-primary p-2"
-                    aria-label="Close menu"
-                  >
-                    <svg
-                      className="w-6 h-6"
-                      fill="none"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path d="M6 18L18 6M6 6l12 12" />
-                    </svg>
-                  </button>
                 </div>
 
                 {/* Menu Links */}

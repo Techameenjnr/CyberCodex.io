@@ -42,7 +42,7 @@ export function PricingCard({
       className={cn(
         "relative rounded-lg p-8 transition-all duration-300 h-full flex flex-col",
         highlighted
-          ? "bg-cyber-dark-secondary border-2 border-cyber-primary shadow-lg glow-primary"
+          ? "bg-cyber-dark-secondary border-2 border-cyber-primary shadow-lg"
           : "bg-cyber-dark-secondary border border-cyber-border hover:border-cyber-primary/50",
         className
       )}

@@ -43,15 +43,16 @@ export function FeatureComparison({ features, className }: FeatureComparisonProp
   return (
     <div className={cn("w-full", className)}>
       {/* Header Row */}
-      <div className="grid grid-cols-3 gap-6 mb-8">
-        <div className="col-span-1 flex items-center justify-center">
+      <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6 mb-8">
+        {/* Logo - Hidden on mobile, shown on desktop */}
+        <div className="hidden md:flex col-span-1 items-center justify-center">
           <div className="font-pixel leading-tight text-center" style={{ fontSize: 'clamp(1.125rem, 2vw, 1.5rem)' }}>
             <span className="text-cyber-primary">Cyber</span>
             <span className="text-cyber-text-primary">Codex.io</span>
           </div>
         </div>
         <div className="text-center">
-          <div className="inline-flex items-center justify-center w-16 h-16 mb-3 bg-cyber-dark-secondary rounded-lg border border-cyber-border overflow-hidden">
+          <div className="inline-flex items-center justify-center w-16 h-16 mb-3 rounded-lg overflow-hidden">
             <Image
               src="/images/categories/possibleCharacter.gif"
               alt="Explorer"
@@ -67,9 +68,9 @@ export function FeatureComparison({ features, className }: FeatureComparisonProp
           </button>
         </div>
         <div className="text-center">
-          <div className="inline-flex items-center justify-center w-16 h-16 mb-3 bg-cyber-dark-secondary rounded-lg border-2 border-cyber-primary glow-primary overflow-hidden">
+          <div className="inline-flex items-center justify-center w-16 h-16 mb-3 rounded-lg overflow-hidden">
             <Image
-              src="/images/categories/possibleCharacter.gif"
+              src="/images/logo/coin.webp"
               alt="Elite Hacker"
               width={64}
               height={64}
@@ -95,21 +96,21 @@ export function FeatureComparison({ features, className }: FeatureComparisonProp
               {category.features.map((feature) => (
                 <div
                   key={feature.name}
-                  className="grid grid-cols-3 gap-6 items-center py-4 px-4 rounded-lg hover:bg-cyber-dark-secondary transition-colors duration-200"
+                  className="grid grid-cols-[1fr_auto_auto] md:grid-cols-3 gap-4 md:gap-6 items-center py-4 px-4 rounded-lg hover:bg-cyber-dark-secondary transition-colors duration-200"
                 >
                   <div className="col-span-1 flex items-center space-x-2">
-                    <span className="text-cyber-text-primary font-medium">
+                    <span className="text-cyber-text-primary font-medium text-sm md:text-base">
                       {feature.name}
                     </span>
                     <button
                       title={feature.info}
-                      className="inline-flex items-center justify-center w-4 h-4 rounded-full border border-cyber-border text-cyber-text-muted hover:text-cyber-primary hover:border-cyber-primary transition-colors duration-200 text-xs"
+                      className="inline-flex items-center justify-center w-4 h-4 rounded-full border border-cyber-border text-cyber-text-muted hover:text-cyber-primary hover:border-cyber-primary transition-colors duration-200 text-xs flex-shrink-0"
                     >
                       i
                     </button>
                   </div>
-                  <div className="text-center">{renderValue(feature.free)}</div>
-                  <div className="text-center">{renderValue(feature.pro)}</div>
+                  <div className="text-center w-12 md:w-auto">{renderValue(feature.free)}</div>
+                  <div className="text-center w-12 md:w-auto">{renderValue(feature.pro)}</div>
                 </div>
               ))}
             </div>

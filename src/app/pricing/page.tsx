@@ -17,7 +17,7 @@ export default function PricingPage() {
         {/* Background Image/GIF */}
         <div className="absolute inset-0 z-0">
           <Image
-            src="/images/banners/futureOutpost.gif"
+            src="/images/banners/purpleSKy.gif"
             alt="CyberCodex Pricing Background"
             fill
             className="object-cover"
@@ -93,7 +93,7 @@ export default function PricingPage() {
                 icon={
                   <div className="w-16 h-16 relative">
                     <Image
-                      src="/images/categories/possibleCharacter.gif"
+                      src="/images/logo/gengar.gif"
                       alt="Explorer"
                       width={64}
                       height={64}
@@ -135,7 +135,7 @@ export default function PricingPage() {
                 icon={
                   <div className="w-16 h-16 relative">
                     <Image
-                      src="/images/categories/possibleCharacter.gif"
+                      src="/images/logo/coin.webp"
                       alt="Elite Hacker"
                       width={64}
                       height={64}
@@ -349,11 +349,11 @@ export default function PricingPage() {
             >
               <div className="w-24 h-24 relative">
                 <Image
-                  src="/images/logo/possibleCharacter.gif"
+                  src="/images/logo/gengar.gif"
                   alt="CyberCodex Elite"
                   width={96}
                   height={96}
-                  className="object-contain drop-shadow-[0_0_20px_rgba(0,255,65,0.5)]"
+                  className="object-contain"
                 />
               </div>
             </motion.div>
