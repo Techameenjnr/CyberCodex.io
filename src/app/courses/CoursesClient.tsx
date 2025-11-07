@@ -96,10 +96,10 @@ export function CoursesClient({ courses }: CoursesClientProps) {
         {/* Header Content */}
         <Container>
           <div className="relative z-10">
-            <h1 className="text-display-2 font-bold mb-4 text-white drop-shadow-[0_4px_20px_rgba(0,0,0,1)] [text-shadow:_0_0_30px_rgb(0_0_0_/_100%),_0_2px_10px_rgb(0_0_0_/_100%)]">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-display-2 font-bold mb-4 text-white drop-shadow-[0_4px_20px_rgba(0,0,0,1)] [text-shadow:_0_0_30px_rgb(0_0_0_/_100%),_0_2px_10px_rgb(0_0_0_/_100%)] px-4">
               Cybersecurity Courses
             </h1>
-            <p className="text-xl text-white/95 max-w-3xl drop-shadow-[0_2px_12px_rgba(0,0,0,1)] [text-shadow:_0_2px_8px_rgb(0_0_0_/_80%)]">
+            <p className="text-base sm:text-lg md:text-xl text-white/95 max-w-3xl drop-shadow-[0_2px_12px_rgba(0,0,0,1)] [text-shadow:_0_2px_8px_rgb(0_0_0_/_80%)] px-4">
               Master cybersecurity through hands-on tutorials and comprehensive learning paths
             </p>
           </div>

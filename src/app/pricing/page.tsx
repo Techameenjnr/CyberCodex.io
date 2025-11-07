@@ -36,10 +36,10 @@ export default function PricingPage() {
         {/* Header Content */}
         <Container>
           <div className="relative z-10 text-center">
-            <h1 className="text-display-1 font-bold mb-6 text-white drop-shadow-[0_4px_20px_rgba(0,0,0,1)] [text-shadow:_0_0_30px_rgb(0_0_0_/_100%),_0_2px_10px_rgb(0_0_0_/_100%)]">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-display-2 font-bold mb-6 text-white drop-shadow-[0_4px_20px_rgba(0,0,0,1)] [text-shadow:_0_0_30px_rgb(0_0_0_/_100%),_0_2px_10px_rgb(0_0_0_/_100%)] px-4">
               Choose Your Path
             </h1>
-            <p className="text-xl text-white/90 max-w-3xl mx-auto mb-8 drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">
+            <p className="text-base sm:text-lg md:text-xl text-white/90 max-w-3xl mx-auto mb-8 drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)] px-4">
               Unlock your full potential with tailored plans designed for every stage of your cybersecurity journey
             </p>
 
@@ -243,7 +243,7 @@ export default function PricingPage() {
             transition={{ duration: 0.6 }}
             className="text-center mb-12"
           >
-            <h2 className="text-4xl md:text-5xl font-bold gradient-text mb-4">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold gradient-text mb-4">
               What's Included?
             </h2>
             <p className="text-lg text-cyber-text-secondary max-w-2xl mx-auto">
@@ -275,7 +275,7 @@ export default function PricingPage() {
             transition={{ duration: 0.6 }}
             className="text-center mb-12"
           >
-            <h2 className="text-display-2 gradient-text mb-4">
+            <h2 className="text-3xl md:text-4xl lg:text-display-2 gradient-text mb-4">
               Frequently Asked Questions
             </h2>
             <p className="text-lg text-cyber-text-secondary max-w-2xl mx-auto">
@@ -358,10 +358,10 @@ export default function PricingPage() {
               </div>
             </motion.div>
 
-            <h2 className="text-5xl md:text-6xl font-bold text-white mb-6 drop-shadow-[0_4px_20px_rgba(0,0,0,1)] [text-shadow:_0_0_30px_rgb(0_0_0_/_100%),_0_2px_10px_rgb(0_0_0_/_100%)]">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 drop-shadow-[0_4px_20px_rgba(0,0,0,1)] [text-shadow:_0_0_30px_rgb(0_0_0_/_100%),_0_2px_10px_rgb(0_0_0_/_100%)] px-4">
               Ready to Level Up?
             </h2>
-            <p className="text-xl md:text-2xl text-white/90 mb-12 max-w-2xl mx-auto drop-shadow-[0_2px_10px_rgba(0,0,0,0.8)]">
+            <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-white/90 mb-12 max-w-2xl mx-auto drop-shadow-[0_2px_10px_rgba(0,0,0,0.8)] px-4">
               Join <span className="text-cyber-primary font-bold">10,000+</span> learners mastering cybersecurity with hands-on courses, elite mentorship, and real-world labs.
             </p>
 
