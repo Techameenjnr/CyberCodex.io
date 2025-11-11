@@ -3,14 +3,21 @@
  * Structure for course chapters, lessons, and exercises
  */
 
+import { TestCase } from "@/lib/python/runtime";
+
 export interface Exercise {
   id: string;
   title: string;
   description?: string;
-  type: "exercise" | "project" | "article" | "quiz";
+  type: "exercise" | "project" | "article" | "quiz" | "interactive-python";
   isLocked: boolean;
   isCompleted: boolean;
   xpReward?: number;
+  // Interactive Python exercise fields
+  starterCode?: string;
+  solution?: string;
+  tests?: TestCase[];
+  hints?: string[];
 }
 
 export interface Chapter {

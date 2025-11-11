@@ -1,0 +1,97 @@
+---
+title: "String Concatenation"
+description: "Learn to combine strings together"
+type: "interactive-python"
+xpReward: 30
+starterCode: |
+  # Create two variables
+  first_name = "Python"
+  last_name = "Programmer"
+
+  # Combine them with a space and print
+
+solution: |
+  first_name = "Python"
+  last_name = "Programmer"
+  full_name = first_name + " " + last_name
+  print(full_name)
+tests:
+  - description: "Prints 'Python Programmer'"
+    expectedOutput: "Python Programmer"
+hints:
+  - "Use the + operator to combine strings"
+  - "Don't forget to add a space between the names: ' '"
+  - "You can combine multiple strings: string1 + ' ' + string2"
+---
+
+## String Concatenation
+
+**Concatenation** means joining strings together. In Python, you can combine strings using the `+` operator!
+
+### The + Operator with Strings
+
+When used with strings, `+` joins them together:
+
+```python
+greeting = "Hello" + " " + "World"
+print(greeting)  # Hello World
+```
+
+### Combining Variables
+
+You can also combine string variables:
+
+```python
+first = "Cyber"
+second = "Codex"
+combined = first + second
+print(combined)  # CyberCodex
+```
+
+### Adding Spaces
+
+Remember to add spaces when combining words:
+
+```python
+# Without space
+name = "John" + "Doe"
+print(name)  # JohnDoe (no space!)
+
+# With space
+name = "John" + " " + "Doe"
+print(name)  # John Doe (correct!)
+```
+
+### Multiple Concatenations
+
+You can chain multiple concatenations:
+
+```python
+message = "Welcome" + " " + "to" + " " + "Python" + "!"
+print(message)  # Welcome to Python!
+```
+
+## Your Challenge
+
+You're given two variables: `first_name` and `last_name`.
+
+Combine them with a space in between and print the full name.
+
+### Starting Code
+```python
+first_name = "Python"
+last_name = "Programmer"
+```
+
+### Requirements
+- Combine `first_name` and `last_name`
+- Put a space between them
+- Print the result
+
+**Expected Output:**
+```
+Python Programmer
+```
+
+### Bonus
+Try creating a full greeting like "Hello, Python Programmer!" by adding more strings!

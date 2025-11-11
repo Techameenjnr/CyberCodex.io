@@ -1,0 +1,86 @@
+---
+title: "Variables - Storing Data"
+description: "Learn how to create and use variables in Python"
+type: "interactive-python"
+xpReward: 30
+starterCode: |
+  # Create a variable called name and set it to your name
+
+  # Print the variable
+
+solution: |
+  name = "Python Learner"
+  print(name)
+tests:
+  - description: "Creates and prints a variable"
+    assertion: |
+      assert 'name' in dir(), "Variable 'name' should be defined"
+hints:
+  - "Use the = sign to assign a value to a variable"
+  - "Variable names should be lowercase with no spaces"
+  - "Print the variable without quotes: print(name)"
+---
+
+## Introduction to Variables
+
+Variables are like containers that store data. Think of them as labeled boxes where you can put different types of information.
+
+### Creating Variables
+
+In Python, creating a variable is simple:
+
+```python
+variable_name = value
+```
+
+### Example
+
+```python
+name = "Alice"
+age = 25
+city = "New York"
+```
+
+Now `name`, `age`, and `city` are variables that store different values!
+
+### Using Variables
+
+Once you've created a variable, you can use it anywhere in your code:
+
+```python
+name = "Bob"
+print(name)  # Outputs: Bob
+```
+
+**Important:** When printing a variable, don't use quotes around it!
+
+```python
+# Correct ✓
+print(name)  # Prints the value stored in name
+
+# Incorrect ✗
+print("name")  # Prints the word "name"
+```
+
+### Variable Naming Rules
+
+- Can contain letters, numbers, and underscores
+- Must start with a letter or underscore
+- Are case-sensitive (`name` and `Name` are different)
+- Should be descriptive (use `user_name` not `x`)
+
+## Your Challenge
+
+1. Create a variable called `name` and assign it a string value (any name you like)
+2. Print the value of the `name` variable
+
+### Requirements
+- Create a variable named exactly `name`
+- Assign it a string value (text in quotes)
+- Print the variable (without quotes)
+
+**Example Output:**
+```
+Python Learner
+```
+(or whatever name you choose)

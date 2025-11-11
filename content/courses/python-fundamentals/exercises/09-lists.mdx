@@ -1,0 +1,122 @@
+---
+title: "Lists - Storing Multiple Values"
+description: "Learn to work with lists in Python"
+type: "interactive-python"
+xpReward: 35
+starterCode: |
+  # Create a list of your three favorite colors
+
+  # Print the list
+
+solution: |
+  colors = ["blue", "green", "red"]
+  print(colors)
+tests:
+  - description: "Creates and prints a list"
+    assertion: |
+      assert isinstance(colors, list), "Variable 'colors' should be a list"
+      assert len(colors) == 3, "List should have 3 items"
+hints:
+  - "Lists use square brackets: []"
+  - "Separate items with commas"
+  - "Strings should be in quotes"
+  - "Example: my_list = ['item1', 'item2', 'item3']"
+---
+
+## Lists in Python
+
+A **list** is a collection that can store multiple values in a single variable. Think of it like a shopping list or a playlist!
+
+### Creating Lists
+
+Lists are created using square brackets `[]`:
+
+```python
+fruits = ["apple", "banana", "orange"]
+numbers = [1, 2, 3, 4, 5]
+mixed = ["hello", 42, True, 3.14]
+```
+
+### Accessing List Items
+
+You can access items by their index (position), starting from 0:
+
+```python
+fruits = ["apple", "banana", "orange"]
+
+print(fruits[0])  # apple (first item)
+print(fruits[1])  # banana (second item)
+print(fruits[2])  # orange (third item)
+```
+
+### List Methods
+
+Lists have useful methods:
+
+```python
+fruits = ["apple", "banana"]
+
+fruits.append("orange")  # Add to end
+print(fruits)  # ["apple", "banana", "orange"]
+
+fruits.remove("banana")  # Remove item
+print(fruits)  # ["apple", "orange"]
+
+length = len(fruits)  # Get number of items
+print(length)  # 2
+```
+
+### Looping Through Lists
+
+You can loop through each item:
+
+```python
+colors = ["red", "green", "blue"]
+
+for color in colors:
+    print(color)
+```
+
+**Output:**
+```
+red
+green
+blue
+```
+
+### List Operations
+
+```python
+# Concatenate lists
+list1 = [1, 2, 3]
+list2 = [4, 5, 6]
+combined = list1 + list2  # [1, 2, 3, 4, 5, 6]
+
+# Check if item exists
+if "apple" in fruits:
+    print("Found apple!")
+
+# Get list length
+count = len(fruits)
+```
+
+## Your Challenge
+
+Create a list called `colors` with **three** of your favorite colors as strings.
+
+Then print the list.
+
+### Requirements
+- Create a variable named `colors`
+- It should be a list `[]`
+- Add three color names as strings
+- Print the list
+
+**Example Output:**
+```python
+['blue', 'green', 'red']
+```
+(Your colors can be different!)
+
+### Bonus
+Try accessing individual colors using `colors[0]`, `colors[1]`, etc!

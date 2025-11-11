@@ -1,0 +1,80 @@
+---
+title: "Math in Python"
+description: "Perform basic arithmetic operations"
+type: "interactive-python"
+xpReward: 30
+starterCode: |
+  # Calculate 15 + 27 and print the result
+
+solution: |
+  result = 15 + 27
+  print(result)
+tests:
+  - description: "Prints 42"
+    expectedOutput: "42"
+hints:
+  - "Use the + operator to add numbers"
+  - "Store the result in a variable, then print it"
+  - "15 + 27 = 42"
+---
+
+## Math Operations in Python
+
+Python can be used as a powerful calculator! Let's learn the basic arithmetic operators.
+
+### Arithmetic Operators
+
+| Operator | Operation | Example | Result |
+|----------|-----------|---------|--------|
+| `+` | Addition | `5 + 3` | `8` |
+| `-` | Subtraction | `10 - 4` | `6` |
+| `*` | Multiplication | `6 * 7` | `42` |
+| `/` | Division | `15 / 3` | `5.0` |
+| `**` | Exponent | `2 ** 3` | `8` |
+| `%` | Modulo (remainder) | `10 % 3` | `1` |
+
+### Examples
+
+```python
+# Addition
+sum = 10 + 5
+print(sum)  # 15
+
+# Multiplication
+product = 6 * 7
+print(product)  # 42
+
+# Multiple operations
+result = 2 + 3 * 4
+print(result)  # 14 (multiplication happens first)
+```
+
+### Order of Operations
+
+Python follows the standard mathematical order of operations (PEMDAS):
+1. **P**arentheses
+2. **E**xponents
+3. **M**ultiplication and **D**ivision (left to right)
+4. **A**ddition and **S**ubtraction (left to right)
+
+```python
+result = (2 + 3) * 4
+print(result)  # 20 (parentheses first)
+```
+
+## Your Challenge
+
+Calculate **15 + 27** and print the result.
+
+### Requirements
+- Add 15 and 27
+- Store the result in a variable (you can name it anything)
+- Print the result
+
+**Expected Output:**
+```
+42
+```
+
+### Bonus Challenge
+Try calculating other operations on your own! What's 100 - 42? Or 6 * 7?

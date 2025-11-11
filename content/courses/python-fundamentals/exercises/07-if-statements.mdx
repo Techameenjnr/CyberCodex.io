@@ -1,0 +1,107 @@
+---
+title: "If Statements - Making Decisions"
+description: "Learn how to make your code make decisions"
+type: "interactive-python"
+xpReward: 35
+starterCode: |
+  age = 18
+
+  # Write an if statement that prints "Adult" if age is 18 or more
+
+solution: |
+  age = 18
+
+  if age >= 18:
+      print("Adult")
+tests:
+  - description: "Prints 'Adult' when age is 18 or more"
+    expectedOutput: "Adult"
+hints:
+  - "Use the if keyword followed by a condition"
+  - "Use >= to check if age is greater than or equal to 18"
+  - "Don't forget the colon : at the end of the if line"
+  - "Indent the print statement with 4 spaces or Tab"
+---
+
+## Conditional Statements
+
+Sometimes you want your code to do different things based on certain conditions. That's where `if` statements come in!
+
+### Basic If Statement
+
+The syntax for an `if` statement:
+
+```python
+if condition:
+    # code to run if condition is True
+    print("Condition was true!")
+```
+
+**Important:** The code inside the `if` block must be indented (4 spaces or 1 Tab).
+
+### Comparison Operators
+
+Use these to compare values:
+
+| Operator | Meaning | Example |
+|----------|---------|---------|
+| `==` | Equal to | `x == 5` |
+| `!=` | Not equal to | `x != 5` |
+| `>` | Greater than | `x > 5` |
+| `<` | Less than | `x < 5` |
+| `>=` | Greater than or equal | `x >= 5` |
+| `<=` | Less than or equal | `x <= 5` |
+
+### Examples
+
+```python
+temperature = 75
+
+if temperature > 70:
+    print("It's warm outside!")
+```
+
+```python
+password = "secret123"
+
+if password == "secret123":
+    print("Access granted!")
+```
+
+### The Colon and Indentation
+
+Two critical parts of `if` statements:
+
+1. **Colon (`:`)** - Must come after the condition
+2. **Indentation** - Code inside the `if` must be indented
+
+```python
+# Correct ✓
+if x > 10:
+    print("x is big")
+
+# Wrong ✗ (missing colon)
+if x > 10
+    print("x is big")
+
+# Wrong ✗ (not indented)
+if x > 10:
+print("x is big")
+```
+
+## Your Challenge
+
+You have a variable `age` set to 18.
+
+Write an `if` statement that prints **"Adult"** if age is 18 or greater.
+
+### Requirements
+- Use an `if` statement
+- Check if `age >= 18`
+- Print exactly "Adult"
+- Don't forget the colon and indentation!
+
+**Expected Output:**
+```
+Adult
+```

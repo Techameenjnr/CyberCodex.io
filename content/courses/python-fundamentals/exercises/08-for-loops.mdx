@@ -1,0 +1,113 @@
+---
+title: "For Loops - Repeating Actions"
+description: "Learn how to repeat code with for loops"
+type: "interactive-python"
+xpReward: 35
+starterCode: |
+  # Write a for loop that prints numbers 1 through 5
+
+solution: |
+  for i in range(1, 6):
+      print(i)
+tests:
+  - description: "Prints numbers 1 through 5"
+    expectedOutput: "1\n2\n3\n4\n5"
+hints:
+  - "Use range(1, 6) to get numbers 1 through 5"
+  - "range() stops BEFORE the second number"
+  - "Use a for loop: for i in range(1, 6):"
+  - "Don't forget to indent the print statement"
+---
+
+## For Loops
+
+Loops let you repeat code multiple times without writing it over and over. This is one of the most powerful features in programming!
+
+### Basic For Loop
+
+```python
+for i in range(5):
+    print(i)
+```
+
+**Output:**
+```
+0
+1
+2
+3
+4
+```
+
+### The range() Function
+
+`range()` generates a sequence of numbers:
+
+```python
+range(5)        # 0, 1, 2, 3, 4 (starts at 0, stops before 5)
+range(1, 6)     # 1, 2, 3, 4, 5 (starts at 1, stops before 6)
+range(0, 10, 2) # 0, 2, 4, 6, 8 (starts at 0, step by 2)
+```
+
+### Loop Variable
+
+The variable after `for` (commonly `i`) represents the current value:
+
+```python
+for num in range(1, 4):
+    print(f"Count: {num}")
+```
+
+**Output:**
+```
+Count: 1
+Count: 2
+Count: 3
+```
+
+### Real-World Example
+
+```python
+# Print a countdown
+for count in range(10, 0, -1):
+    print(count)
+print("Blastoff!")
+```
+
+### Common Patterns
+
+**Repeat an action 5 times:**
+```python
+for i in range(5):
+    print("Hello!")
+```
+
+**Sum numbers 1 to 10:**
+```python
+total = 0
+for num in range(1, 11):
+    total = total + num
+print(total)  # 55
+```
+
+## Your Challenge
+
+Write a `for` loop that prints the numbers **1 through 5**, each on a new line.
+
+### Requirements
+- Use a `for` loop
+- Use `range(1, 6)` to get numbers 1-5
+- Print each number
+- Remember: indentation is required!
+
+**Expected Output:**
+```
+1
+2
+3
+4
+5
+```
+
+### Tip
+Remember that `range(1, 6)` generates numbers from 1 up to (but not including) 6!

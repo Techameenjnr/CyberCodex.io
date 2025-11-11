@@ -2,10 +2,12 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import { MDXRemote } from "next-mdx-remote/rsc";
+import { serialize } from "next-mdx-remote/serialize";
 import rehypePrism from "rehype-prism-plus";
 import { getAllCurriculumSlugs, getAllExerciseIds, getExerciseContent, getCurriculumBySlug } from "@/lib/curriculum";
 import { Container, Button } from "@/components/ui";
 import { TerminalWrapper } from "@/components/lab/TerminalWrapper";
+import { InteractivePythonLayout } from "@/components/course/InteractivePythonLayout";
 import type { Metadata } from "next";
 
 // Courses that use the terminal emulator
@@ -61,6 +63,47 @@ export default async function ExercisePage({ params }: ExercisePageProps) {
   }
 
   const hasTerminal = TERMINAL_ENABLED_COURSES.includes(slug);
+  const isInteractivePython = exercise.frontmatter.type === "interactive-python";
+
+  // Find next and previous exercises
+  let nextExerciseId: string | undefined;
+  let previousExerciseId: string | undefined;
+
+  const allExercises = curriculum.chapters.flatMap((chapter) => chapter.exercises);
+  const currentIndex = allExercises.findIndex((ex) => ex.id === exerciseId);
+
+  if (currentIndex !== -1) {
+    if (currentIndex > 0) {
+      previousExerciseId = allExercises[currentIndex - 1].id;
+    }
+    if (currentIndex < allExercises.length - 1) {
+      nextExerciseId = allExercises[currentIndex + 1].id;
+    }
+  }
+
+  // For interactive Python exercises, serialize MDX content
+  if (isInteractivePython) {
+    const mdxSource = await serialize(exercise.content, {
+      mdxOptions: {
+        rehypePlugins: [rehypePrism as any],
+      },
+    });
+
+    return (
+      <InteractivePythonLayout
+        title={exercise.frontmatter.title || exerciseId}
+        description={exercise.frontmatter.description}
+        mdxContent={mdxSource}
+        starterCode={exercise.frontmatter.starterCode || "# Write your code here\n"}
+        solution={exercise.frontmatter.solution}
+        tests={exercise.frontmatter.tests}
+        hints={exercise.frontmatter.hints}
+        courseSlug={slug}
+        nextExerciseId={nextExerciseId}
+        previousExerciseId={previousExerciseId}
+      />
+    );
+  }
 
   return (
     <main className="min-h-screen bg-cyber-dark">

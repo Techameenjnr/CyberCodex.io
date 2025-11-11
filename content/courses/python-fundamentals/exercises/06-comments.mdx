@@ -1,0 +1,92 @@
+---
+title: "Code Comments"
+description: "Learn how to document your code with comments"
+type: "interactive-python"
+xpReward: 20
+starterCode: |
+  # Add a comment above this line explaining what it does
+  print("Learning Python!")
+
+solution: |
+  # This prints a message to the screen
+  print("Learning Python!")
+tests:
+  - description: "Prints the message"
+    expectedOutput: "Learning Python!"
+hints:
+  - "Comments start with the # symbol"
+  - "Comments are ignored by Python - they're just for humans"
+  - "Add a # before any text to make it a comment"
+---
+
+## Code Comments
+
+Comments are notes in your code that Python ignores. They help you (and others) understand what your code does!
+
+### Single-Line Comments
+
+In Python, comments start with `#`:
+
+```python
+# This is a comment
+print("Hello")  # This is also a comment
+```
+
+### Why Use Comments?
+
+1. **Explain complex code** - Help others understand your logic
+2. **Document your work** - Remember what you did later
+3. **Temporarily disable code** - Test without deleting
+
+```python
+# Calculate the area of a rectangle
+width = 10
+height = 5
+area = width * height
+
+# print(area)  # Temporarily disabled
+```
+
+### Good vs Bad Comments
+
+**Good Comments** - Explain WHY:
+```python
+# Convert temperature from Celsius to Fahrenheit
+fahrenheit = celsius * 9/5 + 32
+```
+
+**Bad Comments** - State the obvious:
+```python
+# Add 5 and 3
+result = 5 + 3  # This is obvious from the code
+```
+
+### Multi-line Comments
+
+For longer explanations, use multiple `#` symbols:
+
+```python
+# This function calculates the factorial
+# of a number using recursion
+# It's used in probability calculations
+def factorial(n):
+    if n == 0:
+        return 1
+    return n * factorial(n - 1)
+```
+
+## Your Challenge
+
+The code below prints a message. Add a comment above it explaining what the code does.
+
+### Requirements
+- Add a comment using `#`
+- The comment should describe what the print statement does
+- The code should still print "Learning Python!"
+
+**The output should be:**
+```
+Learning Python!
+```
+
+**Note:** Your comment won't appear in the output - it's just for documentation!

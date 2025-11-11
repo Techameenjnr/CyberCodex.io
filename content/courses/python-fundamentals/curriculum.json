@@ -8,11 +8,11 @@
   },
   "progress": {
     "exercisesCompleted": 0,
-    "totalExercises": 43,
+    "totalExercises": 10,
     "projectsCompleted": 0,
-    "totalProjects": 2,
+    "totalProjects": 0,
     "xpEarned": 0,
-    "totalXp": 685,
+    "totalXp": 305,
     "badgesEarned": 0,
     "totalBadges": 8
   },
@@ -26,46 +26,28 @@
       "isPremium": false,
       "exercises": [
         {
-          "id": "setting-up",
-          "title": "Setting Up",
-          "description": "Get Python installed and ready to code",
-          "type": "exercise",
+          "id": "01-print-hello",
+          "title": "Hello, Python!",
+          "description": "Learn how to print your first message in Python",
+          "type": "interactive-python",
           "isLocked": false,
           "isCompleted": false,
-          "xpReward": 10
+          "xpReward": 25
         },
         {
-          "id": "hello-world",
-          "title": "Hello World",
-          "description": "Print your first message",
-          "type": "exercise",
+          "id": "02-print-multiple",
+          "title": "Print Multiple Lines",
+          "description": "Learn to print multiple lines of text",
+          "type": "interactive-python",
           "isLocked": false,
           "isCompleted": false,
-          "xpReward": 15
+          "xpReward": 25
         },
         {
-          "id": "pattern",
-          "title": "Pattern",
-          "description": "Create ASCII art with print statements",
-          "type": "exercise",
-          "isLocked": false,
-          "isCompleted": false,
-          "xpReward": 15
-        },
-        {
-          "id": "initials",
-          "title": "Initials",
-          "description": "Print your initials in block letters",
-          "type": "exercise",
-          "isLocked": false,
-          "isCompleted": false,
-          "xpReward": 20
-        },
-        {
-          "id": "snail-mail",
-          "title": "Snail Mail",
-          "description": "Format and print an address",
-          "type": "exercise",
+          "id": "06-comments",
+          "title": "Code Comments",
+          "description": "Learn how to document your code with comments",
+          "type": "interactive-python",
           "isLocked": false,
           "isCompleted": false,
           "xpReward": 20
@@ -81,28 +63,31 @@
       "isPremium": false,
       "exercises": [
         {
-          "id": "variables-intro",
-          "title": "Introduction to Variables",
-          "type": "exercise",
+          "id": "03-variables-intro",
+          "title": "Variables - Storing Data",
+          "description": "Learn how to create and use variables in Python",
+          "type": "interactive-python",
           "isLocked": false,
           "isCompleted": false,
-          "xpReward": 15
+          "xpReward": 30
         },
         {
-          "id": "string-variables",
-          "title": "String Variables",
-          "type": "exercise",
+          "id": "04-math-operations",
+          "title": "Math in Python",
+          "description": "Perform basic arithmetic operations",
+          "type": "interactive-python",
           "isLocked": false,
           "isCompleted": false,
-          "xpReward": 15
+          "xpReward": 30
         },
         {
-          "id": "number-variables",
-          "title": "Number Variables",
-          "type": "exercise",
+          "id": "05-string-concat",
+          "title": "String Concatenation",
+          "description": "Learn to combine strings together",
+          "type": "interactive-python",
           "isLocked": false,
           "isCompleted": false,
-          "xpReward": 15
+          "xpReward": 30
         }
       ]
     },
@@ -115,20 +100,13 @@
       "isPremium": false,
       "exercises": [
         {
-          "id": "if-statements",
-          "title": "If Statements",
-          "type": "exercise",
+          "id": "07-if-statements",
+          "title": "If Statements - Making Decisions",
+          "description": "Learn how to make your code make decisions",
+          "type": "interactive-python",
           "isLocked": false,
           "isCompleted": false,
-          "xpReward": 20
-        },
-        {
-          "id": "else-statements",
-          "title": "Else Statements",
-          "type": "exercise",
-          "isLocked": false,
-          "isCompleted": false,
-          "xpReward": 20
+          "xpReward": 35
         }
       ]
     },
@@ -138,23 +116,16 @@
       "title": "Loops",
       "description": "Repeat code efficiently with loops",
       "isLocked": false,
-      "isPremium": true,
+      "isPremium": false,
       "exercises": [
         {
-          "id": "for-loops",
-          "title": "For Loops",
-          "type": "exercise",
-          "isLocked": true,
+          "id": "08-for-loops",
+          "title": "For Loops - Repeating Actions",
+          "description": "Learn how to repeat code with for loops",
+          "type": "interactive-python",
+          "isLocked": false,
           "isCompleted": false,
-          "xpReward": 25
-        },
-        {
-          "id": "while-loops",
-          "title": "While Loops",
-          "type": "exercise",
-          "isLocked": true,
-          "isCompleted": false,
-          "xpReward": 25
+          "xpReward": 35
         }
       ]
     },
@@ -164,15 +135,16 @@
       "title": "Lists",
       "description": "Store multiple items in a single variable",
       "isLocked": false,
-      "isPremium": true,
+      "isPremium": false,
       "exercises": [
         {
-          "id": "list-basics",
-          "title": "List Basics",
-          "type": "exercise",
-          "isLocked": true,
+          "id": "09-lists",
+          "title": "Lists - Storing Multiple Values",
+          "description": "Learn to work with lists in Python",
+          "type": "interactive-python",
+          "isLocked": false,
           "isCompleted": false,
-          "xpReward": 25
+          "xpReward": 35
         }
       ]
     },
@@ -182,15 +154,16 @@
       "title": "Functions",
       "description": "Organize code into reusable blocks",
       "isLocked": false,
-      "isPremium": true,
+      "isPremium": false,
       "exercises": [
         {
-          "id": "function-basics",
-          "title": "Function Basics",
-          "type": "exercise",
-          "isLocked": true,
+          "id": "10-functions",
+          "title": "Functions - Reusable Code",
+          "description": "Learn to create and use functions in Python",
+          "type": "interactive-python",
+          "isLocked": false,
           "isCompleted": false,
-          "xpReward": 30
+          "xpReward": 40
         }
       ]
     },
