@@ -58,9 +58,9 @@ export default async function CoursePage({ params }: CoursePageProps) {
   };
 
   return (
-    <main className="min-h-screen">
+    <main className="min-h-screen bg-cyber-dark pb-20">
       {/* Hero Banner Section */}
-      <div className="relative mb-16 pt-32 pb-20 overflow-hidden min-h-[300px] sm:min-h-[350px] md:min-h-[400px]">
+      <div className="relative pt-24 pb-12 mb-8 overflow-hidden">
         {/* Background Image/GIF */}
         <div className="absolute inset-0 z-0">
           {category?.iconGif && (
@@ -69,7 +69,7 @@ export default async function CoursePage({ params }: CoursePageProps) {
                 src={category.iconGif}
                 alt={`${category.name} Background`}
                 fill
-                className="object-cover"
+                className="object-cover opacity-40"
                 priority
                 unoptimized
               />
@@ -79,49 +79,46 @@ export default async function CoursePage({ params }: CoursePageProps) {
             // Fallback gradient background
             <div className="absolute inset-0 bg-gradient-to-br from-cyber-primary/20 via-cyber-secondary/20 to-cyber-dark" />
           )}
-          {/* Darker gradient overlay for better text readability */}
-          <div className="absolute inset-0 bg-gradient-to-b from-cyber-dark/70 via-cyber-dark/60 to-cyber-dark" />
-          {/* Additional dark overlay at top for title */}
-          <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-transparent to-transparent" />
+          {/* Gradient overlay for better text readability */}
+          <div className="absolute inset-0 bg-gradient-to-b from-cyber-dark/80 via-cyber-dark/90 to-cyber-dark" />
         </div>
 
         {/* Header Content */}
-        <Container>
+        <Container className="max-w-7xl">
           <div className="relative z-10">
             {/* Breadcrumb */}
-            <div className="flex items-center gap-2 text-sm text-white/80 mb-4 drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">
+            <div className="flex items-center gap-2 text-sm text-cyber-text-muted mb-6">
               <a href="/courses" className="hover:text-cyber-primary transition-colors">
                 Courses
               </a>
               <span>/</span>
-              <span className="text-white">{curriculum.metadata.title}</span>
+              <span className="text-cyber-text-secondary">{curriculum.metadata.title}</span>
             </div>
 
             {/* Title & Description */}
-            <h1 className="text-display-1 font-bold mb-4 text-white drop-shadow-[0_4px_20px_rgba(0,0,0,1)] [text-shadow:_0_0_30px_rgb(0_0_0_/_100%),_0_2px_10px_rgb(0_0_0_/_100%)]">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 gradient-text">
               {curriculum.metadata.title}
             </h1>
-            <p className="text-xl text-white/90 max-w-3xl drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">
+            <p className="text-lg md:text-xl text-cyber-text-secondary max-w-3xl leading-relaxed">
               {curriculum.metadata.description}
             </p>
           </div>
         </Container>
       </div>
 
-      <div className="pb-20">
-        <CourseLayout
-          hero={null}
-          sidebar={
-            <CourseSidebar
-              user={mockUser}
-              progress={curriculum.progress}
-              badges={curriculum.badges}
-            />
-          }
-        >
-          <ChapterList chapters={curriculum.chapters} courseSlug={slug} />
-        </CourseLayout>
-      </div>
+      {/* Main Content */}
+      <CourseLayout
+        hero={null}
+        sidebar={
+          <CourseSidebar
+            user={mockUser}
+            progress={curriculum.progress}
+            badges={curriculum.badges}
+          />
+        }
+      >
+        <ChapterList chapters={curriculum.chapters} courseSlug={slug} />
+      </CourseLayout>
     </main>
   );
 }

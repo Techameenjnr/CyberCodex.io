@@ -1,0 +1,114 @@
+---
+title: "Reading File Contents"
+description: "Learn to view file contents using the cat command"
+---
+
+The `cat` command (short for concatenate) is used to display the contents of files. It's one of the most common ways to quickly view text files in Linux.
+
+## Learning Objectives
+
+- Display file contents with `cat`
+- View multiple files at once
+- Understand when to use `cat`
+- Practice reading different files
+
+## Basic Usage
+
+To display a file's contents:
+
+```bash
+cat filename
+```
+
+For example:
+
+```bash
+cat welcome.txt
+```
+
+## Viewing Multiple Files
+
+You can display multiple files in sequence:
+
+```bash
+cat file1.txt file2.txt
+```
+
+The output will show file1.txt followed by file2.txt.
+
+## Practice with the Welcome File
+
+Your system has a welcome file. Try reading it:
+
+```bash
+cat welcome.txt
+```
+
+You should see a welcome message!
+
+## When to Use cat
+
+`cat` is perfect for:
+- Quickly viewing small files
+- Checking file contents
+- Combining multiple files
+- Redirecting file contents (we'll learn this later)
+
+`cat` might not be ideal for:
+- Very large files (use `less` or `more` instead)
+- Binary files (non-text files)
+
+## Practice Challenges
+
+1. Read the contents of `welcome.txt`
+2. First, use `ls` to see what files exist
+3. Try to cat a file that doesn't exist and observe the error
+4. Read the same file twice: `cat welcome.txt welcome.txt`
+
+## Common Errors
+
+If you try to cat a file that doesn't exist:
+
+```bash
+cat nonexistent.txt
+```
+
+You'll see an error:
+
+```
+cat: nonexistent.txt: No such file or directory
+```
+
+If you try to cat a directory:
+
+```bash
+cat documents
+```
+
+You'll see:
+
+```
+cat: documents: Is a directory
+```
+
+## Understanding the Output
+
+When you successfully `cat` a file:
+- The entire file contents are displayed
+- The output scrolls past if the file is long
+- After the output, you're back at the command prompt
+
+## Tips
+
+- Always check if a file exists with `ls` before using `cat`
+- For long files, consider using `less` or `more` (we'll learn these later)
+- `cat` can also be used to create files (advanced usage)
+- Combine `cat` with other commands using pipes `|` (coming soon!)
+
+## What's Next?
+
+Now that you can read files, let's learn how to create files using the `touch` command!
+
+---
+
+**XP Reward:** 25 XP

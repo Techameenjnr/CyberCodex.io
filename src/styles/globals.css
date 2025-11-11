@@ -463,33 +463,53 @@ pre {
   }
 }
 
-/* MDX Prose Styles */
+/* MDX Prose Styles - Enhanced */
 .prose-cyber {
   color: var(--color-cyber-text-secondary);
   line-height: 1.75;
 }
 
 .prose-cyber h2 {
-  color: var(--color-cyber-primary);
-  font-size: 1.875rem;
+  font-family: var(--font-pixel);
+  background: linear-gradient(135deg, var(--color-cyber-primary) 0%, var(--color-cyber-secondary) 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  font-size: 1.75rem;
   font-weight: 700;
   margin-top: 3rem;
   margin-bottom: 1.5rem;
-  padding-bottom: 0.5rem;
-  border-bottom: 2px solid var(--color-cyber-border);
+  padding-bottom: 0.75rem;
+  border-bottom: 2px solid transparent;
+  border-image: linear-gradient(90deg, var(--color-cyber-primary), var(--color-cyber-secondary), transparent) 1;
+  letter-spacing: 0.05em;
+  text-shadow: 0 0 20px rgba(0, 255, 65, 0.2);
+}
+
+.prose-cyber h2:first-child {
+  margin-top: 0;
 }
 
 .prose-cyber h3 {
   color: var(--color-cyber-secondary);
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   font-weight: 600;
   margin-top: 2rem;
   margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.prose-cyber h3::before {
+  content: '▸';
+  color: var(--color-cyber-primary);
+  font-size: 1.2rem;
 }
 
 .prose-cyber h4 {
   color: var(--color-cyber-text-primary);
-  font-size: 1.25rem;
+  font-size: 1.2rem;
   font-weight: 600;
   margin-top: 1.5rem;
   margin-bottom: 0.75rem;
@@ -497,6 +517,12 @@ pre {
 
 .prose-cyber p {
   margin-bottom: 1.25rem;
+  color: var(--color-cyber-text-secondary);
+}
+
+.prose-cyber strong {
+  color: var(--color-cyber-primary);
+  font-weight: 700;
 }
 
 .prose-cyber ul,
@@ -507,6 +533,18 @@ pre {
 
 .prose-cyber li {
   margin-bottom: 0.5rem;
+  position: relative;
+  padding-left: 0.5rem;
+}
+
+.prose-cyber ul li::marker {
+  color: var(--color-cyber-primary);
+  font-size: 1.2em;
+}
+
+.prose-cyber ol li::marker {
+  color: var(--color-cyber-secondary);
+  font-weight: bold;
 }
 
 .prose-cyber code {
@@ -674,3 +712,61 @@ pre {
  * - preferred: scales with viewport
  * - maximum: largest size on desktop
  */
+
+/* ============================================
+   TERMINAL EMULATOR STYLES
+   ============================================ */
+
+/* Terminal container */
+.terminal-container {
+  background-color: #0a0e27;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+/* Override xterm.js styles to match cyber theme */
+.terminal-container .xterm {
+  padding: 10px;
+  font-family: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace !important;
+}
+
+.terminal-container .xterm-viewport {
+  background-color: transparent !important;
+}
+
+.terminal-container .xterm-screen {
+  background-color: transparent !important;
+}
+
+/* Custom scrollbar for terminal */
+.terminal-container .xterm-viewport::-webkit-scrollbar {
+  width: 8px;
+}
+
+.terminal-container .xterm-viewport::-webkit-scrollbar-track {
+  background: #0a0e27;
+}
+
+.terminal-container .xterm-viewport::-webkit-scrollbar-thumb {
+  background: #1f2937;
+  border-radius: 4px;
+}
+
+.terminal-container .xterm-viewport::-webkit-scrollbar-thumb:hover {
+  background: #00ff41;
+}
+
+/* Selection color */
+.terminal-container .xterm-selection div {
+  background-color: rgba(0, 255, 65, 0.3) !important;
+}
+
+/* Links */
+.terminal-container .xterm a {
+  color: #00d9ff !important;
+  text-decoration: underline;
+}
+
+.terminal-container .xterm a:hover {
+  color: #00ff41 !important;
+}

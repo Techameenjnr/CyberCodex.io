@@ -1,0 +1,67 @@
+---
+title: "Print Working Directory"
+description: "Learn to use pwd to find your current location in the filesystem"
+---
+
+The `pwd` command (Print Working Directory) is one of the simplest yet most useful commands in Linux. It tells you exactly where you are in the filesystem.
+
+## What is a Working Directory?
+
+When you're using the terminal, you're always "in" a directory (folder). This is called your **working directory** or **current directory**. All commands you run operate relative to this location unless you specify otherwise.
+
+## Using pwd
+
+Simply type:
+
+```bash
+pwd
+```
+
+The output shows your current location. For example:
+
+```
+/home/user
+```
+
+This means you're in the "user" directory, which is inside the "home" directory, which is at the root (/) of the filesystem.
+
+## Why Use pwd?
+
+You'll use `pwd` frequently to:
+
+- **Verify your location** before running commands
+- **Understand command output** that shows relative paths
+- **Debug issues** when commands don't find files
+- **Navigate complex directory structures**
+
+## Understanding the Output
+
+The output of `pwd` is an **absolute path** - it shows the complete path from the root directory (/) to your current location.
+
+Breaking down `/home/user`:
+- `/` - Root directory (top of filesystem)
+- `home/` - A directory inside root
+- `user` - Your current location inside home
+
+## Practice
+
+Try these exercises:
+
+1. Run `pwd` to see where you are
+2. Remember this location (we'll use it later!)
+3. Run `pwd` again - notice it doesn't change unless you move
+
+## Tips
+
+- `pwd` has no options or arguments - just type `pwd`
+- It always shows an absolute path (starting with /)
+- Use it anytime you're unsure of your location
+- Combine with other commands: `ls $(pwd)` lists your current directory
+
+## What's Next?
+
+Now that you know where you are, let's learn how to see what's in your current directory with the `ls` command!
+
+---
+
+**XP Reward:** 25 XP

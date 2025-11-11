@@ -1,10 +1,15 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import rehypePrism from "rehype-prism-plus";
 import { getAllCurriculumSlugs, getAllExerciseIds, getExerciseContent, getCurriculumBySlug } from "@/lib/curriculum";
 import { Container, Button } from "@/components/ui";
+import { TerminalWrapper } from "@/components/lab/TerminalWrapper";
 import type { Metadata } from "next";
+
+// Courses that use the terminal emulator
+const TERMINAL_ENABLED_COURSES = ["linux-fundamentals", "networking-fundamentals"];
 
 interface ExercisePageProps {
   params: Promise<{
@@ -55,70 +60,165 @@ export default async function ExercisePage({ params }: ExercisePageProps) {
     notFound();
   }
 
+  const hasTerminal = TERMINAL_ENABLED_COURSES.includes(slug);
+
   return (
-    <main className="min-h-screen pt-32 pb-20">
-      <Container className="max-w-4xl">
-        {/* Breadcrumb */}
-        <div className="flex items-center gap-2 text-sm text-cyber-text-muted mb-6">
-          <Link href="/courses" className="hover:text-cyber-primary transition-colors">
-            Courses
-          </Link>
-          <span>/</span>
-          <Link href={`/courses/${slug}`} className="hover:text-cyber-primary transition-colors">
-            {curriculum.metadata.title}
-          </Link>
-          <span>/</span>
-          <span className="text-cyber-text-secondary">{exercise.frontmatter.title || exerciseId}</span>
+    <main className="min-h-screen bg-cyber-dark">
+      {/* Full-Width Banner Header - Touches Top */}
+      <div className="fixed top-0 left-0 right-0 z-50 bg-cyber-dark border-b border-cyber-primary/30">
+        {/* Top Navigation Bar */}
+        <div className="border-b border-cyber-border/50 bg-gradient-to-r from-cyber-dark via-cyber-dark-secondary to-cyber-dark">
+          <div className="px-6 md:px-8 lg:px-10">
+            <div className="flex items-center justify-between py-1.5">
+              {/* Logo - Match Homepage Style */}
+              <Link href="/" className="flex items-center space-x-2 group flex-shrink-0">
+                <div className="relative w-6 h-6 md:w-8 md:h-8">
+                  <Image
+                    src="/images/logo/possibleCharacter.gif"
+                    alt="CyberCodex Logo"
+                    fill
+                    className="object-contain transition-transform duration-300 group-hover:scale-110"
+                    unoptimized
+                    priority
+                  />
+                </div>
+                <div className="font-pixel leading-tight text-xs md:text-sm">
+                  <span className="text-cyber-primary">Cyber</span>
+                  <span className="text-cyber-text-primary">Codex.io</span>
+                </div>
+              </Link>
+
+              {/* Breadcrumb Navigation */}
+              <div className="flex items-center gap-2 text-xs text-cyber-text-muted">
+                <Link href="/courses" className="hover:text-cyber-primary transition-colors">
+                  Courses
+                </Link>
+                <span>/</span>
+                <Link href={`/courses/${slug}`} className="hover:text-cyber-primary transition-colors hidden md:inline">
+                  {curriculum.metadata.title}
+                </Link>
+              </div>
+            </div>
+          </div>
         </div>
 
-        {/* Back Button */}
-        <Link href={`/courses/${slug}`}>
-          <Button variant="ghost" className="mb-6 border border-cyber-border hover:border-cyber-primary">
-            ← Back to Course
-          </Button>
-        </Link>
+        {/* Banner Title Section */}
+        <div className="bg-gradient-to-r from-cyber-dark-secondary/80 via-cyber-primary/5 to-cyber-secondary/5">
+          <div className="px-6 md:px-8 lg:px-10">
+            <div className="py-1.5 flex items-center gap-2">
+              {/* Course Icon/Badge */}
+              <div className="hidden md:flex items-center justify-center w-8 h-8 rounded-lg bg-gradient-to-br from-cyber-primary/20 to-cyber-secondary/20 border border-cyber-primary/40 flex-shrink-0">
+                <span className="text-lg">🐧</span>
+              </div>
 
-        {/* Exercise Header */}
-        <div className="mb-8">
-          <h1 className="text-display-2 font-bold mb-4 gradient-text">
-            {exercise.frontmatter.title || exerciseId}
-          </h1>
-          {exercise.frontmatter.description && (
-            <p className="text-xl text-cyber-text-secondary">
-              {exercise.frontmatter.description}
-            </p>
-          )}
+              {/* Title and Meta */}
+              <div className="flex-1 min-w-0">
+                <h1 className="text-base md:text-lg lg:text-xl font-bold gradient-text leading-tight">
+                  {exercise.frontmatter.title || exerciseId}
+                </h1>
+                <div className="flex items-center gap-2 text-xs text-cyber-text-muted">
+                  <span className="flex items-center gap-1">
+                    <span className="text-cyber-primary text-[10px]">📚</span>
+                    <span className="text-[11px]">{curriculum.metadata.title}</span>
+                  </span>
+                  {exercise.frontmatter.xpReward && (
+                    <span className="flex items-center gap-1">
+                      <span className="text-cyber-warning text-[10px]">⭐</span>
+                      <span className="text-[11px]">{exercise.frontmatter.xpReward} XP</span>
+                    </span>
+                  )}
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
 
-        {/* Exercise Content */}
-        <article className="prose prose-invert prose-cyber max-w-none">
-          <MDXRemote
-            source={exercise.content}
-            options={{
-              mdxOptions: {
-                rehypePlugins: [rehypePrism as any],
-              },
-            }}
-          />
-        </article>
+      {/* Main Content */}
+      {hasTerminal ? (
+        // Two-column layout for terminal-enabled courses
+        <div className="fixed top-[130px] left-0 right-0 bottom-0">
+          <div className="flex flex-col lg:grid lg:grid-cols-2 h-full">
+            {/* Left: Exercise Content */}
+            <div className="h-1/2 lg:h-full overflow-y-auto scrollbar-cyber lg:border-r border-b lg:border-b-0 border-cyber-border bg-gradient-to-br from-cyber-dark via-cyber-dark to-cyber-dark-secondary/50">
+              {/* Decorative Background Elements */}
+              <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-5">
+                <div className="absolute top-20 right-10 w-64 h-64 bg-cyber-primary rounded-full blur-3xl"></div>
+                <div className="absolute bottom-20 left-10 w-64 h-64 bg-cyber-secondary rounded-full blur-3xl"></div>
+              </div>
 
-        {/* Navigation */}
-        <div className="mt-12 pt-8 border-t border-cyber-border flex justify-between">
-          <Link href={`/courses/${slug}`}>
-            <Button variant="ghost" className="border border-cyber-border hover:border-cyber-primary">
-              ← Back to Course
-            </Button>
-          </Link>
+              <div className="relative p-6 sm:p-8 lg:p-10 pb-20">
+                <article className="prose prose-invert prose-cyber max-w-none">
+                  <MDXRemote
+                    source={exercise.content}
+                    options={{
+                      mdxOptions: {
+                        rehypePlugins: [rehypePrism as any],
+                      },
+                    }}
+                  />
+                </article>
+              </div>
+            </div>
 
-          {exercise.frontmatter.nextExercise && (
-            <Link href={`/courses/${slug}/${exercise.frontmatter.nextExercise}`}>
-              <Button variant="primary">
-                Next Exercise →
+            {/* Right: Terminal */}
+            <div className="h-1/2 lg:h-full bg-[#0a0e27] overflow-hidden flex flex-col">
+              <div className="border-b border-cyber-border px-6 py-3.5 bg-cyber-dark-secondary/50 backdrop-blur-sm flex items-center gap-3 flex-shrink-0">
+                <div className="flex items-center gap-2">
+                  <div className="w-3 h-3 rounded-full bg-red-500 shadow-[0_0_8px_rgba(239,68,68,0.5)]"></div>
+                  <div className="w-3 h-3 rounded-full bg-yellow-500 shadow-[0_0_8px_rgba(234,179,8,0.5)]"></div>
+                  <div className="w-3 h-3 rounded-full bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.5)]"></div>
+                </div>
+                <span className="text-sm text-cyber-text-secondary font-mono">Linux Terminal</span>
+              </div>
+              <div className="flex-1 overflow-hidden">
+                <TerminalWrapper className="h-full w-full" />
+              </div>
+            </div>
+          </div>
+        </div>
+      ) : (
+        // Single-column layout for regular courses
+        <div className="pt-[132px]">
+          <Container className="max-w-4xl py-8">
+            {/* Back Button */}
+            <Link href={`/courses/${slug}`}>
+              <Button variant="ghost" className="mb-6 border border-cyber-border hover:border-cyber-primary">
+                ← Back to Course
               </Button>
             </Link>
-          )}
+
+            {/* Exercise Content */}
+            <article className="prose prose-invert prose-cyber max-w-none">
+              <MDXRemote
+                source={exercise.content}
+                options={{
+                  mdxOptions: {
+                    rehypePlugins: [rehypePrism as any],
+                  },
+                }}
+              />
+            </article>
+
+            {/* Navigation */}
+            <div className="mt-12 pt-8 border-t border-cyber-border flex justify-between">
+              <Link href={`/courses/${slug}`}>
+                <Button variant="ghost" className="border border-cyber-border hover:border-cyber-primary">
+                  ← Back to Course
+                </Button>
+              </Link>
+
+              {exercise.frontmatter.nextExercise && (
+                <Link href={`/courses/${slug}/${exercise.frontmatter.nextExercise}`}>
+                  <Button variant="primary">
+                    Next Exercise →
+                  </Button>
+                </Link>
+              )}
+            </div>
+          </Container>
         </div>
-      </Container>
+      )}
     </main>
   );
 }

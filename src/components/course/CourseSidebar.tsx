@@ -18,38 +18,38 @@ export function CourseSidebar({
   className,
 }: CourseSidebarProps) {
   return (
-    <div className={cn("space-y-6", className)}>
+    <div className={cn("space-y-4 lg:space-y-6", className)}>
       {/* User Profile */}
-      <Card className="border-cyber-border">
-        <CardContent className="pt-6">
+      <Card className="border-cyber-border bg-cyber-dark-secondary/50">
+        <CardContent className="pt-6 pb-6">
           <div className="flex items-center gap-4 mb-4">
-            <div className="w-12 h-12 rounded-full bg-gradient-to-br from-cyber-primary to-cyber-secondary flex items-center justify-center text-2xl">
+            <div className="w-14 h-14 rounded-full bg-gradient-to-br from-cyber-primary to-cyber-secondary flex items-center justify-center text-2xl shadow-lg shadow-cyber-primary/20">
               {user.avatar || "👤"}
             </div>
             <div>
-              <p className="font-semibold text-cyber-text-primary">{user.name}</p>
+              <p className="font-semibold text-cyber-text-primary text-lg">{user.name}</p>
               <p className="text-sm text-cyber-text-secondary">Level {user.level}</p>
             </div>
           </div>
-          <Button variant="ghost" className="w-full border border-cyber-border hover:border-cyber-primary">
+          <Button variant="ghost" className="w-full border border-cyber-border hover:border-cyber-primary transition-all">
             View Profile
           </Button>
         </CardContent>
       </Card>
 
       {/* Course Progress */}
-      <Card className="border-cyber-border">
-        <CardHeader>
-          <CardTitle>Course Progress</CardTitle>
+      <Card className="border-cyber-border bg-cyber-dark-secondary/50">
+        <CardHeader className="pb-4">
+          <CardTitle className="text-lg">Course Progress</CardTitle>
         </CardHeader>
-        <CardContent className="space-y-4">
+        <CardContent className="space-y-4 pb-6">
           <ProgressBar
             label="Exercises"
             current={progress.exercisesCompleted}
             total={progress.totalExercises}
           />
           <ProgressBar
-            label="Projects Completed"
+            label="Projects"
             current={progress.projectsCompleted}
             total={progress.totalProjects}
           />
@@ -63,30 +63,30 @@ export function CourseSidebar({
       </Card>
 
       {/* Course Badges */}
-      <Card className="border-cyber-border">
-        <CardHeader>
-          <CardTitle className="flex items-center justify-between">
+      <Card className="border-cyber-border bg-cyber-dark-secondary/50">
+        <CardHeader className="pb-4">
+          <CardTitle className="flex items-center justify-between text-lg">
             Course Badges
             <span className="text-sm text-cyber-text-secondary font-normal">
               {progress.badgesEarned}/{progress.totalBadges}
             </span>
           </CardTitle>
         </CardHeader>
-        <CardContent>
+        <CardContent className="pb-6">
           <p className="text-sm text-cyber-text-secondary mb-4">
-            Complete a chapter to earn a badge – collect &apos;em all!
+            Complete chapters to earn badges – collect &apos;em all!
           </p>
-          <div className="grid grid-cols-4 gap-3">
+          <div className="grid grid-cols-4 gap-2.5">
             {badges.map((badge) => (
               <div
                 key={badge.id}
                 className={cn(
-                  "aspect-square rounded-lg flex items-center justify-center text-2xl transition-all",
-                  badge.isUnlocked
-                    ? "bg-gradient-to-br from-cyber-primary/20 to-cyber-secondary/20 border border-cyber-primary"
-                    : "bg-cyber-dark-secondary border border-cyber-border grayscale opacity-40"
+                  "aspect-square rounded-lg flex items-center justify-center text-2xl transition-all cursor-help",
+                  !badge.isLocked
+                    ? "bg-gradient-to-br from-cyber-primary/20 to-cyber-secondary/20 border-2 border-cyber-primary shadow-lg shadow-cyber-primary/20"
+                    : "bg-cyber-dark-secondary border-2 border-cyber-border grayscale opacity-40 hover:opacity-50"
                 )}
-                title={badge.isUnlocked ? badge.name : "Locked"}
+                title={!badge.isLocked ? badge.name : "Locked - " + badge.description}
               >
                 {badge.icon}
               </div>

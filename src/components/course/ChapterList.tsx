@@ -20,16 +20,27 @@ export function ChapterList({ chapters, courseSlug, className }: ChapterListProp
   });
 
   return (
-    <div className={cn("space-y-4", className)}>
-      {chaptersWithStartingNumbers.map(({ chapter, startingExerciseNumber }, index) => (
-        <ChapterItem
-          key={chapter.id}
-          chapter={chapter}
-          courseSlug={courseSlug}
-          isFirst={index === 0}
-          startingExerciseNumber={startingExerciseNumber}
-        />
-      ))}
+    <div className={cn("", className)}>
+      <div className="mb-6 pb-4 border-b border-cyber-border/50">
+        <h2 className="text-2xl md:text-3xl font-bold text-cyber-text-primary mb-2">
+          Course Curriculum
+        </h2>
+        <p className="text-sm md:text-base text-cyber-text-secondary">
+          {chapters.length} chapters • {exerciseCounter} exercises
+        </p>
+      </div>
+
+      <div className="space-y-2">
+        {chaptersWithStartingNumbers.map(({ chapter, startingExerciseNumber }, index) => (
+          <ChapterItem
+            key={chapter.id}
+            chapter={chapter}
+            courseSlug={courseSlug}
+            isFirst={index === 0}
+            startingExerciseNumber={startingExerciseNumber}
+          />
+        ))}
+      </div>
     </div>
   );
 }

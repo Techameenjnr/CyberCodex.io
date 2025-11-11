@@ -16,19 +16,21 @@ export function CourseLayout({
   className,
 }: CourseLayoutProps) {
   return (
-    <div className={cn("min-h-screen", className)}>
+    <div className={cn("w-full", className)}>
       {hero && <div className="w-full">{hero}</div>}
 
-      <Container className="py-12">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-          {/* Main content area */}
-          <div className="lg:col-span-8">
-            {children}
+      <Container className="max-w-7xl py-0 px-4 md:px-6">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start">
+          {/* Main content area - scrolls with page */}
+          <div className="lg:col-span-8 order-2 lg:order-1">
+            <div className="pb-8">
+              {children}
+            </div>
           </div>
 
-          {/* Sidebar */}
-          <div className="lg:col-span-4">
-            <div className="lg:sticky lg:top-24">
+          {/* Sidebar - sticky positioned */}
+          <div className="lg:col-span-4 order-1 lg:order-2">
+            <div className="lg:sticky lg:top-24 lg:max-h-[calc(100vh-7rem)] lg:overflow-y-auto scrollbar-cyber">
               {sidebar}
             </div>
           </div>

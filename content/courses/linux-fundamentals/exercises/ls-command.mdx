@@ -1,0 +1,111 @@
+---
+title: "Listing Files and Directories"
+description: "Master the ls command to view files and directories"
+---
+
+The `ls` command is one of the most frequently used commands in Linux. It lists the contents of directories, helping you see what files and folders exist in your current location.
+
+## Learning Objectives
+
+- Use `ls` to list directory contents
+- Understand different `ls` options and flags
+- View hidden files and detailed information
+- Navigate and explore the filesystem
+
+## Basic Usage
+
+The simplest form of `ls` lists files in your current directory:
+
+```bash
+ls
+```
+
+This shows you all visible files and folders in your current location.
+
+## Listing a Specific Directory
+
+You can list the contents of any directory by providing its path:
+
+```bash
+ls /home
+ls /home/user
+ls documents
+```
+
+## Common ls Options
+
+### Long Format (-l)
+
+The `-l` flag shows detailed information about each file:
+
+```bash
+ls -l
+```
+
+This displays:
+- File permissions
+- Number of links
+- Owner name
+- Group name
+- File size
+- Modification date
+- File name
+
+### Show Hidden Files (-a)
+
+Files starting with `.` are hidden by default. Use `-a` to see them:
+
+```bash
+ls -a
+```
+
+### Combine Flags
+
+You can combine multiple flags:
+
+```bash
+ls -la
+```
+
+This shows all files (including hidden ones) in long format.
+
+## Practice Challenges
+
+1. List all files in your current directory
+2. List files in the `/home/user` directory
+3. Use `ls -l` to see detailed information
+4. Find hidden files using `ls -a`
+5. Use `ls -la` to see everything with details
+
+## Understanding the Output
+
+When you run `ls -l`, you'll see output like:
+
+```
+drwxr-xr-x  2 user user 4096 Jan 15 10:30 documents
+-rw-r--r--  1 user user   75 Jan 15 09:15 welcome.txt
+```
+
+Breaking this down:
+- First character: `d` = directory, `-` = file
+- Next 9 characters: permissions (we'll learn about these later!)
+- Numbers: link count
+- Names: owner and group
+- Number: size in bytes
+- Date/time: last modified
+- Text: filename
+
+## Tips
+
+- `ls` only shows files/folders in the current directory unless you specify a path
+- Directories often show in a different color than files
+- The `.` represents the current directory
+- The `..` represents the parent directory
+
+## What's Next?
+
+Now that you can see what files exist, let's learn how to navigate between directories using the `cd` command!
+
+---
+
+**XP Reward:** 25 XP
