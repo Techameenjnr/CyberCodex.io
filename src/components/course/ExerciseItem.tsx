@@ -7,6 +7,7 @@ export interface ExerciseItemProps {
   exercise: Exercise;
   courseSlug: string;
   exerciseNumber: number;
+  chapterId?: string;
   className?: string;
 }
 
@@ -14,6 +15,7 @@ export function ExerciseItem({
   exercise,
   courseSlug,
   exerciseNumber,
+  chapterId,
   className,
 }: ExerciseItemProps) {
   const isLocked = exercise.isLocked;

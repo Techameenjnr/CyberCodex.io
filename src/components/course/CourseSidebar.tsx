@@ -82,11 +82,11 @@ export function CourseSidebar({
                 key={badge.id}
                 className={cn(
                   "aspect-square rounded-lg flex items-center justify-center text-2xl transition-all cursor-help",
-                  !badge.isLocked
+                  badge.isUnlocked
                     ? "bg-gradient-to-br from-cyber-primary/20 to-cyber-secondary/20 border-2 border-cyber-primary shadow-lg shadow-cyber-primary/20"
                     : "bg-cyber-dark-secondary border-2 border-cyber-border grayscale opacity-40 hover:opacity-50"
                 )}
-                title={!badge.isLocked ? badge.name : "Locked - " + badge.description}
+                title={badge.isUnlocked ? badge.name : "Locked - " + badge.description}
               >
                 {badge.icon}
               </div>

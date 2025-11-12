@@ -37,7 +37,7 @@ export interface CommandResult {
 export type CommandFunction = (context: CommandContext) => CommandResult;
 
 export interface Command {
-  name: string;
+  name: string; 
   description: string;
   usage: string;
   execute: CommandFunction;

@@ -27,12 +27,11 @@ export function JumpBackIn({ courseProgress }: JumpBackInProps) {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.1 }}
-        className="mb-12"
       >
-        <h2 className="text-2xl font-bold text-cyber-text-primary mb-4">
+        <h2 className="text-2xl md:text-3xl font-bold text-cyber-text-primary mb-4 md:mb-6">
           Jump back in
         </h2>
-        <Card className="p-8 text-center">
+        <Card className="p-6 md:p-8 text-center">
           <div className="max-w-md mx-auto">
             <div className="w-16 h-16 rounded-full bg-cyber-primary/10 flex items-center justify-center mx-auto mb-4">
               <svg
@@ -55,9 +54,11 @@ export function JumpBackIn({ courseProgress }: JumpBackInProps) {
             <p className="text-cyber-text-secondary mb-6">
               Browse our course catalog and begin your cybersecurity journey today.
             </p>
-            <Button variant="primary" size="lg" asChild>
-              <Link href="/courses">Browse Courses</Link>
-            </Button>
+            <Link href="/courses">
+              <Button variant="primary" size="lg">
+                Browse Courses
+              </Button>
+            </Link>
           </div>
         </Card>
       </motion.div>
@@ -69,13 +70,12 @@ export function JumpBackIn({ courseProgress }: JumpBackInProps) {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, delay: 0.1 }}
-      className="mb-12"
     >
-      <h2 className="text-2xl font-bold text-cyber-text-primary mb-4">
+      <h2 className="text-2xl md:text-3xl font-bold text-cyber-text-primary mb-4 md:mb-6">
         Jump back in
       </h2>
-      <Card className="p-6 hover:border-cyber-primary transition-colors duration-300">
-        <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
+      <Card className="p-6 md:p-8 hover:border-cyber-primary transition-colors duration-300">
+        <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6 md:gap-8">
           <div className="flex-1">
             <div className="flex items-center gap-3 mb-3">
               <span className="px-3 py-1 rounded-full bg-cyber-primary/10 text-cyber-primary text-xs font-semibold uppercase tracking-wider">
@@ -102,11 +102,11 @@ export function JumpBackIn({ courseProgress }: JumpBackInProps) {
             </div>
           </div>
           <div className="lg:ml-6">
-            <Button variant="primary" size="lg" asChild>
-              <Link href={`/courses/${courseProgress.courseSlug}`}>
+            <Link href={`/courses/${courseProgress.courseSlug}`}>
+              <Button variant="primary" size="lg">
                 Continue Learning
-              </Link>
-            </Button>
+              </Button>
+            </Link>
           </div>
         </div>
       </Card>

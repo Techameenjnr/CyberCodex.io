@@ -7,10 +7,11 @@ import { cn } from "@/lib/utils";
 export interface ChapterListProps {
   chapters: Chapter[];
   courseSlug: string;
+  completedExercises?: string[];
   className?: string;
 }
 
-export function ChapterList({ chapters, courseSlug, className }: ChapterListProps) {
+export function ChapterList({ chapters, courseSlug, completedExercises = [], className }: ChapterListProps) {
   // Calculate starting exercise number for each chapter
   let exerciseCounter = 0;
   const chaptersWithStartingNumbers = chapters.map((chapter) => {
@@ -38,6 +39,7 @@ export function ChapterList({ chapters, courseSlug, className }: ChapterListProp
             courseSlug={courseSlug}
             isFirst={index === 0}
             startingExerciseNumber={startingExerciseNumber}
+            completedExercises={completedExercises}
           />
         ))}
       </div>

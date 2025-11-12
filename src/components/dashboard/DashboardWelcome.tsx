@@ -19,12 +19,11 @@ export function DashboardWelcome({ userName }: DashboardWelcomeProps) {
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6 }}
-      className="mb-8"
     >
-      <h1 className="text-4xl md:text-5xl font-bold text-cyber-text-primary mb-2">
+      <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-cyber-text-primary mb-2 md:mb-3">
         {getGreeting()}, <span className="gradient-text">{userName}</span>
       </h1>
-      <p className="text-lg text-cyber-text-secondary">
+      <p className="text-base md:text-lg text-cyber-text-secondary">
         Ready to level up your cybersecurity skills?
       </p>
     </motion.div>

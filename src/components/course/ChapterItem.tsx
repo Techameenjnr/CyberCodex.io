@@ -12,6 +12,7 @@ export interface ChapterItemProps {
   courseSlug: string;
   isFirst?: boolean;
   startingExerciseNumber?: number;
+  completedExercises?: string[];
   className?: string;
 }
 
@@ -20,6 +21,7 @@ export function ChapterItem({
   courseSlug,
   isFirst = false,
   startingExerciseNumber = 1,
+  completedExercises = [],
   className,
 }: ChapterItemProps) {
   const [isExpanded, setIsExpanded] = useState(isFirst);
@@ -107,14 +109,18 @@ export function ChapterItem({
             style={{ overflow: "hidden" }}
           >
             <div className="ml-12 md:ml-16 mt-2 space-y-1 pb-2">
-              {chapter.exercises.map((exercise, index) => (
-                <ExerciseItem
-                  key={exercise.id}
-                  exercise={exercise}
-                  courseSlug={courseSlug}
-                  exerciseNumber={startingExerciseNumber + index}
-                />
-              ))}
+              {chapter.exercises.map((exercise, index) => {
+                const isCompleted = completedExercises.includes(exercise.id);
+                return (
+                  <ExerciseItem
+                    key={exercise.id}
+                    exercise={{...exercise, isCompleted}}
+                    courseSlug={courseSlug}
+                    exerciseNumber={startingExerciseNumber + index}
+                    chapterId={chapter.id}
+                  />
+                );
+              })}
             </div>
           </motion.div>
         )}

@@ -121,10 +121,10 @@ export function ExploreMore() {
       transition={{ duration: 0.6, delay: 0.2 }}
       className="mb-12"
     >
-      <h2 className="text-2xl font-bold text-cyber-text-primary mb-4">
+      <h2 className="text-2xl md:text-3xl font-bold text-cyber-text-primary mb-6">
         Explore more
       </h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
         {exploreCards.map((card, index) => (
           <motion.div
             key={card.title}
@@ -132,19 +132,19 @@ export function ExploreMore() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.3 + index * 0.1 }}
           >
-            <Link href={card.href} className="group">
+            <Link href={card.href} className="group block h-full">
               <Card
-                className={`p-6 h-full transition-all duration-300 ${borderColorClasses[card.color]}`}
+                className={`p-6 md:p-8 h-full min-h-[200px] flex flex-col transition-all duration-300 hover:transform hover:scale-105 ${borderColorClasses[card.color]}`}
               >
                 <div
-                  className={`w-16 h-16 rounded-2xl flex items-center justify-center mb-4 transition-colors duration-300 ${colorClasses[card.color]}`}
+                  className={`w-14 h-14 md:w-16 md:h-16 rounded-2xl flex items-center justify-center mb-4 transition-colors duration-300 ${colorClasses[card.color]}`}
                 >
                   {card.icon}
                 </div>
-                <h3 className="text-lg font-bold text-cyber-text-primary mb-2 group-hover:text-cyber-primary transition-colors duration-300">
+                <h3 className="text-lg md:text-xl font-bold text-cyber-text-primary mb-2 group-hover:text-cyber-primary transition-colors duration-300">
                   {card.title}
                 </h3>
-                <p className="text-sm text-cyber-text-secondary">
+                <p className="text-sm md:text-base text-cyber-text-secondary leading-relaxed">
                   {card.description}
                 </p>
               </Card>

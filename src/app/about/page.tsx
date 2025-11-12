@@ -22,47 +22,51 @@ export default function AboutPage() {
     visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
   };
 
-  const values = [
-    {
-      backgroundGif: "/images/banners/GameSpooky3.gif",
-      title: "Practical Learning",
-      subtext: "Build real skills through interactive labs, CTF challenges, and practical exercises. Hands-on courses with real-world scenarios that prepare you for actual security challenges. Every lesson includes hands-on practice to reinforce your learning.",
-      badge: "Learn by Doing"
-    },
-    {
-      backgroundGif: "/images/banners/GameSpooky.gif",
-      title: "Ethical Focus",
-      subtext: "Learn the right way to apply security knowledge. We emphasize responsible disclosure, legal boundaries, and ethical hacking principles. Teaching responsible security practices with emphasis on ethics and legal compliance.",
-      badge: "Responsible Security"
-    },
-    {
-      backgroundGif: "/images/banners/shock.gif",
-      title: "Always Current",
-      subtext: "Stay ahead of emerging threats with regularly updated content. Our courses evolve with the cybersecurity landscape to keep you relevant. Content updated regularly to reflect the latest threats, tools, and techniques.",
-      badge: "Up-to-Date"
-    },
-    {
-      backgroundGif: "/images/banners/GameSpooky2.gif",
-      title: "Community Driven",
-      subtext: "Join a vibrant community of learners, share knowledge, get help, and collaborate on challenges. Learn alongside thousands of security enthusiasts and professionals worldwide. Learn together, grow together.",
-      badge: "10,000+ Members"
-    },
-  ];
+ const values = [
+  {
+    backgroundGif: "/images/banners/GameSpooky3.gif",
+    title: "Practical Learning",
+    subtext:
+      "Master cybersecurity through experience, not theory. Every course features interactive labs, capture-the-flag (CTF) missions, and real-world simulations that strengthen your skills through direct application. CyberCodex is built on one core belief, the best way to learn is by doing.",
+    badge: "Hands-On Training",
+  },
+  {
+    backgroundGif: "/images/banners/GameSpooky.gif",
+    title: "Ethical Foundation",
+    subtext:
+      "Learn to protect and secure systems the right way. CyberCodex emphasizes ethical hacking, responsible disclosure, and understanding the legal boundaries of cybersecurity work. Our goal is to train professionals who lead with integrity and use their skills for good.",
+    badge: "Hack Responsibly",
+  },
+  {
+    backgroundGif: "/images/banners/shock.gif",
+    title: "Always Evolving",
+    subtext:
+      "Cybersecurity never stands still, and neither do we. Our content is continuously updated to reflect the latest threats, vulnerabilities, and defense techniques. Learn modern tools, frameworks, and strategies that keep your knowledge sharp and industry-relevant.",
+    badge: "Stay Ahead",
+  },
+  {
+    backgroundGif: "/images/banners/GameSpooky2.gif",
+    title: "Community & Collaboration",
+    subtext:
+      "CyberCodex is more than a platform, it’s a community of developers, students, and professionals who grow together. Connect with others, share insights, and collaborate on challenges that push your limits. Because the best security experts are the ones who never stop learning from each other.",
+    badge: "Learn Together",
+  },
+];
 
   const [activeTab, setActiveTab] = useState<"about" | "skills" | "journey">("journey");
 
   const skills = [
     { category: "Frontend", items: [
-      { name: "React", level: 90 },
-      { name: "Next.js", level: 85 },
-      { name: "TypeScript", level: 88 },
-      { name: "Tailwind CSS", level: 92 }
+      { name: "React", level: 80 },
+      { name: "Next.js", level: 73 },
+      { name: "TypeScript", level: 72 },
+      { name: "UI/UX Design Principles", level: 75 }
     ]},
     { category: "Backend", items: [
-      { name: "C, C++, C#", level: 85 },
+      { name: "C, C++, C#", level: 80 },
       { name: "Python", level: 80 },
-      { name: "PostgreSQL", level: 75 },
-      { name: "API Design", level: 88 }
+      { name: "PostgreSQL", level: 70 },
+      { name: "API Design", level: 75 }
     ]},
     { category: "Security", items: [
       { name: "Penetration Testing", level: 78 },
@@ -72,14 +76,14 @@ export default function AboutPage() {
     ]},
     { category: "Tools", items: [
       { name: "Git", level: 90 },
-      { name: "Docker", level: 75 },
-      { name: "Linux", level: 82 },
+      { name: "Docker", level: 70 },
+      { name: "Linux", level: 85 },
       { name: "Kali", level: 70 }
     ]},
   ];
 
   const journey = [
-    { year: "2026", title: "Graduated College with B.S. in Cybersecurity and Computer Science", description: "Studied ethical hacking, network defense, and software engineering — bridging security and development through hands-on projects." },
+    { year: "2026", title: "Graduated College with B.S. in Cybersecurity and Computer Science", description: "Studied ethical hacking, network defense, and software engineering, bridging security and development through hands-on projects." },
     { year: "2025", title: "Launched CyberCodex.io", description: "Built and deployed a cybersecurity education platform focused on Linux, Python, and ethical hacking fundamentals. Designed branding, frontend, and backend architecture." },
     { year: "2024", title: "IT Network Technician - NPCE", description: "Supported enterprise networks, configured domain accounts, firewalls, and remote deployments across multiple client sites. Developed internal automation scripts to improve workflow." },
     { year: "2023", title: "Node.io & Automation SaaS Prototypes", description: "Prototyped Node.io and n8n-driven workflow automations for small businesses, automating daily reports, email triggers, and schedule notifications." },
@@ -216,7 +220,7 @@ export default function AboutPage() {
                     <h3 className="text-2xl font-bold text-cyber-primary mb-4 group-hover:text-cyber-secondary transition-colors duration-300 text-center">
                       {value.title}
                     </h3>
-                    <p className="text-cyber-text-secondary leading-relaxed group-hover:text-cyber-text-primary transition-colors duration-300">
+                    <p className="text-cyber-text-secondary leading-relaxed group-hover:text-cyber-text-primary transition-colors duration-300 text-center">
                       {value.subtext}
                     </p>
 
@@ -402,26 +406,27 @@ export default function AboutPage() {
                         <h4 className="text-xl sm:text-2xl font-bold text-cyber-primary mb-4">About Me</h4>
                         <div className="space-y-3 sm:space-y-4 text-sm sm:text-base text-cyber-text-secondary leading-relaxed">
                           <p>
-                            Full-stack developer and cybersecurity enthusiast dedicated to making security education accessible and engaging.
-                            I built CyberCodex to bridge the gap between theoretical knowledge and practical skills, creating a platform where
-                            anyone can learn by doing.
+                            IT and Network Technician with a dual focus in Computer Science and Cybersecurity, passionate about creating tools and
+                            experiences that make learning technology both practical and engaging. I built CyberCodex to turn complex security topics
+                            into interactive, hands-on lessons that empower learners to build confidence through real application.
                           </p>
                           <p>
-                            With a background in network security (CCNA certified) and full-stack development, I combine deep technical expertise
-                            with a passion for education. Every course, lab, and challenge on CyberCodex is designed from real-world experience
-                            and best practices in the cybersecurity industry.
+                            Combining my academic background with real-world IT experience, I’ve worked across network management, system support, and
+                            software development. Those experiences taught me that the best way to understand cybersecurity is through direct practice, 
+                            a belief that drives every course, lab, and challenge on CyberCodex. My goal is to make technical education approachable while
+                            still grounded in professional standards used throughout the industry.
                           </p>
                           <p>
-                            When I'm not coding or designing new learning experiences, you'll find me:
+                            When I’m not developing new features or refining lessons, you’ll usually find me:
                           </p>
                           <ul className="list-disc list-inside space-y-2 ml-2 sm:ml-4 text-sm sm:text-base">
-                            <li>Contributing to open-source security tools and educational resources</li>
-                            <li>Researching emerging threats and vulnerabilities</li>
-                            <li>Mentoring aspiring developers and security professionals</li>
-                            <li>Building automation tools to streamline workflows</li>
+                            <li>Playing basketball, I played at the college level and still love staying active on the court</li>
+                            <li>Creating cybersecurity and coding content for my TikTok audience to inspire new learners</li>
+                            <li>Exploring new penetration-testing tools, automation workflows, and open-source security projects</li>
+                            <li>Helping others get started in IT, coding, and cybersecurity through mentoring and tutorials</li>
                           </ul>
                           <p className="pt-3 sm:pt-4 text-cyber-primary font-semibold text-sm sm:text-base">
-                            "The best way to learn cybersecurity is to practice it. That's why every lesson on CyberCodex includes hands-on challenges."
+                            "I believe the best way to learn cybersecurity is by doing, that’s why every course on CyberCodex is built around hands-on practice and real-world challenges."
                           </p>
                         </div>
                       </motion.div>

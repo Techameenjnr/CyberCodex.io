@@ -6,6 +6,7 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   size?: "sm" | "md" | "lg";
   isLoading?: boolean;
   fullWidth?: boolean;
+  asChild?: boolean;
 }
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
@@ -18,6 +19,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       fullWidth = false,
       disabled,
       children,
+      asChild,
       ...props
     },
     ref
@@ -37,16 +39,29 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       lg: "px-8 py-4 text-lg rounded-lg",
     };
 
+    const buttonClasses = cn(
+      baseStyles,
+      variants[variant],
+      sizes[size],
+      fullWidth && "w-full",
+      className
+    );
+
+    // If asChild is true, clone the child element and apply button styles
+    if (asChild && children) {
+      const childElement = children as React.ReactElement;
+      return (
+        <childElement.type
+          {...childElement.props}
+          className={cn(buttonClasses, childElement.props.className)}
+        />
+      );
+    }
+
     return (
       <button
         ref={ref}
-        className={cn(
-          baseStyles,
-          variants[variant],
-          sizes[size],
-          fullWidth && "w-full",
-          className
-        )}
+        className={buttonClasses}
         disabled={disabled || isLoading}
         {...props}
       >

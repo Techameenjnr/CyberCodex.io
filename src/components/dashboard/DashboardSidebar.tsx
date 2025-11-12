@@ -45,10 +45,10 @@ export function DashboardSidebar({ user, stats }: DashboardSidebarProps) {
       initial={{ opacity: 0, x: 20 }}
       animate={{ opacity: 1, x: 0 }}
       transition={{ duration: 0.6, delay: 0.3 }}
-      className="space-y-6"
+      className="space-y-4 md:space-y-6"
     >
       {/* User Profile Card */}
-      <Card className="p-6">
+      <Card className="p-4 md:p-6">
         <div className="flex items-center gap-4 mb-6">
           <div className="relative">
             {user.image ? (
@@ -115,13 +115,15 @@ export function DashboardSidebar({ user, stats }: DashboardSidebarProps) {
           </div>
         </div>
 
-        <Button variant="secondary" size="md" fullWidth className="mt-4" asChild>
-          <Link href="/profile">View Profile</Link>
-        </Button>
+        <Link href="/profile" className="mt-4 block">
+          <Button variant="secondary" size="md" fullWidth>
+            View Profile
+          </Button>
+        </Link>
       </Card>
 
       {/* Upcoming Events */}
-      <Card className="p-6">
+      <Card className="p-4 md:p-6">
         <h3 className="text-lg font-bold text-cyber-text-primary mb-4 flex items-center gap-2">
           <svg
             className="w-5 h-5 text-cyber-secondary"
@@ -179,7 +181,7 @@ export function DashboardSidebar({ user, stats }: DashboardSidebarProps) {
       </Card>
 
       {/* Club Upgrade CTA */}
-      <Card className="p-6 bg-gradient-to-br from-cyber-primary/10 to-cyber-secondary/10 border-cyber-primary/50">
+      <Card className="p-4 md:p-6 bg-gradient-to-br from-cyber-primary/10 to-cyber-secondary/10 border-cyber-primary/50">
         <div className="text-center">
           <div className="w-12 h-12 rounded-full bg-cyber-primary/20 flex items-center justify-center mx-auto mb-4">
             <svg
@@ -202,14 +204,16 @@ export function DashboardSidebar({ user, stats }: DashboardSidebarProps) {
           <p className="text-sm text-cyber-text-secondary mb-4">
             Unlock exclusive courses, labs, and certificates
           </p>
-          <Button variant="primary" size="md" fullWidth asChild>
-            <Link href="/pricing">Upgrade Now</Link>
-          </Button>
+          <Link href="/pricing">
+            <Button variant="primary" size="md" fullWidth>
+              Upgrade Now
+            </Button>
+          </Link>
         </div>
       </Card>
 
       {/* Invite Friends */}
-      <Card className="p-6">
+      <Card className="p-4 md:p-6">
         <h3 className="text-lg font-bold text-cyber-text-primary mb-2">
           Invite a Friend
         </h3>

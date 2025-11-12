@@ -5,6 +5,8 @@ import { getCourseBySlug } from "@/lib/mdx";
 import { courseCategories } from "@/lib/config";
 import { Container } from "@/components/ui";
 import { CourseLayout, CourseSidebar, ChapterList } from "@/components/course";
+import { auth } from "@/lib/auth/auth";
+import { prisma } from "@/lib/db/prisma";
 import type { Metadata } from "next";
 
 interface CoursePageProps {
@@ -50,12 +52,120 @@ export default async function CoursePage({ params }: CoursePageProps) {
   const courseMetadata = await getCourseBySlug(slug);
   const category = courseMetadata ? courseCategories.find((c) => c.id === courseMetadata.category) : null;
 
-  // Mock user data (static for now since we don't have auth)
-  const mockUser = {
-    name: "Your Name",
-    level: 1,
-    avatar: "👤",
-  };
+  // Fetch authenticated user session
+  const session = await auth();
+
+  // Fetch user data and progress if authenticated
+  let user = null;
+  let userProgress = curriculum.progress; // Default to curriculum progress
+  let completedExercises: string[] = [];
+  let unlockedBadges: any[] = [];
+
+  if (session?.user?.id) {
+    // Fetch full user data including level, xp, etc.
+    const userData = await prisma.user.findUnique({
+      where: { id: session.user.id },
+      select: {
+        name: true,
+        username: true,
+        level: true,
+        xp: true,
+        totalXp: true,
+        image: true,
+      },
+    });
+
+    if (userData) {
+      user = {
+        name: userData.username || userData.name || "Anonymous",
+        level: userData.level,
+        avatar: userData.image || "👤",
+        xp: userData.xp,
+        totalXp: userData.totalXp,
+      };
+    }
+
+    // Fetch course progress
+    const courseProgress = await prisma.courseProgress.findUnique({
+      where: {
+        userId_courseId: {
+          userId: session.user.id,
+          courseId: slug,
+        },
+      },
+    });
+
+    // If progress exists, merge with curriculum data
+    if (courseProgress) {
+      userProgress = {
+        ...curriculum.progress,
+        exercisesCompleted: courseProgress.exercisesCompleted,
+        totalExercises: courseProgress.totalExercises || curriculum.progress.totalExercises,
+        projectsCompleted: courseProgress.projectsCompleted,
+        totalProjects: courseProgress.totalProjects || curriculum.progress.totalProjects,
+        xpEarned: courseProgress.xpEarned,
+        totalXp: courseProgress.totalXp || curriculum.progress.totalXp,
+        badgesEarned: 0, // Will be calculated from unlocked badges
+      };
+    }
+
+    // Fetch completed exercises
+    const completedExercisesData = await prisma.userExercise.findMany({
+      where: {
+        userId: session.user.id,
+        courseId: slug,
+        isCompleted: true,
+      },
+      select: {
+        exerciseId: true,
+      },
+    });
+
+    completedExercises = completedExercisesData.map((ex) => ex.exerciseId);
+
+    // Fetch unlocked badges for this course
+    const unlockedBadgesData = await prisma.userBadge.findMany({
+      where: {
+        userId: session.user.id,
+        badge: {
+          courseId: slug,
+        },
+      },
+      include: {
+        badge: true,
+      },
+      orderBy: {
+        unlockedAt: "desc",
+      },
+    });
+
+    unlockedBadges = unlockedBadgesData.map((ub) => ({
+      ...ub.badge,
+      isUnlocked: true,
+      unlockedAt: ub.unlockedAt,
+    }));
+
+    userProgress.badgesEarned = unlockedBadges.length;
+  }
+
+  // Default user for non-authenticated users
+  if (!user) {
+    user = {
+      name: "Guest",
+      level: 1,
+      avatar: "👤",
+    };
+  }
+
+  // Merge curriculum badges with unlocked badges
+  const badgesWithUnlockStatus = curriculum.badges.map((badge) => {
+    const unlocked = unlockedBadges.find((ub) => ub.name.endsWith(`:${badge.id}`));
+    return {
+      ...badge,
+      isUnlocked: !!unlocked,
+      unlockedAt: unlocked?.unlockedAt,
+    };
+  });
 
   return (
     <main className="min-h-screen bg-cyber-dark pb-20">
@@ -111,13 +221,17 @@ export default async function CoursePage({ params }: CoursePageProps) {
         hero={null}
         sidebar={
           <CourseSidebar
-            user={mockUser}
-            progress={curriculum.progress}
-            badges={curriculum.badges}
+            user={user}
+            progress={userProgress}
+            badges={badgesWithUnlockStatus}
           />
         }
       >
-        <ChapterList chapters={curriculum.chapters} courseSlug={slug} />
+        <ChapterList
+          chapters={curriculum.chapters}
+          courseSlug={slug}
+          completedExercises={completedExercises}
+        />
       </CourseLayout>
     </main>
   );

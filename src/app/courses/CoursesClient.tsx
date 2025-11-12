@@ -167,7 +167,7 @@ export function CoursesClient({ courses }: CoursesClientProps) {
                   }`}
                 >
                   <span className="sm:hidden">{category.icon}</span>
-                  <span className="hidden sm:inline">{category.icon} {category.name}</span>
+                  <span className="hidden sm:inline">{category.name}</span>
                 </button>
               ))}
             </div>

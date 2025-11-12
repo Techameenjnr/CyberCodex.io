@@ -19,6 +19,8 @@ export const config = {
     login: "/auth/login",
     signup: "/auth/signup",
     profile: "/profile",
+    dashboard: "/dashboard",
+    leaderboard: "/leaderboard",
   },
 
   navigation: {
@@ -32,7 +34,7 @@ export const config = {
   },
 
   features: {
-    auth: false, // Will enable when NextAuth is set up
+    auth: true, // ✅ Enabled with NextAuth.js v5
     comments: false, // Will enable when comment system is ready
     labs: false, // Will enable when lab environment is ready
   },

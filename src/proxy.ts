@@ -14,25 +14,23 @@ export default auth((req) => {
 
   // Define protected routes
   const protectedRoutes = ["/dashboard", "/profile", "/settings"];
-  const authRoutes = ["/login", "/signup"];
+  const authRoutes = ["/auth/login", "/auth/signup"];
 
   const isProtectedRoute = protectedRoutes.some((route) =>
     pathname.startsWith(route)
   );
   const isAuthRoute = authRoutes.some((route) => pathname.startsWith(route));
 
-  // Redirect logged-in users away from auth pages
-  if (isAuthRoute && isLoggedIn) {
-    return NextResponse.redirect(new URL("/dashboard", req.url));
-  }
-
   // Redirect non-authenticated users to login
   if (isProtectedRoute && !isLoggedIn) {
     const callbackUrl = encodeURIComponent(pathname);
     return NextResponse.redirect(
-      new URL(`/login?callbackUrl=${callbackUrl}`, req.url)
+      new URL(`/auth/login?callbackUrl=${callbackUrl}`, req.url)
     );
   }
+
+  // REMOVED: Redirect logged-in users away from auth pages (causing loop)
+  // Let them access auth pages if they want
 
   return NextResponse.next();
 });
@@ -42,7 +40,7 @@ export const config = {
     "/dashboard/:path*",
     "/profile/:path*",
     "/settings/:path*",
-    "/login",
-    "/signup",
+    "/auth/login",
+    "/auth/signup",
   ],
 };

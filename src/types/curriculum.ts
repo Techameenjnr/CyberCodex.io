@@ -78,4 +78,6 @@ export interface UserProfile {
   name: string;
   level: number;
   avatar?: string;
+  xp?: number;
+  totalXp?: number;
 }

@@ -34,8 +34,7 @@ export function LoginForm() {
       }
 
       // Redirect to dashboard on success
-      router.push("/dashboard");
-      router.refresh();
+      window.location.href = "/dashboard";
     } catch (err) {
       setError("An error occurred. Please try again.");
       setIsLoading(false);

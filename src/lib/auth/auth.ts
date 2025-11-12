@@ -15,9 +15,8 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
   ...authConfig,
   adapter: PrismaAdapter(prisma) as Adapter,
   session: {
-    strategy: "database",
+    strategy: "jwt", // Use JWT for credentials provider (edge-compatible)
     maxAge: 7 * 24 * 60 * 60, // 7 days
-    updateAge: 24 * 60 * 60,  // Update session every 24 hours
   },
   providers: [
     // Add Credentials provider here (requires Node.js runtime)
@@ -75,17 +74,39 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
     ...authConfig.providers,
   ],
   callbacks: {
-    async session({ session, user }) {
-      // Add custom user fields to session
+    async jwt({ token, user, trigger, session }) {
+      // Initial sign in - add custom fields to token
+      if (user) {
+        token.id = user.id;
+        token.username = user.username;
+        token.emailVerified = user.emailVerified;
+        token.level = user.level;
+        token.xp = user.xp;
+        token.totalXp = user.totalXp;
+        token.streak = user.streak;
+        token.rank = user.rank;
+        token.subscriptionTier = user.subscriptionTier;
+      }
+
+      // Handle session updates
+      if (trigger === "update" && session) {
+        token = { ...token, ...session };
+      }
+
+      return token;
+    },
+    async session({ session, token }) {
+      // Add custom fields from token to session
       if (session.user) {
-        session.user.id = user.id;
-        session.user.username = user.username;
-        session.user.level = user.level;
-        session.user.xp = user.xp;
-        session.user.totalXp = user.totalXp;
-        session.user.streak = user.streak;
-        session.user.rank = user.rank;
-        session.user.subscriptionTier = user.subscriptionTier;
+        session.user.id = token.id as string;
+        session.user.username = token.username as string | null;
+        session.user.emailVerified = token.emailVerified as Date | null;
+        session.user.level = token.level as number;
+        session.user.xp = token.xp as number;
+        session.user.totalXp = token.totalXp as number;
+        session.user.streak = token.streak as number;
+        session.user.rank = token.rank as string;
+        session.user.subscriptionTier = token.subscriptionTier as string;
       }
       return session;
     },

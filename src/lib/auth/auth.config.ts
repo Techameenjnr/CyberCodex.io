@@ -25,9 +25,9 @@ export default {
     }),
   ],
   pages: {
-    signIn: "/login",
-    signOut: "/login",
-    error: "/login",
-    verifyRequest: "/verify-email",
+    signIn: "/auth/login",
+    signOut: "/auth/login",
+    error: "/auth/login",
+    verifyRequest: "/auth/verify-email",
   },
 } satisfies NextAuthConfig;

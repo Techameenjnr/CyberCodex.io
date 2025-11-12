@@ -18,7 +18,7 @@ export default async function DashboardPage() {
   const session = await auth();
 
   if (!session?.user?.id) {
-    redirect("/login");
+    redirect("/auth/login");
   }
 
   // Fetch user data with progress
@@ -40,7 +40,7 @@ export default async function DashboardPage() {
   });
 
   if (!userData) {
-    redirect("/login");
+    redirect("/auth/login");
   }
 
   // Get the most recent course in progress
@@ -50,10 +50,12 @@ export default async function DashboardPage() {
         courseId: recentCourse.courseId,
         courseTitle: "SQL Injection Basics", // TODO: Fetch from actual course data
         courseSlug: recentCourse.courseId,
-        progress: recentCourse.progressPercentage,
-        currentExercise: `Exercise ${recentCourse.currentExerciseId || 1}`,
-        totalExercises: 28, // TODO: Fetch from actual course data
-        completedExercises: Math.floor((recentCourse.progressPercentage / 100) * 28),
+        progress: recentCourse.totalExercises > 0
+          ? Math.round((recentCourse.exercisesCompleted / recentCourse.totalExercises) * 100)
+          : 0,
+        currentExercise: `Exercise ${recentCourse.exercisesCompleted + 1}`,
+        totalExercises: recentCourse.totalExercises,
+        completedExercises: recentCourse.exercisesCompleted,
         category: "Web Security",
         difficulty: "Beginner",
       }
@@ -69,18 +71,18 @@ export default async function DashboardPage() {
   };
 
   return (
-    <main className="min-h-screen pt-32 pb-20 bg-cyber-dark">
-      <Container>
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+    <main className="min-h-screen pt-24 md:pt-32 pb-20 bg-cyber-dark">
+      <Container className="px-4 md:px-6">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 md:gap-8">
           {/* Main Content */}
-          <div className="lg:col-span-8">
+          <div className="lg:col-span-8 space-y-6 md:space-y-8">
             <DashboardWelcome userName={userData.name || "User"} />
             <JumpBackIn courseProgress={courseProgress} />
             <ExploreMore />
           </div>
 
           {/* Sidebar */}
-          <aside className="lg:col-span-4">
+          <aside className="lg:col-span-4 space-y-6">
             <DashboardSidebar
               user={{
                 name: userData.name || "User",
