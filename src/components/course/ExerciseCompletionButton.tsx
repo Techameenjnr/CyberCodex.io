@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
 import { Button } from "@/components/ui";
 
 export interface ExerciseCompletionButtonProps {
@@ -24,6 +25,7 @@ export function ExerciseCompletionButton({
   className,
 }: ExerciseCompletionButtonProps) {
   const router = useRouter();
+  const { update: updateSession } = useSession();
   const [loading, setLoading] = useState(false);
   const [completed, setCompleted] = useState(isCompleted);
   const [showSuccess, setShowSuccess] = useState(false);
@@ -55,6 +57,11 @@ export function ExerciseCompletionButton({
 
       setCompleted(true);
       setShowSuccess(true);
+
+      // Refresh session to update user's XP in navbar
+      if (updateSession) {
+        await updateSession();
+      }
 
       // Show success notification for 2 seconds
       setTimeout(() => {

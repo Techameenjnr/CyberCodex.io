@@ -3,7 +3,7 @@ import { Inter } from "next/font/google";
 import localFont from "next/font/local";
 import { NavigationWrapper } from "@/components/layout/NavigationWrapper";
 import { Footer } from "@/components/layout";
-import { SmoothScrollProvider } from "@/components/providers";
+import { SmoothScrollProvider, SessionProvider } from "@/components/providers";
 import "@/styles/globals.css";
 
 const inter = Inter({
@@ -59,11 +59,13 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} ${pressStart2P.variable}`}>
       <body className="antialiased">
-        <SmoothScrollProvider>
-          <NavigationWrapper />
-          {children}
-          <Footer />
-        </SmoothScrollProvider>
+        <SessionProvider>
+          <SmoothScrollProvider>
+            <NavigationWrapper />
+            {children}
+            <Footer />
+          </SmoothScrollProvider>
+        </SessionProvider>
       </body>
     </html>
   );

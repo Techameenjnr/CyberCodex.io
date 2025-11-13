@@ -16,6 +16,7 @@ const completeExerciseSchema = z.object({
   chapterId: z.string().optional(),
   xpReward: z.number().int().min(0),
   code: z.string().optional(), // Save user's code for interactive exercises
+  usedSolution: z.boolean().optional().default(false), // Track if user used "Show Solution"
 });
 
 // XP required per level (100 XP per level)
@@ -149,6 +150,11 @@ export async function POST(request: NextRequest) {
         };
       }
 
+      // Calculate actual XP to award (half if solution was used)
+      const actualXpReward = validatedData.usedSolution
+        ? Math.floor(validatedData.xpReward / 2)
+        : validatedData.xpReward;
+
       // Mark exercise as complete
       const completedExercise = await tx.userExercise.upsert({
         where: {
@@ -163,6 +169,7 @@ export async function POST(request: NextRequest) {
           completedAt: new Date(),
           code: validatedData.code,
           attempts: { increment: 1 },
+          usedSolution: validatedData.usedSolution,
         },
         create: {
           userId: session.user.id!,
@@ -172,6 +179,7 @@ export async function POST(request: NextRequest) {
           completedAt: new Date(),
           code: validatedData.code,
           attempts: 1,
+          usedSolution: validatedData.usedSolution,
         },
       });
 
@@ -186,7 +194,7 @@ export async function POST(request: NextRequest) {
       }
 
       // Calculate new XP and level
-      const newTotalXp = currentUser.totalXp + validatedData.xpReward;
+      const newTotalXp = currentUser.totalXp + actualXpReward;
       const newLevel = calculateLevel(newTotalXp);
       const levelUp = newLevel > currentUser.level;
       const currentLevelXp = newTotalXp % XP_PER_LEVEL;
@@ -212,14 +220,14 @@ export async function POST(request: NextRequest) {
         },
         update: {
           exercisesCompleted: { increment: 1 },
-          xpEarned: { increment: validatedData.xpReward },
+          xpEarned: { increment: actualXpReward },
           lastActivityAt: new Date(),
         },
         create: {
           userId: session.user.id!,
           courseId: validatedData.courseId,
           exercisesCompleted: 1,
-          xpEarned: validatedData.xpReward,
+          xpEarned: actualXpReward,
           totalExercises: 0, // Will be updated when course is started
           totalXp: 0,
         },
@@ -228,7 +236,8 @@ export async function POST(request: NextRequest) {
       return {
         alreadyCompleted: false,
         exercise: completedExercise,
-        xpAwarded: validatedData.xpReward,
+        xpAwarded: actualXpReward,
+        usedSolution: validatedData.usedSolution,
         levelUp,
         newLevel,
         totalXp: newTotalXp,

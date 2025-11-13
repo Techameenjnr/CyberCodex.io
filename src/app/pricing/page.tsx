@@ -182,13 +182,13 @@ export default function PricingPage() {
           >
             {[
               {
-                number: "10,000+",
-                label: "Active Learners",
-                description: "Join thousands of cybersecurity enthusiasts"
+                number: "200+",
+                label: "Hands-on Exercises",
+                description: "Labs and challenges spanning web, network, malware, cloud, and Python"
               },
               {
-                number: "50+",
-                label: "Expert-Led Courses",
+                number: "30+",
+                label: "Cyber Security Courses",
                 description: "Comprehensive learning paths for all levels"
               },
               {

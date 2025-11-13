@@ -56,6 +56,8 @@ model User {
   badges        UserBadge[]
   exercises     UserExercise[]
   loginAttempts LoginAttempt[]
+  followers     UserFollow[] @relation("UserFollowers")
+  following     UserFollow[] @relation("UserFollowing")
 
   @@index([email])
   @@index([username])
@@ -150,6 +152,7 @@ model UserExercise {
   // Code & Submissions
   code          String?
   attempts      Int      @default(0)
+  usedSolution  Boolean  @default(false) // Track if user used "Show Solution"
 
   // Timing
   completedAt   DateTime?
@@ -209,6 +212,26 @@ model UserBadge {
   @@unique([userId, badgeId])
   @@index([userId])
   @@index([badgeId])
+}
+
+// ============================================
+// USER SOCIAL FEATURES
+// ============================================
+
+model UserFollow {
+  id          String   @id @default(cuid())
+  followerId  String   // User who is following
+  followingId String   // User being followed
+
+  createdAt   DateTime @default(now())
+
+  // Relations
+  follower    User     @relation("UserFollowing", fields: [followerId], references: [id], onDelete: Cascade)
+  following   User     @relation("UserFollowers", fields: [followingId], references: [id], onDelete: Cascade)
+
+  @@unique([followerId, followingId])
+  @@index([followerId])
+  @@index([followingId])
 }
 
 // ============================================

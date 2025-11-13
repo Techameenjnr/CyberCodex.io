@@ -8,6 +8,7 @@ import { getAllCurriculumSlugs, getAllExerciseIds, getExerciseContent, getCurric
 import { Container, Button } from "@/components/ui";
 import { TerminalWrapper } from "@/components/lab/TerminalWrapper";
 import { InteractivePythonLayout } from "@/components/course/InteractivePythonLayout";
+import { ExerciseCompletionWrapper } from "@/components/course/ExerciseCompletionWrapper";
 import type { Metadata } from "next";
 
 // Courses that use the terminal emulator
@@ -65,9 +66,11 @@ export default async function ExercisePage({ params }: ExercisePageProps) {
   const hasTerminal = TERMINAL_ENABLED_COURSES.includes(slug);
   const isInteractivePython = exercise.frontmatter.type === "interactive-python";
 
-  // Find next and previous exercises
+  // Find next and previous exercises, and get current exercise metadata
   let nextExerciseId: string | undefined;
   let previousExerciseId: string | undefined;
+  let currentChapterId: string | undefined;
+  let currentXpReward: number = 0;
 
   const allExercises = curriculum.chapters.flatMap((chapter) => chapter.exercises);
   const currentIndex = allExercises.findIndex((ex) => ex.id === exerciseId);
@@ -78,6 +81,16 @@ export default async function ExercisePage({ params }: ExercisePageProps) {
     }
     if (currentIndex < allExercises.length - 1) {
       nextExerciseId = allExercises[currentIndex + 1].id;
+    }
+  }
+
+  // Get current exercise metadata from curriculum
+  for (const chapter of curriculum.chapters) {
+    const ex = chapter.exercises.find((e) => e.id === exerciseId);
+    if (ex) {
+      currentChapterId = chapter.id;
+      currentXpReward = ex.xpReward || 0;
+      break;
     }
   }
 
@@ -99,6 +112,9 @@ export default async function ExercisePage({ params }: ExercisePageProps) {
         tests={exercise.frontmatter.tests}
         hints={exercise.frontmatter.hints}
         courseSlug={slug}
+        exerciseId={exerciseId}
+        chapterId={currentChapterId}
+        xpReward={currentXpReward}
         nextExerciseId={nextExerciseId}
         previousExerciseId={previousExerciseId}
       />
@@ -201,6 +217,17 @@ export default async function ExercisePage({ params }: ExercisePageProps) {
                     }}
                   />
                 </article>
+
+                {/* Completion Button for Terminal Courses */}
+                <div className="mt-8 not-prose">
+                  <ExerciseCompletionWrapper
+                    courseId={slug}
+                    exerciseId={exerciseId}
+                    chapterId={currentChapterId}
+                    xpReward={currentXpReward}
+                    nextExerciseId={nextExerciseId}
+                  />
+                </div>
               </div>
             </div>
 
@@ -242,6 +269,17 @@ export default async function ExercisePage({ params }: ExercisePageProps) {
                 }}
               />
             </article>
+
+            {/* Completion Button */}
+            <div className="mt-8">
+              <ExerciseCompletionWrapper
+                courseId={slug}
+                exerciseId={exerciseId}
+                chapterId={currentChapterId}
+                xpReward={currentXpReward}
+                nextExerciseId={nextExerciseId}
+              />
+            </div>
 
             {/* Navigation */}
             <div className="mt-12 pt-8 border-t border-cyber-border flex justify-between">

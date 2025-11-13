@@ -1,7 +1,8 @@
 "use client";
 
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import Link from "next/link";
+import { useSession } from "next-auth/react";
 import { MDXRemote, MDXRemoteSerializeResult } from "next-mdx-remote";
 import { PythonCodeEditor } from "./PythonCodeEditor";
 import { PythonConsole } from "./PythonConsole";
@@ -18,6 +19,9 @@ export interface InteractivePythonLayoutProps {
   tests?: TestCase[];
   hints?: string[];
   courseSlug?: string;
+  exerciseId?: string;
+  chapterId?: string;
+  xpReward?: number;
   nextExerciseId?: string;
   previousExerciseId?: string;
 }
@@ -31,9 +35,15 @@ export function InteractivePythonLayout({
   tests = [],
   hints = [],
   courseSlug,
+  exerciseId,
+  chapterId,
+  xpReward = 0,
   nextExerciseId,
   previousExerciseId,
 }: InteractivePythonLayoutProps) {
+  const { data: session, update: updateSession } = useSession({
+    required: false,
+  });
   const [code, setCode] = useState(starterCode);
   const [output, setOutput] = useState("");
   const [error, setError] = useState<string | undefined>();
@@ -42,6 +52,8 @@ export function InteractivePythonLayout({
   const [showHints, setShowHints] = useState(false);
   const [showSolution, setShowSolution] = useState(false);
   const [hintsRevealed, setHintsRevealed] = useState<number>(0);
+  const [xpAwarded, setXpAwarded] = useState(false);
+  const [awardingXp, setAwardingXp] = useState(false);
 
   const handleRunCode = useCallback(async () => {
     setIsRunning(true);
@@ -93,6 +105,51 @@ export function InteractivePythonLayout({
   const allTestsPassed =
     testResults.length > 0 && testResults.every((t) => t.passed);
 
+  // Automatically award XP when all tests pass
+  useEffect(() => {
+    async function awardXP() {
+      if (!allTestsPassed || xpAwarded || awardingXp || !session?.user || !courseSlug || !exerciseId) {
+        return;
+      }
+
+      setAwardingXp(true);
+
+      try {
+        const response = await fetch("/api/progress/complete-exercise", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            courseId: courseSlug,
+            exerciseId,
+            chapterId,
+            xpReward,
+            usedSolution: showSolution, // Track if user used "Show Solution"
+          }),
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+          setXpAwarded(true);
+          // Refresh session to update user's XP in navbar
+          if (updateSession) {
+            await updateSession();
+          }
+        } else {
+          console.error("Failed to award XP:", data.error);
+        }
+      } catch (error) {
+        console.error("Error awarding XP:", error);
+      } finally {
+        setAwardingXp(false);
+      }
+    }
+
+    awardXP();
+  }, [allTestsPassed, xpAwarded, awardingXp, session, courseSlug, exerciseId, chapterId, xpReward, updateSession, showSolution]);
+
   return (
     <div className="interactive-python-layout">
       {/* Compact Header */}
@@ -116,9 +173,10 @@ export function InteractivePythonLayout({
           {/* Get a Hint Button */}
           {hints.length > 0 && hintsRevealed < hints.length && (
             <Button
-              variant="ghost"
+              variant="secondary"
+              size="sm"
               onClick={handleRevealHint}
-              className="flex items-center gap-2 w-full hint-button"
+              className="flex items-center justify-center gap-2 w-full rounded-xl border border-cyber-primary/30 bg-cyber-dark/60 hover:bg-cyber-primary/10 hover:text-cyber-primary shadow-[0_0_25px_rgba(0,255,170,0.08)] hint-button"
             >
               <span>💡</span>
               Get a Hint ({hintsRevealed}/{hints.length})
@@ -141,18 +199,20 @@ export function InteractivePythonLayout({
           <div className="desktop-actions">
             {solution && !showSolution && (
               <Button
-                variant="ghost"
+                variant="secondary"
+                size="sm"
                 onClick={handleShowSolution}
-                className="flex items-center gap-2 w-full"
+                className="flex items-center gap-2 w-full rounded-xl border border-cyber-primary/30 bg-gradient-to-r from-cyber-dark to-cyber-dark-secondary hover:border-cyber-primary/60 hover:text-cyber-primary shadow-[0_10px_35px_rgba(0,0,0,0.35)]"
               >
                 <Eye size={16} />
                 Show Solution
               </Button>
             )}
             <Button
-              variant="ghost"
+              variant="secondary"
+              size="sm"
               onClick={handleReset}
-              className="flex items-center gap-2 w-full"
+              className="flex items-center gap-2 w-full rounded-xl border border-cyber-border/60 bg-cyber-dark/70 hover:border-cyber-secondary hover:text-cyber-secondary shadow-[0_10px_35px_rgba(0,0,0,0.35)]"
             >
               <RotateCcw size={16} />
               Reset Code
@@ -170,6 +230,12 @@ export function InteractivePythonLayout({
                 <p className="font-bold text-green-400">Great work!</p>
                 <p className="text-sm text-gray-400">
                   All tests passed! You've completed this exercise.
+                  {xpAwarded && xpReward > 0 && (
+                    <span className="text-cyber-primary font-semibold">
+                      {" "}+{showSolution ? Math.floor(xpReward / 2) : xpReward} XP earned!
+                      {showSolution && <span className="text-yellow-400"> (Half XP for using solution)</span>}
+                    </span>
+                  )}
                 </p>
               </div>
             </div>
@@ -200,18 +266,20 @@ export function InteractivePythonLayout({
             <div className="mobile-actions">
               {solution && !showSolution && (
                 <Button
-                  variant="ghost"
+                  variant="secondary"
+                  size="sm"
                   onClick={handleShowSolution}
-                  className="flex items-center gap-2"
+                  className="flex items-center gap-2 rounded-xl border border-cyber-primary/30 bg-gradient-to-r from-cyber-dark to-cyber-dark-secondary hover:border-cyber-primary/60 hover:text-cyber-primary"
                 >
                   <Eye size={16} />
                   Solution
                 </Button>
               )}
               <Button
-                variant="ghost"
+                variant="secondary"
+                size="sm"
                 onClick={handleReset}
-                className="flex items-center gap-2"
+                className="flex items-center gap-2 rounded-xl border border-cyber-border/60 bg-cyber-dark/70 hover:border-cyber-secondary hover:text-cyber-secondary"
               >
                 <RotateCcw size={16} />
                 Reset
