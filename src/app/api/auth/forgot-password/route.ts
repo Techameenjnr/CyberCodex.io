@@ -59,12 +59,14 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json({ message: successMessage });
   } catch (error) {
-    if (error instanceof z.ZodError) {
-      return NextResponse.json(
-        { error: error.issues[0].message },
-        { status: 400 }
-      );
-    }
+   if (error instanceof z.ZodError) {
+  return NextResponse.json(
+    {
+      error: error.issues[0].message,
+    },
+    { status: 400 }
+  );
+}
 
     console.error("Forgot password error:", error);
     return NextResponse.json(
