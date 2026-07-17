@@ -16,7 +16,6 @@ export async function GET(req: NextRequest) {
       include: {
         courseProgress: {
           include: {
-            exercises: true,
           },
         },
         badges: {
