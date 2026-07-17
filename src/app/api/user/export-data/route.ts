@@ -67,13 +67,6 @@ export async function GET(req: NextRequest) {
         completedAt: progress.completedAt,
         lastAccessedAt: progress.lastAccessedAt,
         xpEarned: progress.xpEarned,
-        exercises: progress.exercises.map((ex) => ({
-          exerciseId: ex.exerciseId,
-          status: ex.status,
-          completedAt: ex.completedAt,
-          attempts: ex.attempts,
-          xpEarned: ex.xpEarned,
-        })),
       })),
       badges: userData.badges.map((userBadge) => ({
         badgeId: userBadge.badgeId,
